@@ -1,6 +1,12 @@
 # Hayal Karalayan | Dijital Sanat Müzesi
 
-Burcu Arısoy'un 11 çalışmasını sunan, GitHub Pages üzerinde çalışan sanal sergi.
+Burcu Arısoy'un 11 çalışmasını sunan, Cloudflare Pages üzerinde yayınlanan sanal sergi.
+
+Canlı sergi: https://hayal-karalayan.pages.dev/
+
+GitHub: https://github.com/emrebeymii/HAYAL-KARALAYAN
+
+GitHub `main` dalına yapılan gönderimler Cloudflare Pages üzerinde otomatik yayınlanır.
 
 ## Deneyimler
 
