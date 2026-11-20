@@ -255,7 +255,7 @@
       *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
     }
 
-    /* Alkarası hero composition, original artwork remains unmodified. */
+    /* Alkarısı hero composition, original artwork remains unmodified. */
     .entrance .entrance-center{width:min(1390px,100%);align-self:center;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,72px);align-items:center;margin:0;min-height:0;flex:1;text-align:left;}
     .entrance-copy{position:relative;z-index:3;max-width:800px;}
     .entrance .entrance-copy .eyebrow{justify-content:flex-start;}
@@ -362,6 +362,38 @@
       .museum-meta h2 {font-size:24px;}
       .museum-action .svg-icon {width:12px;height:12px;}
     }
+
+    /* Original artwork metadata: below each artwork and inside its optional detail panel. */
+    .art-facts {display:grid;gap:0;margin:5px 0 8px;padding:0;border-top:1px solid rgba(236,214,175,.14);}
+    .fact-row {display:grid;grid-template-columns:minmax(83px,.35fr) minmax(0,1fr);gap:11px;border-bottom:1px solid rgba(236,214,175,.105);padding:8px 0;align-items:start;}
+    .fact-row dt {margin:0;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.045em;}
+    .fact-row dd {margin:0;font-size:11px;line-height:1.55;color:#e6d8c3;overflow-wrap:anywhere;}
+    .art-card-body .art-facts {margin:4px 0;}
+    .art-card-interpretation {display:flex;flex-direction:column;gap:8px;margin:5px 0 0;}
+    .art-card-interpretation strong {color:var(--gold-2);font-size:10px;letter-spacing:.12em;text-transform:uppercase;}
+    .art-card .art-card-interpretation p {color:#c3b39b;line-height:1.78;font-size:12px;}
+    .museum-details[open] .museum-detail-scroll {max-height:174px;overflow-y:auto;overscroll-behavior:contain;margin-top:8px;padding-right:4px;}
+    .museum-facts .fact-row {grid-template-columns:minmax(75px,.4fr) minmax(0,1fr);gap:7px;padding:6px 0;}
+    .museum-facts .fact-row dt {font-size:9px;}
+    .museum-facts .fact-row dd {font-size:10px;}
+    .museum-details[open] .museum-description {max-height:none !important;overflow:visible;margin:8px 0 0;}
+    .lightbox-copy {max-height:min(76dvh,790px);overflow-y:auto;padding-right:10px;}
+    .lightbox-copy h2 {font-size:clamp(34px,4.2vw,57px);}
+    .lightbox-copy h3 {margin:16px 0 8px;color:var(--gold-2);text-transform:uppercase;letter-spacing:.17em;font-size:10px;}
+    .lightbox-copy .art-facts {margin:12px 0;}
+    .lightbox-copy .fact-row dd {font-size:12px;}
+    @media(max-width:840px){
+      .museum-details[open] .museum-detail-scroll {max-height:145px;}
+      .museum-facts .fact-row{grid-template-columns:minmax(69px,.4fr) minmax(0,1fr);}
+      .museum-facts .fact-row dt,.museum-facts .fact-row dd{font-size:9px;}
+    }
+    @media(max-width:700px){
+      .lightbox-copy {max-height:30dvh;overflow-y:auto;padding:0 6px 12px;}
+      .lightbox-copy h2 {font-size:35px;}
+      .lightbox-copy .fact-row {grid-template-columns:minmax(92px,.35fr) minmax(0,1fr);padding:6px 0;}
+      .lightbox-copy .fact-row dt,.lightbox-copy .fact-row dd {font-size:11px;}
+      .museum-details[open] .museum-detail-scroll {max-height:130px;}
+    }
 </style>
 </head>
 <body>
@@ -383,11 +415,11 @@
         </div>
         <h1 id="entranceTitle" class="reveal-item">hayal<span class="display-break">karalayan<span class="period">.</span></span></h1>
         <div class="hero-strap reveal-item"><span class="hero-strap-line"></span> ANA ESER / ALKARASI</div>
-        <p class="entrance-poem reveal-item">Bir eserin sessizliği, bütün odayı doldurabilir.<br>Alkarası ile başlayan bir sergi.</p>
+        <p class="entrance-poem reveal-item">Bir eserin sessizliği, bütün odayı doldurabilir.<br>Alkarısı ile başlayan bir sergi.</p>
         <div class="entrance-actions reveal-item">
           <button id="enterButton" class="enter-button" type="button">
             <span class="button-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-            <span>Alkarası'na yaklaş</span>
+            <span>Alkarısı’na yaklaş</span>
             <span class="enter-rule" aria-hidden="true"></span>
           </button>
           <button id="classicEntry" class="secondary-button" type="button">
@@ -396,10 +428,10 @@
           </button>
         </div>
       </div>
-      <figure class="hero-art reveal-item" aria-label="Öne çıkan eser: Alkarası">
+      <figure class="hero-art reveal-item" aria-label="Öne çıkan eser: Alkarısı">
         <div class="hero-art-light" aria-hidden="true"></div>
-        <div class="hero-art-frame"><img src="assets/alkarasi.jpg" alt="Alkarası: karanlık bir odada bir beşiğin yanında duran figür" fetchpriority="high"></div>
-        <figcaption><span>BAŞROLDE</span><strong>Alkarası</strong><small>Burcu Arısoy · Dijital Sergi</small></figcaption>
+        <div class="hero-art-frame"><img src="assets/alkarasi.jpg" alt="Alkarısı: karanlık bir odada bir beşiğin yanında duran figür" fetchpriority="high"></div>
+        <figcaption><span>BAŞROLDE</span><strong>Alkarısı</strong><small>Burcu Arısoy · Dijital Sergi</small></figcaption>
       </figure>
     </div>
     <div class="entrance-bottom"><span>01 / Deneyimsel Müze</span><span>Ses katmanı kullanılmadı; görsel atmosfer güçlendirildi.</span></div>
@@ -426,12 +458,12 @@
       <div class="immersive-ui">
         <div class="topnote"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 10-10 10L2 12 12 2Z"/></svg></span> koridorda ilerle · eserleri keşfet · ses yok <span class="rule"></span></div>
         <aside class="museum-meta" aria-live="polite" aria-atomic="true">
-          <span class="museum-index" id="museumIndex">01 / 06</span>
+          <span class="museum-index" id="museumIndex">01 / 11</span>
           <h2 id="museumTitle"></h2>
           <p class="museum-year" id="museumYear"></p>
           <details class="museum-details" id="museumDetails">
             <summary>ESER HAKKINDA <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-            <p class="museum-description" id="museumDescription"></p>
+            <div class="museum-detail-scroll"><dl class="art-facts museum-facts" id="museumFacts"></dl><p class="museum-description" id="museumDescription"></p></div>
           </details>
           <div class="museum-actions">
             <button class="museum-action primary" id="focusArtwork" type="button"><span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 3 6 6"/><path d="M10 14 21 3"/><path d="m18 8 3-5-5 3"/><path d="M3 21l6-2 10-10-4-4L5 15l-2 6Z"/></svg></span><span id="focusLabel">yaklaş</span></button>
@@ -459,7 +491,7 @@
           <aside class="classic-side">
             <span>Alternatif deneyim</span>
             <strong>Aynı eserler, daha sakin gezinme</strong>
-            <p>Gerçek çizimler geldiğinde yalnızca eser listesindeki başlık, yıl, açıklama ve görsel kaynakları güncellenerek her iki mod da otomatik yenilenir.</p>
+            <p>Sergideki eserler Burcu Arısoy'a aittir. Eser isimleri belirtilmeyen çalışmalar geçici tanımlayıcı başlıklarla listelenmiştir.</p>
           </aside>
         </div>
         <section class="classic-grid" id="classicGrid"></section>
@@ -472,7 +504,7 @@
       <h2>hayal <em>karalayan</em></h2>
       <div class="about-line"></div>
       <p>Her çizim başka bir dünyanın kapısını aralar.</p>
-      <p class="small">Bu bölüm sanatçının paylaşacağı biyografi ve kendi sözleriyle tamamlanacak. Mevcut metinler ve galerideki görseller yalnızca şablon amaçlıdır. Gerçek eserler geldiğinde görsel, açıklama ve anlatım dili sanatçının kimliğine göre rafine edilebilir.</p>
+      <p class="small">Bu bölüm sanatçının paylaşacağı biyografi ve kendi sözleriyle tamamlanacaktır. Sergilenen resimler ve eser açıklamaları gerçek çalışmalara dayanmaktadır.</p>
       <a class="about-social" href="https://www.instagram.com/hayalkaralayan/" target="_blank" rel="noopener noreferrer">instagram'da gör <span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
       <span class="about-footnote">Dijital sergi · kişisel portföy</span>
     </aside>
@@ -482,12 +514,12 @@
       <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Büyük görüntüyü kapat"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg> kapat</button>
       <div class="lightbox-body">
         <div class="lightbox-media"><img id="lightboxImage" alt=""></div>
-        <div class="lightbox-copy"><span id="lightboxNumber">Eser 01 / 06</span><h2 id="lightboxTitle"></h2><p id="lightboxDescription"></p></div>
+        <div class="lightbox-copy"><span id="lightboxNumber">Eser 01 / 11</span><h2 id="lightboxTitle"></h2><dl class="art-facts lightbox-facts" id="lightboxFacts"></dl><h3>Galeri açıklaması</h3><p id="lightboxDescription"></p></div>
       </div>
       <div class="lightbox-nav"><button id="lightboxPrev" type="button"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> önceki</button><button id="lightboxNext" type="button">sonraki <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div>
     </dialog>
 
-    <div class="demo-note" id="demoNote"><span class="dot"></span> Şablon önizlemesi · Görseller temsili <button type="button" id="dismissDemo" aria-label="Önizleme notunu kapat"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="demo-note" id="demoNote"><span class="dot"></span> 11 eser · Burcu Arısoy · Dijital sergi <button type="button" id="dismissDemo" aria-label="Önizleme notunu kapat"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   </div>
 
   <script type="module">
@@ -499,17 +531,131 @@
     }
 
     const artworks = [
-      {"title":"Alkarası","year":"ÖNE ÇIKAN ESER","description":"Karanlık bir odada, beşiğin yanında duran uzun saçlı figür. Serginin açılışında yer alan ana çalışma.","src":"assets/alkarasi.jpg","alt":"Burcu Arısoy çalışması: Karanlık bir odada, beşiğin yanında duran uzun saçlı figür. Serginin açılışında yer alan ana çalışma."},
-      {"title":"Kırmızı Örtülü Figür","year":"GEÇİCİ BAŞLIK","description":"Kırmızı örtülü bir figürün, bitki dalı ve bir kapla birlikte resmedildiği çalışma.","src":"assets/kirmizi-ortulu-figur.jpg","alt":"Burcu Arısoy çalışması: Kırmızı örtülü bir figürün, bitki dalı ve bir kapla birlikte resmedildiği çalışma."},
-      {"title":"Mitolojik Kompozisyon","year":"GEÇİCİ BAŞLIK","description":"Deniz kabuğu, figürler ve uçuşan saçlarla kurulan karakalem kompozisyon.","src":"assets/mitolojik-kompozisyon.jpg","alt":"Burcu Arısoy çalışması: Deniz kabuğu, figürler ve uçuşan saçlarla kurulan karakalem kompozisyon."},
-      {"title":"Sürreal Figürler","year":"GEÇİCİ BAŞLIK","description":"Yüzlerin ve uzanan siyah biçimlerin çevrelediği, katmanlı figüratif çalışma.","src":"assets/surreal-kompozisyon.jpg","alt":"Burcu Arısoy çalışması: Yüzlerin ve uzanan siyah biçimlerin çevrelediği, katmanlı figüratif çalışma."},
-      {"title":"Dalgalar ve Figür","year":"GEÇİCİ BAŞLIK","description":"Büyük mavi dalgaların arasında uzanan figürü gösteren resim.","src":"assets/dalgalar-ve-figur.jpg","alt":"Burcu Arısoy çalışması: Büyük mavi dalgaların arasında uzanan figürü gösteren resim."},
-      {"title":"Yeşil Natürmort","year":"GEÇİCİ BAŞLIK","description":"Yeşil tonlarında bir bitki, drape kumaş ve torso betimlemesi.","src":"assets/yesil-naturmort.jpg","alt":"Burcu Arısoy çalışması: Yeşil tonlarında bir bitki, drape kumaş ve torso betimlemesi."},
-      {"title":"Bitki ve Kumaş","year":"GEÇİCİ BAŞLIK","description":"Bir saksı bitkisini kıvrımlı kumaşla birlikte gösteren renkli çalışma.","src":"assets/bitki-ve-kumas.jpg","alt":"Burcu Arısoy çalışması: Bir saksı bitkisini kıvrımlı kumaşla birlikte gösteren renkli çalışma."},
-      {"title":"Farelerle Gıybet","year":"ESER ÜZERİNDEKİ YAZI","description":"Üç farenin çevrelediği kompozisyon; alt kenarında “Farelerle Gıybet” yazıyor.","src":"assets/farelerle-giybet.jpg","alt":"Burcu Arısoy çalışması: Üç farenin çevrelediği kompozisyon; alt kenarında “Farelerle Gıybet” yazıyor."},
-      {"title":"Çiçek Desenli Tabak","year":"GEÇİCİ BAŞLIK","description":"Karanfil ve mavi çiçeklerle bezeli dairesel bir tabak çalışması.","src":"assets/cini-tabak.jpg","alt":"Burcu Arısoy çalışması: Karanfil ve mavi çiçeklerle bezeli dairesel bir tabak çalışması."},
-      {"title":"Çiçek Motifleri","year":"GEÇİCİ BAŞLIK","description":"Turkuaz, lacivert ve kırmızı çiçek motiflerinin yakın görünümü.","src":"assets/cini-detay.jpg","alt":"Burcu Arısoy çalışması: Turkuaz, lacivert ve kırmızı çiçek motiflerinin yakın görünümü."}
-    ];
+      {
+            "title": "Alkarısı",
+            "year": "2026",
+            "medium": "Yağlı boya",
+            "theme": "Türk halk mitolojisi, korku, doğaüstü",
+            "description": "Türk halk inanışlarında özellikle lohusalık ve yeni doğan bebeklerle ilişkilendirilen Alkarısı figürü, bu çalışmada karanlık bir çocuk odasında beliriyor. Solgun renkler, uzatılmış beden biçimleri ve gündelik nesneler arasındaki karşıtlık, tanıdık bir mekânı tekinsiz bir sahneye dönüştürüyor.",
+            "displayNote": "Skylla – Dönüşüm ile aynı tematik bölümde, ancak aralarında bir miktar mesafe bırakılarak sergilenebilir. Bölümün geçici adı Mitler ve Karanlık olabilir.",
+            "src": "assets/alkarasi.jpg",
+            "alt": "Alkarısı; beşiğin yanındaki tekinsiz figürün yer aldığı yağlı boya eser.",
+            "aspect": 0.7127
+      },
+      {
+            "title": "Venüs’ün Doğuşu",
+            "year": "2024",
+            "medium": "Karakalem",
+            "original": "Sandro Botticelli, Venüs’ün Doğuşu",
+            "kind": "Klasik eserden uyarlama",
+            "description": "Sandro Botticelli'nin ikonik kompozisyonunun karakalem tekniğiyle yeniden yorumlanışı. Çizgi, ışık ve gölge aracılığıyla mitolojik sahnenin hareketini ve figürlerin zarafetini yeniden ele alıyor.",
+            "displayNote": "Geniş bir duvar ve yumuşak, odaklı aydınlatma. Yatay kompozisyonu sayesinde güçlü bir açılış eseri olabilir.",
+            "src": "assets/mitolojik-kompozisyon.jpg",
+            "alt": "Venüs’ün Doğuşu; deniz kabuğu üzerindeki figürü içeren karakalem çalışma.",
+            "aspect": 1.4918
+      },
+      {
+            "title": "Farelerle Gıybet",
+            "year": "2025",
+            "medium": "Linol baskı",
+            "edition": "2/3 (görselde belirtilmiş)",
+            "description": "Üç farenin ortak bir sahne etrafında buluştuğu bu linol baskı, gündelik bir davranış olan gıybeti mizahi ve sembolik bir dille ele alıyor. Siyah, gri, pembe ve sarı tonlarının karşıtlığı kompozisyonun hareketini güçlendiriyor.",
+            "displayNote": "Diğer baskı ve desen çalışmalarının bulunduğu ayrı bir bölümde sergilenebilir. Böylece Burcu'nun farklı tekniklerdeki üretimi öne çıkar.",
+            "src": "assets/farelerle-giybet.jpg",
+            "alt": "Farelerle Gıybet; üç farenin çevrelediği linol baskı çalışması.",
+            "aspect": 1.3333
+      },
+      {
+            "title": "İsimsiz (Çiçek Motifli Çini)",
+            "year": "2026",
+            "medium": "Çini",
+            "form": "Dairesel, bitkisel bezemeli",
+            "nameStatus": "Geçici sergi adı",
+            "description": "Geleneksel çini sanatının çiçek motiflerinden beslenen bu çalışma, mavi ve kırmızı tonlarını dengeli bir kompozisyonda buluşturuyor. Merkezde yükselen çiçek dalları, çevresindeki geometrik düzenli bordürle bütünleşiyor.",
+            "displayNote": "Dairesel formunu koruyarak koyu lacivert bir duvar üzerinde, sıcak ve yumuşak bir spot ışığıyla sergilenebilir.",
+            "src": "assets/cini-tabak.jpg",
+            "alt": "Dairesel çini; kırmızı ve mavi çiçeklerle süslenmiş tabak.",
+            "aspect": 1.0298
+      },
+      {
+            "title": "İsimsiz (Lale ve Çiçek Motifleri)",
+            "year": "Henüz belirtilmedi",
+            "medium": "Çini (teyit bekliyor)",
+            "nameStatus": "Geçici sergi adı",
+            "description": "Geleneksel çini bezemelerinden izler taşıyan bu çalışma, lale ve çiçek motiflerini kıvrımlı dallarla bir araya getiriyor. Turkuaz, lacivert ve bordo tonları, beyaz zemin üzerinde canlı bir ritim oluşturuyor.",
+            "displayNote": "Üçüncü eserle aynı bölümde, yan yana sergilenebilir. Böylece iki farklı çini kompozisyonu arasında görsel bir bütünlük kurulur.",
+            "src": "assets/cini-detay.jpg",
+            "alt": "Lale ve çiçek motifleriyle bezeli, turkuaz ve lacivert çini çalışması.",
+            "aspect": 0.9364
+      },
+      {
+            "title": "The Priestess of Delphi",
+            "year": "2026",
+            "medium": "Yağlı boya",
+            "original": "John Collier, The Priestess of Delphi (1891)",
+            "kind": "Klasik eserden uyarlama",
+            "description": "John Collier'ın 1891 tarihli eserinin yağlı boya tekniğiyle yeniden yorumlandığı bu çalışma, Delphi'nin gizemli kâhin figürünü karanlık ve dramatik bir atmosferde ele alıyor. Kırmızı kumaşın yoğunluğu, figürün duruşu ve çevresini saran duman, kompozisyonun mistik anlatımını güçlendiriyor.",
+            "displayNote": "Koyu antrasit duvar, yukarıdan sıcak ve dar açılı bir spot ışığı ve çevresinde geniş boşluk. Galerinin dramatik bölümlerinden birinde konumlandırılabilir.",
+            "src": "assets/kirmizi-ortulu-figur.jpg",
+            "alt": "The Priestess of Delphi; kırmızı örtülü figürün yağlı boya uyarlaması.",
+            "aspect": 0.5629
+      },
+      {
+            "title": "İsimsiz (Heykel ve Bitki)",
+            "year": "2024",
+            "medium": "Tuval üzerine akrilik boya",
+            "nameStatus": "Geçici sergi adı",
+            "description": "Yeşilin dingin tonlarıyla şekillenen bu kompozisyon, klasik heykel formunu gündelik bir iç mekân bitkisiyle buluşturuyor. Serbest fırça darbeleri, ışık ve renk geçişleriyle iki farklı form arasında görsel bir denge kuruyor.",
+            "displayNote": "The Priestess of Delphi eserinin ardından konumlandırılarak karanlık ve yoğun bir atmosferden daha aydınlık, sakin bir sergi alanına geçiş sağlanabilir.",
+            "src": "assets/yesil-naturmort.jpg",
+            "alt": "Yeşil natürmort; klasik heykel formu, saksı bitkisi ve kumaş.",
+            "aspect": 0.75
+      },
+      {
+            "title": "İsimsiz (Bitki ve Drapeli Kumaş)",
+            "year": "2024",
+            "medium": "Toz pastel",
+            "nameStatus": "Geçici sergi adı",
+            "description": "Yumuşak pastel geçişleriyle oluşturulan bu natürmort, saksı bitkisini kıvrımlı kumaş yüzeyleriyle bir araya getiriyor. Turkuaz arka plan ve toprak tonları arasındaki karşıtlık, kompozisyona sakin ve düşsel bir atmosfer kazandırıyor.",
+            "displayNote": "Altıncı eserle aynı bölümde sergilenebilir. Her iki çalışma da bitki ve kumaş dokularına odaklansa da kullanılan teknikler birbirinden farklıdır.",
+            "src": "assets/bitki-ve-kumas.jpg",
+            "alt": "Toz pastel natürmort; saksıdaki bitki ve drapeli kumaş.",
+            "aspect": 0.75
+      },
+      {
+            "title": "Skylla – Dönüşüm",
+            "year": "2025",
+            "medium": "Karışık teknik",
+            "theme": "Mitoloji, dönüşüm, insan figürü",
+            "description": "Yunan mitolojisindeki Skylla figürünü çağrıştıran bu kompozisyon, dönüşüm temasını insan bedenleri, yüzler ve kıvrılan karanlık biçimler aracılığıyla ele alıyor. Deniz ve gemi imgeleri, sahnenin mitolojik anlatısını güçlendirirken keskin karşıtlıklar esere huzursuz edici bir hareket kazandırıyor.",
+            "displayNote": "Galerinin mitoloji temalı bölümünde, The Priestess of Delphi ile anlatısal bir bağlantı kurularak sergilenebilir. Karanlık bir koridorun sonunda aydınlatılan eser, atmosferi güçlendirebilir.",
+            "src": "assets/surreal-kompozisyon.jpg",
+            "alt": "Skylla – Dönüşüm; yüzler, insan figürü, kıvrılan siyah biçimler ve deniz.",
+            "aspect": 0.6959
+      },
+      {
+            "title": "Afrodit",
+            "year": "2026",
+            "medium": "Tuval üzerine yağlı boya",
+            "theme": "Yunan mitolojisi, deniz, güzellik",
+            "description": "Yunan mitolojisinin aşk ve güzellik tanrıçası Afrodit, denizin hareketiyle bütünleşen bir figür olarak resmediliyor. Turkuaz ve koyu mavi dalgalar, figürün çevresinde kıvrılarak su ile beden arasındaki sınırları belirsizleştiriyor.",
+            "displayNote": "Venüs’ün Doğuşu ile görsel bir bağlantı kurulabilir. Böylece ziyaretçiler Burcu'nun aynı mitolojik figürü iki farklı teknik ve kompozisyonla nasıl ele aldığını görebilir.",
+            "src": "assets/dalgalar-ve-figur.jpg",
+            "alt": "Afrodit; turkuaz deniz dalgaları arasında uzanan figür.",
+            "aspect": 0.7176
+      },
+      {
+            "title": "Balığın Dansı",
+            "year": "2026",
+            "medium": "Tuval üzerine yağlı boya",
+            "theme": "Sürrealizm, hayal gücü, düşsel anlatım",
+            "description": "Balık başlı bir figürün gökyüzünde dans ettiği bu düşsel kompozisyon, gündelik nesneleri beklenmedik biçimlerde bir araya getirerek gerçeklik ile hayal gücü arasındaki sınırları bulanıklaştırıyor.",
+            "displayNote": "Canlı renkleri ve alışılmadık figür anlatımıyla galerinin sonunda ziyaretçiye daha eğlenceli ve şaşırtıcı bir kapanış sunabilir.",
+            "src": "assets/baligin-dansi.jpg",
+            "alt": "Balığın Dansı; gökyüzünde pembe bluz ve beyaz etekli, balık başlı dans eden figür.",
+            "aspect": 0.7194
+      }
+];
 
     const $ = (id) => document.getElementById(id);
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
@@ -536,6 +682,27 @@
     let focusMode = false;
     let lastFocus = null;
 
+    function artworkFacts(art) {
+      const fields = [
+        ['Sanatçı', 'Burcu Arısoy'],
+        ['Teknik', art.medium],
+        ['Yapım yılı', art.year],
+        ...(art.original ? [['Özgün eser', art.original]] : []),
+        ...(art.kind ? [['Tür', art.kind]] : []),
+        ...(art.edition ? [['Baskı numarası', art.edition]] : []),
+        ...(art.form ? [['Biçim', art.form]] : []),
+        ...(art.theme ? [['Tema', art.theme]] : []),
+        ...(art.nameStatus ? [['Eser adı', art.nameStatus]] : [])
+      ];
+      return fields.map(([key, value]) =>
+        `<div class="fact-row"><dt>${escapeHtml(key)}</dt><dd>${escapeHtml(value)}</dd></div>`
+      ).join('');
+    }
+
+    function artworkSummary(art) {
+      return `Burcu Arısoy · ${escapeHtml(art.year)} · ${escapeHtml(art.medium)}`;
+    }
+
     function renderClassic() {
       classicGrid.innerHTML = artworks.map((art, index) => `
         <article class="art-card${index===activeIndex ? ' is-active' : ''}" data-card-index="${index}">
@@ -543,9 +710,10 @@
             <div class="art-card-frame"><img src="${escapeHtml(art.src)}" alt="${escapeHtml(art.alt)}" ${index < 2 ? 'fetchpriority="high"' : 'loading="lazy"'}></div>
           </div>
           <div class="art-card-body">
-            <span class="art-card-kicker">${escapeHtml(art.year)}</span>
+            <span class="art-card-kicker">ESER ${String(index + 1).padStart(2,'0')} / ${escapeHtml(art.year)}</span>
             <h3>${escapeHtml(art.title)}</h3>
-            <p>${escapeHtml(art.description)}</p>
+            <dl class="art-facts">${artworkFacts(art)}</dl>
+            <div class="art-card-interpretation"><strong>Galeri açıklaması</strong><p>${escapeHtml(art.description)}</p></div>
             <div class="art-card-actions">
               <button type="button" data-card-focus="${index}"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg> immersive'de aç</button>
               <button type="button" data-card-open="${index}"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> incele</button>
@@ -560,9 +728,14 @@
 
     function updateMeta(index = activeIndex) {
       const art = artworks[index];
+      if (index !== Number($('museumDetails').dataset.index || '-1')) {
+        $('museumDetails').open = false;
+        $('museumDetails').dataset.index = String(index);
+      }
       museumIndex.textContent = `${String(index + 1).padStart(2,'0')} / ${String(artworks.length).padStart(2,'0')}`;
       museumTitle.textContent = art.title;
-      museumYear.textContent = art.year;
+      museumYear.textContent = `Burcu Arısoy · ${art.year} · ${art.medium}`;
+      $('museumFacts').innerHTML = artworkFacts(art);
       museumDescription.textContent = art.description;
       focusLabel.textContent = focusMode ? 'koridora dön' : 'esere yaklaş';
       $('prevArtwork').disabled = index === 0;
@@ -578,6 +751,7 @@
       $('lightboxImage').alt = art.alt;
       $('lightboxNumber').textContent = `Eser ${String(openedIndex + 1).padStart(2,'0')} / ${String(artworks.length).padStart(2,'0')}`;
       $('lightboxTitle').textContent = art.title;
+      $('lightboxFacts').innerHTML = artworkFacts(art);
       $('lightboxDescription').textContent = art.description;
       $('lightboxPrev').disabled = openedIndex === 0;
       $('lightboxNext').disabled = openedIndex === artworks.length - 1;
@@ -894,16 +1068,45 @@
         requestMuseumRender();
       });
       texture.colorSpace = THREE.SRGBColorSpace;
+      const artAspect = art.aspect || .73;
+      const displayWidth = Math.min(1.48, 2.02 * artAspect);
+      const displayHeight = displayWidth / artAspect;
+      imagePlane.geometry.dispose();
+      imagePlane.geometry = new THREE.PlaneGeometry(displayWidth, displayHeight);
       texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
       imagePlane.material.map = texture;
       imagePlane.material.needsUpdate = true;
 
       group.add(outer, inner, recess, imagePlane, glass);
 
-      const plaque = new THREE.Mesh(new THREE.BoxGeometry(.95, .18, .05), new THREE.MeshStandardMaterial({ color:0x73583b, roughness:.58, metalness:.18 }));
-      plaque.position.set(0, -1.54, .04);
+      // The title and technique appear on a physical plaque beneath every canvas.
+      const plaque = new THREE.Mesh(new THREE.BoxGeometry(1.94, .42, .065), new THREE.MeshStandardMaterial({ color:0x755b3d, roughness:.56, metalness:.18 }));
+      plaque.position.set(0, -1.68, .115);
       plaque.castShadow = true;
       group.add(plaque);
+      const plaqueCanvas = document.createElement('canvas');
+      plaqueCanvas.width = 1024; plaqueCanvas.height = 230;
+      const ctx = plaqueCanvas.getContext('2d');
+      ctx.fillStyle = '#e7dcc7'; ctx.fillRect(0,0,1024,230);
+      ctx.fillStyle = '#382819'; ctx.textAlign = 'center';
+      let size = 74;
+      ctx.font = `600 ${size}px Georgia`;
+      while (ctx.measureText(art.title).width > 950 && size > 32) {
+        size -= 2; ctx.font = `600 ${size}px Georgia`;
+      }
+      ctx.fillText(art.title, 512, 104);
+      ctx.fillStyle = '#6f5840'; ctx.font = '30px Arial';
+      const line = `Burcu Arısoy · ${art.year} · ${art.medium}`;
+      let detailSize = 30;
+      while (ctx.measureText(line).width > 940 && detailSize > 20) {
+        detailSize -= 1; ctx.font = `${detailSize}px Arial`;
+      }
+      ctx.fillText(line,512,177);
+      const plaqueTexture = new THREE.CanvasTexture(plaqueCanvas);
+      plaqueTexture.colorSpace = THREE.SRGBColorSpace;
+      const plaqueText = new THREE.Mesh(new THREE.PlaneGeometry(1.89, .395), new THREE.MeshBasicMaterial({map:plaqueTexture, toneMapped:false,side:THREE.DoubleSide}));
+      plaqueText.position.set(0, -1.68, .155);
+      group.add(plaqueText);
 
       const hit = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 2.46), new THREE.MeshBasicMaterial({ transparent:true, opacity:0, depthWrite:false, side:THREE.DoubleSide }));
       hit.position.z = .231;
