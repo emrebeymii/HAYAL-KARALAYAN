@@ -59,3 +59,27 @@
 @media(prefers-reduced-motion:reduce){.room-status {transition:none}}
 /* A higher-specificity override of the legacy .classic-grid rule. */
 .classic-view .classic-grid {display:block;}
+
+/* Quiet studio credit. Art and the artist remain the visual priority. */
+.studio-signature-wrap { text-align:center; }
+.studio-signature { display:flex; flex-direction:column; align-items:center; gap:9px; padding:25px 14px 5px; border-top:1px solid rgba(217,182,122,.22); }
+.studio-signature__eyebrow { color:#ad9776; font:600 9px/1.5 'DM Sans',Arial,sans-serif; letter-spacing:.23em; }
+.studio-signature__brand { color:#e8d4b7; font:500 clamp(27px,3.4vw,37px)/1.1 'Cormorant Garamond',Georgia,serif; letter-spacing:.09em; text-decoration:none; transition:color .18s ease; }
+.studio-signature__brand span { color:#b9945c; }
+.studio-signature__brand:hover,.studio-signature__brand:focus-visible { color:#fff2de; }
+.studio-signature__byline { color:#948269; font:600 9px/1.7 'DM Sans',Arial,sans-serif; letter-spacing:.12em; }
+.studio-signature__byline a { color:#cbb08c; text-decoration:none; text-underline-offset:4px; }
+.studio-signature__byline a:hover,.studio-signature__byline a:focus-visible { color:#fff1d9; text-decoration:underline; }
+.studio-signature__brand:focus-visible,.studio-signature__byline a:focus-visible { outline:2px solid #ffe3a4; outline-offset:5px; border-radius:2px; }
+.studio-signature-wrap--classic { max-width:460px; margin:38px auto 0; padding:0 0 18px; }
+.about-panel { overflow-y:auto; overscroll-behavior:contain; scrollbar-color:#806843 transparent; scrollbar-width:thin; }
+.studio-signature-wrap--panel { margin-top:auto; padding-top:38px; }
+.about-panel .about-footnote { margin-top:22px; text-align:center; padding-top:0; }
+@media(max-width:700px) {
+  .studio-signature { padding:22px 8px 5px; gap:8px; }
+  .studio-signature__brand { font-size:30px; }
+  .studio-signature__eyebrow { font-size:8px; letter-spacing:.18em; }
+  .studio-signature__byline { font-size:8px; letter-spacing:.1em; }
+  .studio-signature-wrap--panel { padding-top:28px; }
+}
+@media(prefers-reduced-motion:reduce){.studio-signature__brand{transition:none}}
