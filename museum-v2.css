@@ -1,0 +1,61 @@
+/* Hayal Karalayan | Müze 2.0: presentation and accessible controls */
+:root { --room-ink:#e8d7bd; }
+.room-toolbar {
+  position:absolute;z-index:9;top:76px;right:clamp(16px,4.2vw,64px);
+  display:flex;align-items:center;gap:10px;pointer-events:auto;
+}
+.room-picker,.guided-tour-panel {
+  display:flex;align-items:center;gap:9px;border:1px solid rgba(236,214,175,.22);
+  background:rgba(15,13,11,.86);border-radius:999px;padding:7px 10px;
+  box-shadow:0 12px 34px rgba(0,0,0,.3);
+}
+.room-picker label,.tour-status {font-size:9px;color:#c8af88;text-transform:uppercase;font-weight:700;letter-spacing:.1em;white-space:nowrap;}
+.room-picker select {
+  color:#f6ead8;background:#211b15;border:1px solid rgba(215,182,126,.22);
+  border-radius:20px;padding:8px 10px;max-width:170px;font:600 10px 'DM Sans',sans-serif;cursor:pointer;
+}
+.room-picker select:focus-visible,.tour-btn:focus-visible,.art-tab:focus-visible,.room-enter:focus-visible {outline:2px solid #ffe3a4;outline-offset:3px;}
+.guided-tour-panel {gap:6px;}
+.tour-btn {display:inline-flex;align-items:center;gap:5px;padding:8px 10px;color:#f6e9d3;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.04em;background:rgba(220,171,105,.14);white-space:nowrap;}
+.tour-btn:hover {background:rgba(220,171,105,.25)}
+.tour-btn.secondary {color:#bfa98c;background:transparent;border:1px solid rgba(236,214,175,.16)}
+.tour-btn:disabled {opacity:.32;cursor:default}
+.tour-btn svg {width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.room-status {position:absolute;z-index:8;left:50%;top:136px;transform:translate(-50%,-10px);padding:10px 20px;pointer-events:none;border-radius:9px;text-align:center;min-width:min(330px,74vw);border:1px solid rgba(236,214,175,.2);background:rgba(14,12,11,.86);box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transition:opacity .3s ease,transform .3s ease;}
+.room-status.is-visible {opacity:1;transform:translate(-50%,0)}
+.room-status strong {display:block;color:#f5dec0;font:500 25px 'Cormorant Garamond',Georgia,serif;}
+.room-status small {display:block;font-size:9px;letter-spacing:.12em;color:#d4baa0;text-transform:uppercase;}
+.museum-room-name {display:block;font-size:9px;color:#f0c48a;letter-spacing:.13em;text-transform:uppercase;font-weight:700;margin:0 0 4px;}
+.museum-detail-scroll {scrollbar-width:thin;scrollbar-color:#826542 transparent;}
+.art-tablist {display:flex;gap:7px;margin:7px 0;border-bottom:1px solid rgba(236,214,175,.15);padding-bottom:7px;}
+.art-tab {border:1px solid rgba(236,214,175,.15);border-radius:999px;padding:7px 10px;font-size:10px;font-weight:700;letter-spacing:.09em;color:#b9aa94;}
+.art-tab[aria-selected="true"] {background:rgba(217,182,122,.2);border-color:rgba(217,182,122,.5);color:#f8e8d1;}
+.art-tab-panel[hidden] {display:none!important;}
+.art-tab-panel .museum-description {display:block!important;max-height:none!important;overflow:visible;font-size:11px;line-height:1.68;color:#e4d6c5;margin:6px 0 0;}
+.room-gallery-section {margin:0 0 52px;}
+.room-gallery-head {display:flex;align-items:end;justify-content:space-between;gap:18px;margin:0 0 19px;padding:12px 4px 15px;border-bottom:1px solid rgba(236,214,175,.18);}
+.room-gallery-head h2 {margin:5px 0 5px;font:500 clamp(35px,5vw,58px)/.98 'Cormorant Garamond',Georgia,serif;}
+.room-gallery-head p {margin:0;color:#bba993;font-size:12px;line-height:1.5;}
+.room-gallery-head .room-kicker {color:#d6b27e;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
+.room-enter {background:rgba(217,182,122,.12);border:1px solid rgba(217,182,122,.25);border-radius:99px;padding:11px 15px;color:#ebd7b7;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+.room-gallery-cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px;}
+.classic-grid {display:block;}
+@media(max-width:1050px){.room-toolbar {top:78px;right:15px}.room-picker label,.tour-status{display:none}.room-picker select {max-width:143px}}
+@media(max-width:700px){
+ .room-toolbar{top:68px;left:10px;right:10px;gap:6px;justify-content:space-between;}
+ .room-picker,.guided-tour-panel{padding:5px 6px;gap:5px;min-width:0;border-radius:24px;backdrop-filter:blur(12px)}
+ .room-picker select{max-width:128px;min-height:36px;font-size:9px;padding:8px 5px}
+ .tour-btn{min-height:36px;font-size:9px;padding:6px 7px;}
+ .tour-btn svg{width:12px;height:12px}
+ .room-status{top:119px;padding:9px 14px;}
+ .room-status strong{font-size:22px}
+ .museum-room-name{font-size:8px;margin-bottom:4px}
+ .room-gallery-head{align-items:start;flex-direction:column;}
+ .room-gallery-cards{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+ .art-tab{padding:6px 8px;font-size:9px}
+ .museum-details[open] .museum-detail-scroll{max-height:min(35vh,240px);}
+}
+@media(max-width:370px){.room-picker select{max-width:112px}.tour-btn{padding:6px}.room-toolbar{gap:3px}}
+@media(prefers-reduced-motion:reduce){.room-status {transition:none}}
+/* A higher-specificity override of the legacy .classic-grid rule. */
+.classic-view .classic-grid {display:block;}
