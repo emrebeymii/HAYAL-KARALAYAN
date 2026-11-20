@@ -197,15 +197,7 @@
     museumSignageAdded = true;
   }
 
-  const foxMarkup = `<svg class="fox-drawing" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-  <path class="fox-tail" d="M65 66c10-5 23-4 24 6 1 10-12 18-29 16-12-1-17-5-23-9"/>
-  <path d="M23 35 18 9l22 18c7-4 15-4 22 0L84 9l-5 26c4 10 1 22-6 29-8 8-18 13-22 14-5-1-17-6-25-14-8-8-10-19-3-29Z"/>
-  <path d="M34 56c8 4 12 5 17 5s11-2 17-6L51 77 34 56Z"/>
-  <path d="M23 35 35 27M79 35 66 27" opacity=".64"/>
-  <path class="fox-eyes-closed" d="m35 47 7 1m18 0 7-1"/>
-  <g class="fox-eyes-open"><path d="M35 47q4-7 8 0-4 5-8 0ZM59 47q4-7 8 0-4 5-8 0Z"/><circle cx="39" cy="47" r="1.1" fill="currentColor" stroke="none"/><circle cx="63" cy="47" r="1.1" fill="currentColor" stroke="none"/></g>
-  <path d="m48 58 3 2 3-2" fill="currentColor"/><path d="M51 60v4m-5 0q5 4 10 0"/>
-</svg>`;
+  const foxMarkup = `<img class="fox-illustration" src="assets/fox-curled.webp" alt="" width="128" height="115" decoding="async">`;
 
   function installFoxSecret() {
     const aboutButton = $('aboutFoxButton');
@@ -213,7 +205,7 @@
       aboutButton.addEventListener('click', () => {
         const isAwake = aboutButton.classList.toggle('is-awake');
         aboutButton.setAttribute('aria-pressed', String(isAwake));
-        aboutButton.setAttribute('aria-label', isAwake ? 'Tilkiyi yeniden uyut' : 'Uyuyan tilkiyi uyandır');
+        aboutButton.setAttribute('aria-label', isAwake ? 'Tilkinin selamını kapat' : 'Tilkiye selam ver');
       });
     }
 

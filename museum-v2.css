@@ -77,23 +77,20 @@
 .about-panel .about-footnote{margin-top:14px;text-align:center;padding-top:0;font-size:8px}
 
 /* The fox is a personal detail, not a logo, and never obscures the paintings. */
-.fox-drawing{width:100%;height:100%;display:block;overflow:visible;color:#b9976d;filter:drop-shadow(0 1px 4px rgba(9,7,5,.4))}
-.fox-eyes-open{opacity:0;transition:opacity .16s ease}
-.is-awake .fox-eyes-closed,.is-found .fox-eyes-closed{opacity:0}
-.is-awake .fox-eyes-open,.is-found .fox-eyes-open{opacity:1}
-.fox-tail{transform-origin:65px 66px}
+/* A clearly recognizable red fox illustration, scaled for retina phones. */
+.fox-illustration{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 2px 5px rgba(0,0,0,.25));transform-origin:53% 65%;transition:transform .34s cubic-bezier(.2,.8,.25,1),filter .34s ease;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.about-fox-button.is-awake .fox-illustration,.museum-fox.is-found .fox-illustration{animation:fox-greeting .65s ease-in-out 1;filter:drop-shadow(0 0 7px rgba(222,156,74,.34)) brightness(1.13)}
+@keyframes fox-greeting{0%,100%{transform:translateY(0) rotate(0deg)}28%{transform:translateY(-3px) rotate(-6deg)}63%{transform:translateY(-2px) rotate(4deg)}}
 .about-fox-mark{display:flex;align-items:center;gap:9px;margin-top:30px;color:#75654e}
-.about-fox-button{display:grid;place-items:center;width:47px;height:47px;padding:5px;border-radius:50%;background:transparent;border:1px solid rgba(213,170,103,.09);cursor:pointer;transition:background .25s ease,border-color .25s ease}
-.about-fox-button .fox-drawing{width:35px;height:35px;opacity:.67}
+.about-fox-button{display:grid;place-items:center;width:57px;height:57px;padding:4px;border-radius:50%;background:transparent;border:1px solid rgba(213,170,103,.09);cursor:pointer;transition:background .25s ease,border-color .25s ease}
+.about-fox-button .fox-illustration{width:48px;height:46px;opacity:.85;filter:grayscale(.1) saturate(.84) drop-shadow(0 1px 4px rgba(0,0,0,.28))}
 .about-fox-button:hover,.about-fox-button:focus-visible{background:rgba(194,151,91,.08);border-color:rgba(213,170,103,.25)}
 .about-fox-caption{font:400 9px/1.45 'DM Sans',Arial,sans-serif;letter-spacing:.07em;color:#86745c}
-.about-fox-button.is-awake .fox-tail,.museum-fox.is-found .fox-tail{animation:fox-tail-wag .7s ease-in-out 2}
-@keyframes fox-tail-wag{0%,100%{transform:rotate(0)}33%{transform:rotate(-12deg)}67%{transform:rotate(8deg)}}
 
 .museum-fox{position:absolute;z-index:9;top:44%;right:clamp(7px,2.7vw,40px);pointer-events:auto;isolation:isolate;transition:opacity .35s ease,visibility .35s ease}
 .museum-fox.is-unavailable{opacity:0;visibility:hidden;pointer-events:none}
-.museum-fox-button{display:grid;place-items:center;width:44px;height:44px;padding:7px;border:1px solid rgba(211,173,109,.09);border-radius:50%;background:rgba(17,13,10,.09);opacity:.48;cursor:pointer;transition:opacity .25s ease,background .25s ease,transform .25s ease}
-.museum-fox-button .fox-drawing{width:26px;height:26px}
+.museum-fox-button{display:grid;place-items:center;width:50px;height:50px;padding:3px;border:1px solid rgba(211,173,109,.09);border-radius:50%;background:rgba(17,13,10,.09);opacity:.48;cursor:pointer;transition:opacity .25s ease,background .25s ease,transform .25s ease}
+.museum-fox-button .fox-illustration{width:42px;height:40px}
 .museum-fox-button:hover,.museum-fox-button:focus-visible{opacity:1;background:rgba(38,26,17,.6);transform:scale(1.1)}
 .museum-fox-button:focus-visible,.about-fox-button:focus-visible{outline:2px solid #e4c28c;outline-offset:3px}
 .museum-fox.is-found .museum-fox-button{opacity:1;transform:scale(1.08);background:rgba(34,25,17,.6);border-color:rgba(211,173,109,.28)}
@@ -107,11 +104,11 @@
  .studio-signature-wrap--panel{padding-top:12px}
  .about-fox-mark{margin-top:22px}
  .museum-fox{top:43%;right:4px}
- .museum-fox-button{opacity:.54;width:42px;height:42px}
+ .museum-fox-button{opacity:.62;width:50px;height:50px}
  .museum-fox-note{right:46px;width:min(198px,calc(100vw - 88px));font-size:13px}
 }
 @media(max-height:580px){.museum-fox{top:52%}}
 @media(prefers-reduced-motion:reduce){
- .studio-signature__brand,.fox-eyes-open,.museum-fox,.museum-fox-button,.museum-fox-note,.about-fox-button{transition:none!important}
- .fox-tail{animation:none!important}
+ .studio-signature__brand,.fox-illustration,.museum-fox,.museum-fox-button,.museum-fox-note,.about-fox-button{transition:none!important}
+ .fox-illustration{animation:none!important}
 }
