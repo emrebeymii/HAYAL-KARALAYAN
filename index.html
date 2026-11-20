@@ -7,10 +7,16 @@
   <meta name="description" content="Hayal Karalayan. Burcu Arısoy’un 11 özgün çalışmasını üç boyutlu müze deneyimi ve klasik galeride keşfedin.">
   <meta property="og:title" content="Hayal Karalayan | Burcu Arısoy">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Hayal Karalayan">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://emrebeymii.github.io/HAYAL-KARALAYAN/">
   <meta property="og:image" content="https://emrebeymii.github.io/HAYAL-KARALAYAN/assets/alkarasi.jpg">
   <meta property="og:description" content="Gerçek mekân hissi, sinematik giriş ve etkileşimli sanat deneyimi.">
   <title>Hayal Karalayan | Burcu Arısoy</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="museum-v2.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -779,6 +785,26 @@
     // studio. Crop them to the canvas boundaries in memory without altering the
     // artist's originals stored in /assets. The same clean image is used by the
     // immersive museum, classic gallery, and full-screen inspection.
+    // A curatorial sequence: Alkarısı always opens, Balığın Dansı always closes.
+    // Artwork records remain unchanged; only exhibition order and room tagging change.
+    const exhibitionRooms = [
+      {id:'myths', name:'Mitler ve Karanlık', caption:'Mitolojik anlatılar ve tekinsiz imgeler', color:0xb99170, works:['alkarasi.jpg','surreal-kompozisyon.jpg','kirmizi-ortulu-figur.jpg','mitolojik-kompozisyon.jpg','dalgalar-ve-figur.jpg']},
+      {id:'prints', name:'Baskı ve Desen', caption:'Çizginin çoğaltılan hikâyesi', color:0xb6a9a0, works:['farelerle-giybet.jpg']},
+      {id:'tiles', name:'Çininin İzleri', caption:'Geleneksel motiflerle çağdaş bakış', color:0x78aab7, works:['cini-tabak.jpg','cini-detay.jpg']},
+      {id:'still', name:'Sessiz Nesneler', caption:'Bitki, form ve dokular', color:0xa3b49b, works:['yesil-naturmort.jpg','bitki-ve-kumas.jpg']},
+      {id:'dream', name:'Düşsel Final', caption:'Hayal gücünün özgür alanı', color:0xc2a7bc, works:['baligin-dansi.jpg']}
+    ];
+    const originalsByFile = new Map(artworks.map(art => [art.src.split('/').pop(), art]));
+    const curated = exhibitionRooms.flatMap(room => room.works.map(file => {
+      const art = originalsByFile.get(file);
+      if (!art) throw new Error('Sergi eseri bulunamadı: ' + file);
+      art.roomId = room.id;
+      return art;
+    }));
+    if (curated.length !== 11 || new Set(curated).size !== 11) throw new Error('Sergi sıralaması tutarsız');
+    artworks.splice(0, artworks.length, ...curated);
+    const roomOf = (index) => exhibitionRooms.find(room => room.id === artworks[index]?.roomId) || exhibitionRooms[0];
+
     const preparedArtworkImages = Promise.all(artworks.filter(art => art.cropQuad).map(art => new Promise((resolve) => {
       const original = new Image();
       original.onload = () => {
@@ -887,6 +913,7 @@
             </div>
           </div>
         </article>`).join('');
+      window.dispatchEvent(new Event('hk:renderclassic'));
     }
 
     function updateClassicActive() {
@@ -909,6 +936,7 @@
       $('nextArtwork').disabled = index === artworks.length - 1;
       immersiveDots.querySelectorAll('button').forEach((button, i) => button.classList.toggle('is-active', i === index));
       updateClassicActive();
+      window.dispatchEvent(new CustomEvent('hk:artwork', {detail:{index, roomId:art.roomId}}));
     }
 
     function openLightbox(index) {
@@ -953,6 +981,7 @@
         setArtwork(activeIndex, {focus: focusMode, jump:true});
         requestMuseumRender();
       }
+      window.dispatchEvent(new CustomEvent('hk:mode', {detail:{mode:galleryMode}}));
     }
 
     async function enterGallery(mode='immersive') {
@@ -1039,6 +1068,8 @@
     let spotlights = [];
     let dustPoints;
     let dustBase = null;
+    let sharedWoodTexture = null;
+    const lowPower = window.matchMedia('(max-width: 850px)').matches || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
     let museumReady = false;
     let animationRunning = false;
     let renderQueued = false;
@@ -1053,6 +1084,7 @@
     let activeTweenStrength = .075;
     let dragPointer = null;
     let dragStart = null;
+    let didDrag = false;
 
     let introState = null;
 
@@ -1245,7 +1277,7 @@
       const heroScale = index === 0 ? 1.14 : 1;
       group.scale.setScalar(heroScale);
 
-      const woodTex = buildWoodTexture();
+      const woodTex = sharedWoodTexture || (sharedWoodTexture = buildWoodTexture());
       const frameMat = new THREE.MeshStandardMaterial({ map: woodTex, color: 0xa98156, roughness: .56, metalness: .12 });
       const edgeMat = new THREE.MeshStandardMaterial({ color: 0x322418, roughness: .7, metalness: .08 });
       const matteMat = new THREE.MeshStandardMaterial({ color: 0xd7c8b4, roughness: .92 });
@@ -1310,8 +1342,8 @@
       const side = frame.side;
       const spot = new THREE.SpotLight(0xffd8a0, 65, 9, .5, .6, 1.25);
       spot.position.set(side * 3.75, 4.5, frame.z);
-      spot.castShadow = window.innerWidth >= 700;
-      spot.shadow.mapSize.set(window.innerWidth < 1100 ? 512 : 1024, window.innerWidth < 1100 ? 512 : 1024);
+      spot.castShadow = false; // enabled only for the active artwork on higher-performance devices
+      spot.shadow.mapSize.set(512, 512);
       spot.shadow.bias = -0.00014;
       spot.target.position.copy(frame.lookAt);
       const housing = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, .4, 16), new THREE.MeshStandardMaterial({ color:0x26211d, metalness:.4, roughness:.56 }));
@@ -1320,11 +1352,12 @@
       const beam = new THREE.Mesh(new THREE.ConeGeometry(.72, 2.5, 18, 1, true), new THREE.MeshBasicMaterial({ color:0xf6d59d, transparent:true, opacity:.08, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide }));
       beam.rotation.z = side === -1 ? -Math.PI/2.36 : Math.PI/2.36;
       beam.position.set(side * 4.05, 3.55, frame.z);
+      beam.visible = false; // remove hard-edged geometric cones; real spotlights do the work
       return { spot, housing, beam };
     }
 
     function createDust() {
-      const count = window.innerWidth < 700 ? 85 : 220;
+      const count = reducedMotion ? 0 : (lowPower ? 48 : 130);
       const positions = new Float32Array(count * 3);
       dustBase = new Float32Array(count * 3);
       for (let i = 0; i < count; i++) {
@@ -1343,12 +1376,12 @@
     function createScene() {
       stage = $('museumStage');
       renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.25 : 1.75));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lowPower ? 1.15 : 1.6));
       renderer.setSize(stage.clientWidth, stage.clientHeight);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.18;
-      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.enabled = !lowPower;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       stage.innerHTML = '';
       stage.appendChild(renderer.domElement);
@@ -1412,6 +1445,7 @@
       // Navigation is handled by the visible Back / Forward buttons.
 
       museumReady = true;
+      window.dispatchEvent(new Event('hk:museumready'));
     }
 
     function startCinematicEntry() {
@@ -1507,8 +1541,10 @@
         frame.halo.material.opacity = isActive ? (focusMode ? .13 : .08) : .02;
         const bundle = spotlights[index];
         if (bundle) {
-          bundle.spot.intensity = isActive ? (focusMode ? 88 : 72) : 34;
-          bundle.beam.material.opacity = isActive ? (focusMode ? .12 : .08) : .03;
+          bundle.spot.intensity = isActive ? (focusMode ? 84 : 70) : 23;
+          bundle.spot.castShadow = !lowPower && isActive;
+          bundle.spot.color.setHex(roomOf(index).color === 0x78aab7 ? 0xffe6c4 : 0xffd8a8);
+          bundle.beam.visible = false;
         }
       });
     }
@@ -1550,6 +1586,7 @@
       if (galleryMode !== 'immersive' || dialog.open || aboutPanel.classList.contains('is-open')) return;
       dragPointer = event.pointerId;
       dragStart = { x:event.clientX, y:event.clientY, lx:lookOffsetX, ly:lookOffsetY };
+      didDrag = false;
       renderer.domElement.setPointerCapture(event.pointerId);
     }
 
@@ -1557,6 +1594,7 @@
       if (dragPointer === null || !dragStart) return;
       const dx = event.clientX - dragStart.x;
       const dy = event.clientY - dragStart.y;
+      if (Math.abs(dx) + Math.abs(dy) > 8) didDrag = true;
       lookOffsetX = THREE.MathUtils.clamp(dragStart.lx + dx * .015, -1.4, 1.4);
       lookOffsetY = THREE.MathUtils.clamp(dragStart.ly - dy * .012, -0.55, 0.55);
       requestMuseumRender();
@@ -1590,7 +1628,7 @@
     }
 
     function onCanvasClick(event) {
-      if (galleryMode !== 'immersive' || dragStart || aboutPanel.classList.contains('is-open')) return;
+      if (galleryMode !== 'immersive' || didDrag || dragStart || aboutPanel.classList.contains('is-open')) return;
       const hit = raycastArt(event.clientX, event.clientY);
       if (!hit) return;
       const index = hit.object.userData.index;
@@ -1666,7 +1704,30 @@
       else animationRunning = false;
     }
 
+    // Small explicit bridge for accessible museum controls and curatorial signage.
+    // Never exposes credentials or performs network writes.
+    window.HayalMuseum = {
+      artworks, rooms: exhibitionRooms,
+      currentIndex: () => activeIndex,
+      currentMode: () => galleryMode,
+      isReady: () => museumReady,
+      goTo: (index) => walkToArtwork(index),
+      goClassic: () => setMode('classic'),
+      goImmersive: () => setMode('immersive'),
+      sceneObjects: () => museumReady ? { THREE, scene, frameGroups, renderer, spotlights } : null,
+      stopCamera: () => {
+        if (!museumReady) return;
+        tourState = null;
+        introState = null;
+        targetPosition.copy(camera.position);
+        guidePosition.copy(camera.position);
+        desiredLookTarget.copy(currentLookTarget);
+        requestMuseumRender();
+      }
+    };
+    window.dispatchEvent(new Event('hk:ready'));
     updateMeta(0);
   </script>
+  <script src="museum-v2.js" defer></script>
 </body>
 </html>
