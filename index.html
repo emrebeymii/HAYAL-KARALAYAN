@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="@hayalkaralayan için hazırlanmış, ışıkla hayat bulan deneyimsel dijital sanat galerisi.">
+  <meta property="og:title" content="Hayal Karalayan · 3D Dijital Sergi">
+  <meta property="og:description" content="Her çizimin kendi ışığı var.">
+  <title>Hayal Karalayan | 3D Sanat Evreni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root{color-scheme:dark;--bg:#11100e;--surface:#211c17;--ivory:#e9e0d3;--muted:#9b8e7a;--gold:#d4ab69;--goldlight:#f9dda5;--border:rgba(232,216,193,.18);--bay:clamp(340px,44vw,630px);--gap:clamp(18px,2.2vw,42px);font-family:'DM Sans',Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ivory)}
+body{overflow:hidden;-webkit-font-smoothing:antialiased}
+button,a{-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--goldlight);outline-offset:5px}
+::selection{background:#ae8b5c;color:#12100e}
+.noise{pointer-events:none;position:fixed;inset:-50%;z-index:90;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");background-size:180px}
+/* Invitation */
+.entrance{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,3.2vw,48px) clamp(25px,5.4vw,90px);background:radial-gradient(ellipse at 50% 85%,#30261b 0%,#1c1915 28%,#100f0e 76%);z-index:60;overflow:hidden;transition:opacity .95s cubic-bezier(.17,.67,.18,1),transform .95s cubic-bezier(.17,.67,.18,1),visibility .95s}
+.entrance.is-leaving{opacity:0;transform:scale(1.035);visibility:hidden;pointer-events:none}
+.entrance::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.30),transparent 27%,transparent 73%,rgba(0,0,0,.30));pointer-events:none}
+.entrance-top,.entrance-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;font-size:9px;letter-spacing:.27em;color:#ad9f8a;font-weight:600}
+.entrance-center{position:relative;z-index:2;text-align:center;margin-top:4vh;display:flex;flex-direction:column;align-items:center}
+.eyebrow{font-size:10px;letter-spacing:.28em;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:18px}
+.small-star{font-size:13px;opacity:.65}
+h1,h2,p{margin:0}
+.entrance h1{font:500 clamp(76px,11vw,174px)/.75 'Cormorant Garamond',Georgia,serif;letter-spacing:-.075em;margin:33px 0 30px;text-transform:lowercase;text-shadow:0 10px 85px rgba(0,0,0,.65)}
+.display-break{display:block;margin-left:clamp(5px,2vw,32px)}.period{color:var(--gold)}
+.entrance-poem{font:400 clamp(15px,1.45vw,20px)/1.55 'Cormorant Garamond',Georgia,serif;letter-spacing:.045em;color:#c7bdb0}
+.enter-button{display:flex;align-items:center;gap:16px;color:var(--ivory);border:0;background:transparent;padding:14px 0;margin-top:35px;font-size:10px;font-weight:700;letter-spacing:.22em;transition:color .25s}
+.enter-button:hover{color:var(--goldlight)}.enter-button .button-circle{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(230,198,146,.58);border-radius:50%;font-size:21px;font-weight:400;transition:transform .3s,background .3s,color .3s}
+.enter-button:hover .button-circle{transform:rotate(45deg);background:var(--goldlight);color:#18120a}
+.enter-button-rule{width:36px;height:1px;background:var(--gold);opacity:.5}
+.reveal-item{animation:floatup 1.15s both;animation-timing-function:cubic-bezier(.2,.7,.14,1)}.entrance h1{animation-delay:.1s}.entrance-poem{animation-delay:.25s}.enter-button{animation-delay:.45s}
+@keyframes floatup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.entrance-ambience{position:absolute;inset:0;pointer-events:none;opacity:.42}
+.entrance-arch{position:absolute;top:10%;left:50%;width:min(63vw,780px);height:100%;transform:translateX(-50%);border-radius:49% 49% 0 0 / 35% 35% 0 0;border:2px solid #6b5739;box-shadow:0 0 0 25px rgba(72,56,36,.12),0 0 0 30px rgba(112,87,56,.09),inset 0 0 95px #000}
+.entrance-painting{position:absolute;left:50%;top:25%;transform:translateX(-50%);width:min(21vw,225px);height:37%;border:9px ridge #59452a;background:#241c14;box-shadow:0 10px 40px #0009}
+.entrance-painting span{display:block;width:100%;height:100%;background:radial-gradient(ellipse at 50% 39%,#b3a07c 0 14%,#564a39 14.5% 15%,transparent 15.5%),linear-gradient(135deg,#1a2425,#534b3c,#211e1e)}
+.entrance-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:70%;height:85%;background:radial-gradient(ellipse at 50% 40%,rgba(183,129,59,.25),transparent 53%);filter:blur(40px)}
+/* Exhibition */
+.experience{position:fixed;inset:0;opacity:0;transform:scale(.985);transition:opacity 1s,transform 1s;pointer-events:none}.experience.is-visible{opacity:1;transform:scale(1);pointer-events:auto}
+.site-header{height:74px;padding:0 clamp(24px,4.7vw,80px);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:8;border-bottom:1px solid rgba(209,182,140,.14);background:#171411}
+.brand{font:600 28px/.9 'Cormorant Garamond',Georgia,serif;letter-spacing:-.08em;white-space:nowrap}.brand-dot{color:var(--gold)}
+.header-center{display:flex;align-items:center;gap:20px;font-size:10px;letter-spacing:.32em;font-weight:600;color:#b7a68c}.header-line{width:25px;height:1px;background:#72573a}
+.about-link{border:0;background:none;color:#c9b69a;font-size:10px;letter-spacing:.14em;font-weight:600;padding:14px 0}.about-link span{color:var(--gold);margin-left:6px}.about-link:hover{color:#fff}
+.gallery-section{height:calc(100dvh - 74px - 120px);min-height:360px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 28%,#36312a 0%,#28241f 29%,#211d1a 68%,#181512 100%)}
+.gallery-wall{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(33.333% - 2px),rgba(0,0,0,.16) calc(33.333% - 1px),rgba(255,238,208,.015) 33.333%);opacity:.4}
+.gallery-moulding{position:absolute;top:0;left:0;right:0;height:13px;background:linear-gradient(#38312a,#1a1612 40%,#4b4236 52%,#1e1b16 65%,transparent);box-shadow:0 10px 18px #0005;z-index:2}
+.gallery-floor{position:absolute;bottom:0;left:-5%;width:110%;height:18%;background:linear-gradient(180deg,#171310 0%,#392d22 5%,#181411 18%,#262019 70%,#130f0d 100%);transform:perspective(600px) rotateX(42deg);transform-origin:bottom;z-index:1;box-shadow:0 -10px 35px rgba(0,0,0,.5)}
+.gallery-floor::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(89deg,transparent 0 14%,#0b08073b 14.2% 14.6%,transparent 14.8% 28%),repeating-linear-gradient(0deg,transparent 0 32%,#07050433 32.2% 33%,transparent 33.4% 66%)}
+.gallery-sheen{position:absolute;inset:0;pointer-events:none;z-index:4;background:linear-gradient(90deg,rgba(16,13,11,.75) 0%,transparent 12%,transparent 88%,rgba(16,13,11,.75) 100%)}
+.gallery-rail{height:100%;width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding-inline:calc((100vw - var(--bay))/2);position:relative;z-index:3;overscroll-behavior-inline:contain;touch-action:pan-x pan-y}
+.gallery-rail::-webkit-scrollbar{display:none}
+.gallery-track{height:100%;display:flex;align-items:stretch;gap:var(--gap);padding-inline:calc((100vw - var(--bay))/2)}
+.art-bay{width:var(--bay);height:100%;flex:0 0 var(--bay);scroll-snap-align:center;scroll-snap-stop:normal;position:relative;display:flex;justify-content:center;align-items:center;isolation:isolate}
+.lamp{position:absolute;top:0;left:50%;transform:translateX(-50%);height:clamp(115px,19vh,180px);width:120px;z-index:4;pointer-events:none}
+.lamp-wire{position:absolute;top:-1px;left:50%;width:2px;height:clamp(62px,10vh,98px);transform:translateX(-50%);background:linear-gradient(90deg,#120e0b,#5d4b34,#130f0c)}
+.lamp-hood{position:absolute;top:clamp(60px,10vh,96px);left:50%;transform:translateX(-50%);width:96px;height:43px;background:linear-gradient(170deg,#9f7e4d,#3e2f20 33%,#241a14 70%,#b3925e 100%);border-radius:50% 50% 12% 12%/65% 65% 20% 20%;clip-path:polygon(34% 0,66% 0,100% 100%,0 100%);box-shadow:0 3px 15px #0009}
+.lamp-hood::after{content:'';position:absolute;left:9px;right:9px;bottom:0;height:5px;border-radius:50%;background:#a38a5d}
+.lamp-bulb{position:absolute;top:calc(clamp(60px,10vh,96px) + 37px);left:50%;width:21px;height:9px;transform:translateX(-50%);border-radius:0 0 50% 50%;background:#604c32;transition:background .7s,box-shadow .7s}
+.light-beam{position:absolute;top:calc(clamp(60px,10vh,96px) + 41px);left:50%;transform:translateX(-50%);width:clamp(280px,38vw,530px);height:clamp(210px,48vh,510px);background:linear-gradient(180deg,rgba(255,222,154,.36),rgba(223,161,69,.07) 72%,transparent);clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);filter:blur(15px);opacity:.07;transition:opacity .75s ease;mix-blend-mode:screen;z-index:-1}
+.light-halo{position:absolute;top:clamp(60px,10vh,96px);left:50%;transform:translateX(-50%);width:260px;height:200px;background:radial-gradient(ellipse,rgba(239,180,90,.34),rgba(255,202,120,.04) 42%,transparent 70%);filter:blur(22px);opacity:0;transition:opacity .75s}
+.wall-aura{position:absolute;left:50%;top:26%;transform:translateX(-50%);width:min(105%,660px);height:70%;background:radial-gradient(ellipse,rgba(242,183,97,.18),transparent 69%);filter:blur(24px);opacity:0;transition:opacity 1s;pointer-events:none;z-index:-1}
+.art-display{position:relative;margin-top:clamp(55px,11vh,104px);width:min(68%,370px);max-height:calc(100% - 160px);display:flex;flex-direction:column;align-items:center;transition:transform .85s cubic-bezier(.2,.8,.2,1),filter .85s,opacity .85s;opacity:.55;filter:brightness(.58) saturate(.7);transform:scale(.91)}
+.frame-shell{position:relative;width:100%;aspect-ratio:4/4.85;padding:10px;background:linear-gradient(125deg,#7d6544 0%,#34291c 13%,#80633d 20%,#2a2119 43%,#96734a 61%,#30251b 82%,#94764b 96%);box-shadow:0 18px 45px #0e0a08d9,0 0 0 2px #100d0a,0 0 0 3px #87745465,3px 4px 0 0 #080707;transition:box-shadow .7s}
+.frame-shell::before{content:'';position:absolute;inset:4px;border:1px solid #a4865a88;pointer-events:none;z-index:2;box-shadow:inset 0 0 0 2px #0c0a07a1}
+.frame-inner{width:100%;height:100%;padding:clamp(8px,1.2vw,15px);background:#d5c9b6;border:4px solid #201911;box-shadow:inset 0 0 7px #15110c8c;overflow:hidden}
+.art-image{width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:#c8b7a2;filter:contrast(1.02);user-select:none}
+.frame-glass{position:absolute;inset:12px;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.10),transparent 19%,transparent 73%,rgba(255,255,255,.025) 100%);z-index:2}
+.wall-plate{margin-top:20px;min-width:135px;max-width:100%;border-top:1px solid rgba(221,190,136,.55);padding:8px 22px 3px;text-align:center;color:#d3bea0;font-size:9px;line-height:1.5;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;opacity:.45;transition:opacity .7s}
+.wall-plate span{display:block;color:#998b76;font-size:8px;letter-spacing:.15em;margin-top:2px}
+.art-open{position:absolute;inset:0;z-index:5;background:none;border:0;color:transparent;font-size:0;cursor:zoom-in}
+.art-bay.is-active .art-display{opacity:1;filter:brightness(1) saturate(1);transform:scale(1)}
+.art-bay.is-active .lamp-bulb{background:#ffe3a2;box-shadow:0 0 12px 5px rgba(255,211,121,.72),0 0 38px 16px rgba(255,202,114,.23)}
+.art-bay.is-active .light-beam{opacity:.9}.art-bay.is-active .light-halo{opacity:.9}.art-bay.is-active .wall-aura{opacity:1}.art-bay.is-active .wall-plate{opacity:1}
+.art-bay.is-active .frame-shell{box-shadow:0 21px 53px #070504ef,0 0 0 2px #17110c,0 0 27px rgba(241,182,91,.12),0 0 0 3px #b492595e}
+.art-bay.is-active .art-open:hover~.frame-shell{transform:none}
+.gallery-label{position:absolute;top:27px;left:clamp(24px,4.7vw,80px);z-index:5;display:flex;flex-direction:column;gap:4px;pointer-events:none}.gallery-label-top{letter-spacing:.28em;color:var(--gold);font-size:10px;font-weight:700}.gallery-label-bottom{letter-spacing:.14em;color:#968771;font-size:8px}
+.gallery-help{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.15em;color:#b7a68f;white-space:nowrap;pointer-events:none;transition:opacity .4s}.gesture-icon{font:26px/1 Georgia,serif;color:#e5c698;animation:nudge 2.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(-3px)}50%{transform:translateX(7px)}}
+.gallery-help.is-hidden{opacity:0}
+.gallery-footer{height:120px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:25px;padding:0 clamp(24px,4.7vw,80px);align-items:center;background:linear-gradient(#171310,#14110f);border-top:1px solid #55402785;position:relative;z-index:5}
+.art-caption{display:flex;align-items:center;gap:19px;min-width:0}.caption-index{align-self:flex-start;font-size:10px;letter-spacing:.16em;color:var(--gold);padding-top:6px;white-space:nowrap}.art-caption h2{font:500 27px/.95 'Cormorant Garamond',Georgia,serif;letter-spacing:.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.art-caption p{font-size:10px;margin-top:8px;color:var(--muted);letter-spacing:.06em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gallery-controls{display:flex;align-items:center;justify-content:center;gap:25px}.arrow-button{background:none;border:1px solid #82705573;border-radius:50%;width:45px;height:45px;color:var(--ivory);font-size:22px;transition:background .3s,color .3s,border-color .3s}.arrow-button:hover:not(:disabled){background:#b48c57;color:#0e0b09;border-color:#b48c57}.arrow-button:disabled{opacity:.22;cursor:default}
+.progress-track{display:flex;gap:8px;align-items:center}.progress-dot{width:5px;height:5px;border:0;padding:0;border-radius:50%;background:#655849;transition:width .3s,background .3s,border-radius .3s}.progress-dot.is-active{width:25px;border-radius:10px;background:var(--gold)}.progress-dot:hover{background:#e9cf9f}
+.footer-credit{display:flex;flex-direction:column;gap:11px;align-items:flex-end;text-align:right;font-size:9px;font-weight:600;letter-spacing:.18em;color:#938571}.footer-credit a{color:#d8be98;transition:color .2s}.footer-credit a:hover{color:#fff}.footer-credit a span{margin-left:7px;color:var(--gold)}
+/* Artist panel */
+.about-panel{position:fixed;z-index:40;top:0;right:0;bottom:0;width:min(470px,100vw);background:#211d18;border-left:1px solid #8b6d4566;padding:clamp(45px,6.5vw,92px) clamp(32px,4vw,65px);transform:translateX(110%);transition:transform .7s cubic-bezier(.22,.72,.16,1);display:flex;flex-direction:column;box-shadow:-20px 0 85px #0008}.about-panel.is-open{transform:translateX(0)}
+.panel-close{position:absolute;top:27px;right:28px;border:1px solid var(--border);background:none;color:#fff;border-radius:50%;width:38px;height:38px}.panel-kicker{font-size:10px;letter-spacing:.24em;color:var(--gold)}.about-panel h2{font:500 clamp(64px,7vw,108px)/.82 'Cormorant Garamond',Georgia,serif;letter-spacing:-.04em;margin:44px 0 40px}.about-panel h2 em{font-weight:400}.panel-line{width:100%;height:1px;background:#846e4e71;margin-bottom:30px}.about-panel p{font:20px/1.45 'Cormorant Garamond',Georgia,serif;color:#e2d1b9}.about-panel .about-placeholder{font:12px/1.85 'DM Sans',sans-serif;color:#a59a89;margin-top:20px}.panel-social{margin-top:44px;font-size:10px;letter-spacing:.19em;color:var(--goldlight);font-weight:600}.panel-social span{margin-left:10px}.panel-footnote{margin-top:auto;padding-top:30px;color:#796d5b;font-size:9px;letter-spacing:.22em}.panel-scrim{position:fixed;inset:0;background:#070605a8;z-index:39;cursor:pointer}.panel-scrim[hidden]{display:none}
+/* Lightbox */
+.lightbox{position:fixed;inset:0;border:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;background:#10100ff7;color:var(--ivory);overflow:hidden}.lightbox::backdrop{background:#070605e8;backdrop-filter:blur(15px)}
+.lightbox[open]{display:flex;flex-direction:column;animation:lightboxin .38s both}@keyframes lightboxin{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
+.lightbox-close{position:absolute;right:clamp(23px,5vw,70px);top:28px;z-index:2;border:1px solid #91785a78;border-radius:25px;color:var(--ivory);background:#ffffff0c;padding:11px 18px;display:flex;gap:12px;align-items:center;font-size:12px}.lightbox-close span{font-size:9px;letter-spacing:.17em}
+.lightbox-inner{min-height:0;display:flex;flex:1;align-items:center;justify-content:center;gap:clamp(25px,5vw,90px);padding:75px clamp(35px,10vw,190px) 24px}
+.lightbox-image-wrap{height:100%;min-height:0;display:flex;justify-content:center;align-items:center;flex:1.3}.lightbox-image-wrap img{display:block;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 17px 50px #000a;border:8px solid #bdb19c;background:#c8b7a2}
+.lightbox-meta{flex:.7;min-width:180px;max-width:340px}.lightbox-num{font-size:9px;letter-spacing:.23em;color:var(--gold)}.lightbox-meta h2{font:500 clamp(40px,5vw,75px)/.95 'Cormorant Garamond',Georgia,serif;margin:18px 0}.lightbox-meta p{font:13px/1.9 'DM Sans',sans-serif;color:#a99d8e}
+.lightbox-nav{height:80px;flex:0 0 80px;display:flex;justify-content:center;gap:85px;align-items:center;border-top:1px solid #74604738}.lightbox-nav button{color:#d9c39f;border:0;background:none;letter-spacing:.16em;font-size:10px}.lightbox-nav button:disabled{opacity:.2;cursor:default}
+.demo-notice{position:fixed;z-index:95;bottom:14px;right:14px;max-width:calc(100vw - 28px);background:#ede0c4;color:#30271c;display:flex;align-items:center;gap:10px;box-shadow:0 8px 35px #0006;border-radius:4px;padding:10px 13px;font-size:9px;letter-spacing:.08em;font-weight:700;transition:opacity .3s,transform .3s}.demo-notice.is-dismissed{opacity:0;transform:translateY(15px);pointer-events:none}.demo-dot{background:#a57430;width:6px;height:6px;border-radius:50%}.demo-divider{opacity:.45}.demo-notice button{padding:0 2px 0 6px;color:#66533a;border:0;background:none;font-size:13px}
+@media(max-height:750px) and (min-width:701px){.gallery-section{height:calc(100dvh - 74px - 95px)}.gallery-footer{height:95px}.art-display{width:min(56%,295px);margin-top:75px}.lamp{transform:translateX(-50%) scale(.78);transform-origin:top}.gallery-help{bottom:13px}.wall-plate{margin-top:11px}}
+@media(max-width:900px){.header-center{display:none}.site-header{height:66px}.gallery-section{height:calc(100dvh - 66px - 110px)}.gallery-footer{height:110px;grid-template-columns:1fr auto;gap:15px}.footer-credit{display:none}.gallery-controls{gap:12px}.gallery-controls .arrow-button{width:39px;height:39px}.gallery-help{bottom:15px}.art-display{width:min(70%,340px)}}
+@media(max-width:700px){:root{--bay:min(83vw,450px);--gap:12px}.entrance{padding:24px 22px 30px}.entrance-top,.entrance-bottom{font-size:8px;letter-spacing:.13em}.entrance-bottom span:last-child{display:none}.entrance-center{margin-top:0}.eyebrow{font-size:8px;letter-spacing:.16em;gap:7px}.entrance h1{font-size:clamp(65px,18vw,115px);margin:33px 0 22px}.entrance-poem{font-size:18px}.enter-button{margin-top:28px}.entrance-arch{width:90vw;top:13%}.entrance-painting{width:43vw;height:28%;top:30%}.site-header{padding:0 23px}.about-link{font-size:9px}.gallery-section{height:calc(100dvh - 66px - 128px);min-height:310px}.gallery-footer{height:128px;padding:0 23px;grid-template-columns:1fr;grid-template-rows:auto auto;gap:5px;align-content:center}.gallery-controls{grid-row:2;justify-content:space-between;gap:12px}.art-caption{gap:12px}.art-caption h2{font-size:24px}.art-caption p{font-size:9px;margin-top:3px}.caption-index{font-size:9px;padding-top:4px}.gallery-label{top:20px;left:24px}.gallery-label-top{font-size:9px}.gallery-label-bottom{font-size:7px}.gallery-help{font-size:8px;bottom:8px}.art-display{width:min(75%,310px);margin-top:clamp(32px,7vh,72px);max-height:calc(100% - 123px)}.frame-shell{padding:8px}.frame-inner{padding:8px;border-width:3px}.wall-plate{margin-top:10px;min-width:110px;font-size:8px;padding:5px 9px}.wall-plate span{font-size:7px}.lamp{transform:translateX(-50%) scale(.8);transform-origin:top}.light-beam{height:46vh;width:78vw}.lightbox-inner{flex-direction:column;padding:80px 21px 15px;gap:20px}.lightbox-image-wrap{max-height:65%;width:100%}.lightbox-image-wrap img{border-width:5px}.lightbox-meta{max-width:none;min-width:0;flex:0 0 auto;width:100%;text-align:center}.lightbox-meta h2{font-size:36px;margin:6px 0}.lightbox-meta p{font-size:11px;line-height:1.6}.lightbox-nav{height:64px;flex-basis:64px;gap:55px}.demo-notice{bottom:10px;right:10px;left:10px;justify-content:center;font-size:8px;gap:6px;letter-spacing:.015em}.about-panel{padding:80px 30px 32px}}
+@media(max-width:380px){.art-display{width:71%}.gallery-controls .arrow-button{width:33px;height:33px}.gallery-footer{height:115px}.gallery-section{height:calc(100dvh - 66px - 115px)}.gallery-help{display:none}.demo-notice{font-size:7px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+/* Şablon uyarısı hiçbir ekranda galeri kontrollerini kapatmamalı. */
+@media(min-width:701px){.demo-notice{bottom:135px}}
+@media(max-width:700px){.demo-notice{display:none}}
+
+
+/* Inline vector icons, no emoji or platform-specific glyph icons */
+.svg-icon{display:inline-flex;vertical-align:middle;width:13px;height:13px;margin-left:7px}
+.svg-icon svg,.button-circle svg,.gesture-icon svg,.small-star svg,.arrow-button svg,.panel-close svg,.lightbox-close svg,.lightbox-nav svg,.demo-notice button svg{display:block;width:1em;height:1em;flex-shrink:0}
+.button-circle svg{width:20px;height:20px}
+.small-star{display:inline-flex;align-items:center;font-size:11px}
+.gesture-icon{display:inline-flex;align-items:center;font-size:22px}
+.arrow-button{display:grid;place-items:center}
+.arrow-button svg{width:18px;height:18px}
+.lightbox-close,.lightbox-nav button{display:inline-flex;align-items:center;gap:8px}
+.lightbox-close svg,.lightbox-nav svg{width:16px;height:16px}
+.panel-close{display:grid;place-items:center}
+.panel-close svg{width:18px;height:18px}
+.demo-notice button svg{width:13px;height:13px}
+
+/* ================================================
+   HAYAL KARALAYAN · IMMERSIVE 3D EXHIBITION
+   CSS perspective transforms: standalone, no CDN.
+   ================================================ */
+[hidden]{display:none!important}
+.classic-entry{margin-top:2px;border:0;background:none;color:#bca98e;letter-spacing:.22em;font-weight:700;font-size:9px;padding:11px 18px;transition:color .25s,transform .25s}
+.classic-entry:hover{color:#fbe6bd;transform:translateY(-2px)}
+.classic-entry span{font-size:14px;margin-left:6px;color:var(--gold)}
+.mode-switch{position:absolute;top:91px;right:clamp(17px,3vw,48px);z-index:22;display:flex;align-items:center;gap:3px;border:1px solid rgba(231,202,149,.2);border-radius:99px;padding:4px;background:rgba(14,15,19,.77);box-shadow:0 10px 30px #0005;backdrop-filter:blur(15px)}
+.mode-option{background:none;border:0;color:#aca296;border-radius:50px;padding:10px 15px;font:700 9px/1 'DM Sans',sans-serif;letter-spacing:.14em;transition:color .2s,background .2s;white-space:nowrap}
+.mode-option span{color:#ac986e;font-size:13px;margin-right:4px}.mode-option:hover{color:white}
+.mode-option.is-active{background:#d7b786;color:#1b1713}.mode-option.is-active span{color:#463321}
+.immersion{position:relative;height:calc(100dvh - 74px);min-height:475px;overflow:hidden;isolation:isolate;background:#080d17}
+.immersion::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 61% 40% at 50% 55%,#233249 0%,#121c2e 48%,#080d16 100%);pointer-events:none;z-index:0}
+.immersion-sky{position:absolute;inset:-15% -10% 26%;pointer-events:none;z-index:1;background:radial-gradient(ellipse 22% 75% at 12% 0%,rgba(84,136,110,.31),transparent 69%),radial-gradient(ellipse 28% 58% at 89% 0%,rgba(134,50,96,.29),transparent 70%),radial-gradient(ellipse 25% 45% at 58% -8%,rgba(59,78,157,.47),transparent 70%);filter:blur(28px);animation:sky-shift 16s ease-in-out infinite alternate}
+@keyframes sky-shift{from{transform:translateX(-2%) skewX(-3deg)}to{transform:translateX(2%) skewX(3deg)}}
+.immersion-grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px}
+.immersion-topnote{position:absolute;z-index:12;top:24px;left:clamp(22px,5vw,82px);font-size:9px;letter-spacing:.23em;font-weight:700;color:#b2b8c4;display:flex;align-items:center;gap:12px;max-width:43%}
+.topnote-diamond{color:#d9c095;font-size:17px}.topnote-rule{width:28px;height:1px;background:#a7a1a0;opacity:.5}
+.orbit-caption-side{position:absolute;left:25px;top:50%;z-index:8;transform:translate(-50%,-50%) rotate(-90deg);transform-origin:center;white-space:nowrap;color:#a5b2c4;opacity:.5;font-size:8px;letter-spacing:.35em;font-weight:700}
+.orbit-caption-side span{display:inline-block;width:24px;height:1px;background:#b7c2cb;margin:0 12px 3px}
+.orbit-viewport{position:absolute;inset:0 0 110px;z-index:3;cursor:grab;touch-action:pan-y;perspective:1100px;perspective-origin:50% 53%;user-select:none;overflow:hidden;outline:none}
+.orbit-viewport:focus-visible{outline:1px solid #ddc89e;outline-offset:-8px}
+.orbit-viewport.is-dragging{cursor:grabbing}
+.orbit-backglow{position:absolute;inset:4% -20% -10%;pointer-events:none;background:radial-gradient(ellipse 38% 45% at 50% 53%,rgba(66,117,181,.36),transparent 78%),radial-gradient(ellipse 45% 70% at 50% 80%,rgba(34,74,132,.28),transparent 77%);filter:blur(8px)}
+.orbit-chamber{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-5deg) rotateY(0deg);will-change:transform;pointer-events:none}
+.orbit-ring,.orbit-upper{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}
+.orbit-art{position:absolute;left:50%;top:55%;width:260px;min-height:318px;display:flex;flex-direction:column;align-items:center;transform-style:preserve-3d;backface-visibility:hidden;pointer-events:auto;filter:brightness(.66) saturate(.75);transition:filter .45s,opacity .45s;opacity:.93}
+.orbit-art.is-active{filter:brightness(1.05) saturate(1.06);opacity:1}
+.orbit-frame{position:relative;width:100%;height:308px;border:8px solid #5b4e3e;padding:6px;background:linear-gradient(130deg,#b89c6b,#473626 18%,#94764b 45%,#282019 80%,#d9b678);box-shadow:0 0 0 1px #d2ac74,0 0 0 3px #110e0d,0 10px 34px #000b,0 0 35px rgba(0,0,0,.4);overflow:hidden}
+.orbit-frame::after{content:"";position:absolute;inset:6px;background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 23%,transparent 75%,rgba(255,255,255,.03));pointer-events:none}
+.orbit-frame img{display:block;width:100%;height:100%;object-fit:cover;background:#d4c5af;border:4px solid #29241e;pointer-events:none}
+.orbit-artname{max-width:275px;margin-top:12px;color:#ebd9b7;text-align:center;font:600 14px/1.13 'Cormorant Garamond',Georgia,serif;letter-spacing:.015em;text-shadow:0 2px 12px #000}
+.orbit-artno{color:#9ca8bc;font:700 7px/2 'DM Sans',sans-serif;letter-spacing:.2em;margin-top:3px}
+.orbit-art-open{position:absolute;inset:0;border:0;background:transparent;color:transparent;cursor:pointer;font-size:0}
+.orbit-art.is-active .orbit-artname,.orbit-art.is-active .orbit-artno{opacity:0}
+.orbit-art.is-active .orbit-frame{box-shadow:0 0 0 1px #e6c38a,0 0 0 3px #17110e,0 20px 45px #000c,0 0 55px rgba(217,168,98,.2)}
+.orbit-upper-panel{position:absolute;left:50%;top:19%;width:180px;height:132px;transform-style:preserve-3d;backface-visibility:hidden;opacity:.58;filter:saturate(.75) brightness(.8);pointer-events:none}
+.orbit-upper-panel img{height:100%;width:100%;object-fit:cover;border:5px solid #151f2d;outline:1px solid #8290a4;box-shadow:0 0 22px rgba(74,106,161,.25)}
+.orbit-floor{position:absolute;bottom:-26px;left:-10%;width:120%;height:43%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 48% 35% at 50% 40%,rgba(44,103,190,.48),transparent 75%),repeating-radial-gradient(ellipse 60% 70% at 50% 90%,transparent 0px,transparent 57px,rgba(111,141,192,.15) 59px,transparent 61px),linear-gradient(to top,#07101d 5%,rgba(19,30,52,.3) 75%,transparent);transform:perspective(500px) rotateX(54deg);transform-origin:center bottom;box-shadow:inset 0 -50px 80px rgba(0,0,0,.3)}
+.orbit-floor-inner{width:160px;height:160px;border:1px solid #638dbd44;box-shadow:0 0 110px 45px rgba(44,97,184,.4);border-radius:50%;margin:8% auto}
+.orbit-vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(3,7,12,.67),transparent 13%,transparent 87%,rgba(3,7,12,.67)),linear-gradient(0deg,rgba(6,11,18,.85),transparent 23%,transparent 83%,rgba(5,8,12,.3))}
+.orbit-caption{position:absolute;z-index:12;left:50%;bottom:100px;transform:translateX(-50%);text-align:center;width:min(540px,88vw);pointer-events:none;text-shadow:0 4px 18px #050911}
+.orbit-number{font:700 9px/1 'DM Sans',sans-serif;letter-spacing:.25em;color:#e3bd83}
+.orbit-caption h2{margin:7px 0 1px;font:500 clamp(29px,3vw,43px)/1.04 'Cormorant Garamond',Georgia,serif;color:#f4ebdc}
+.orbit-caption p{font:700 8px/1.8 'DM Sans',sans-serif;letter-spacing:.19em;color:#b0b9c7}
+.orbit-examine{pointer-events:auto;margin-top:11px;background:#d8b783;border:1px solid #e0cbab;border-radius:100px;padding:11px 17px;font:700 9px/1 'DM Sans',sans-serif;letter-spacing:.17em;color:#201a16;transition:background .2s,transform .2s}
+.orbit-examine:hover{background:#ffdfaa;transform:translateY(-3px)}.orbit-examine span{font-size:14px;margin-left:8px}
+.orbit-bottom-bar{position:absolute;bottom:0;left:0;right:0;height:87px;z-index:13;border-top:1px solid rgba(185,194,207,.14);background:rgba(9,14,23,.78);backdrop-filter:blur(17px);display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 clamp(20px,5vw,82px)}
+.orbit-interaction-help,.orbit-instagram{font-size:9px;letter-spacing:.19em;font-weight:700;color:#b0b9c8;white-space:nowrap}
+.orbit-instagram{color:#ddc3a0;transition:color .2s}.orbit-instagram:hover{color:white}.orbit-instagram span{padding-left:6px}
+.orbit-hand{font-size:17px;vertical-align:middle;margin-right:9px;color:#dbbd8c}
+.orbit-navigation{display:flex;align-items:center;gap:14px}
+.orbit-arrow{width:39px;height:39px;border:1px solid #aab3be66;border-radius:50%;color:#eee0ca;background:#fff1;font-size:20px;transition:background .2s,transform .2s}
+.orbit-arrow:hover{background:#f8dbae33;transform:scale(1.06)}
+.orbit-dots{display:flex;gap:10px;align-items:center;justify-content:center}
+.orbit-dot{width:6px;height:6px;border:0;border-radius:99px;background:#727c8e;opacity:.8;transition:background .25s,width .25s;cursor:pointer;padding:0}
+.orbit-dot.is-active{width:26px;background:#dbbd8b;opacity:1}
+.experience.mode-immersive #mainContent{display:none}
+@media(max-width:800px){.orbit-interaction-help,.orbit-instagram{display:none}.orbit-bottom-bar{justify-content:center;height:73px}.orbit-caption{bottom:85px}.mode-switch{top:86px}.immersion-topnote{max-width:45%;top:23px;font-size:7px}.orbit-caption-side{display:none}.orbit-viewport{bottom:92px}.orbit-upper-panel{width:138px;height:103px}.orbit-art{width:216px;min-height:286px}.orbit-frame{height:257px}.orbit-caption h2{font-size:33px}}
+@media(max-width:500px){.immersion{height:calc(100dvh - 66px);min-height:430px}.mode-switch{left:50%;right:auto;top:76px;transform:translateX(-50%)}.mode-option{padding:9px 11px;font-size:8px}.immersion-topnote{top:18px;left:15px;font-size:7px;max-width:92%;opacity:.75}.orbit-art{top:53%;width:175px;min-height:220px}.orbit-frame{height:207px;border-width:5px;padding:3px}.orbit-frame img{border-width:3px}.orbit-artname{font-size:12px}.orbit-upper-panel{top:16%;width:115px;height:84px}.orbit-viewport{perspective:820px;perspective-origin:50% 52%;inset:0 0 100px}.orbit-caption{bottom:75px}.orbit-caption h2{font-size:28px}.orbit-examine{padding:9px 13px;margin-top:8px}.orbit-bottom-bar{height:65px}.orbit-arrow{width:34px;height:34px}.orbit-dots{gap:7px}.orbit-viewport .orbit-artno{font-size:6px}}
+@media(prefers-reduced-motion:reduce){.immersion-sky{animation:none!important}.orbit-chamber{will-change:auto}}
+
+</style>
+  
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <section class="entrance" id="entrance" aria-labelledby="entranceTitle">
+    <div class="entrance-ambience" aria-hidden="true"><div class="entrance-arch"></div><div class="entrance-painting"><span></span></div><div class="entrance-glow"></div></div>
+    <div class="entrance-top"><span>BAĞIMSIZ DİJİTAL SERGİ</span><span>EST. MMXXVI</span></div>
+    <div class="entrance-center">
+      <div class="eyebrow reveal-item"><span class="small-star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 7 10-7 10L5 12Z"/></svg></span> HER ÇİZGİNİN BİR HİKÂYESİ VAR <span class="small-star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 7 10-7 10L5 12Z"/></svg></span></div>
+      <h1 id="entranceTitle" class="reveal-item">hayal<span class="display-break">karalayan<span class="period">.</span></span></h1>
+      <p class="entrance-poem reveal-item">Karanlığa asılan çizgiler.<br>Işık yalnızca bakmayı seçtiğinde yanar.</p>
+      <button id="enterButton" class="enter-button reveal-item" type="button"><span class="button-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span>3D SERGİYE GİR</span><span class="enter-button-rule" aria-hidden="true"></span></button>
+      <button id="classicEntry" class="classic-entry" type="button">KLASİK GALERİYİ GEZ <span aria-hidden="true">↗</span></button>
+    </div>
+    <div class="entrance-bottom"><span>01 / DİJİTAL DENEYİM</span><span>SESİ AÇMANA GEREK YOK. BAKMAN YETER.</span></div>
+  </section>
+
+  <div class="experience" id="experience" aria-hidden="true">
+    <header class="site-header">
+      <a href="#" id="brandHome" class="brand" aria-label="Hayal Karalayan, serginin başına dön">h<span class="brand-dot">.</span>k<span class="brand-dot">.</span></a>
+      <div class="header-center"><span class="header-line"></span><span>HAYAL KARALAYAN</span><span class="header-line"></span></div>
+      <button class="about-link" id="aboutButton" type="button">SANATÇI HAKKINDA <span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
+    </header>
+
+
+    <nav class="mode-switch" aria-label="Galeri deneyimi seçimi">
+      <button type="button" id="mode3D" class="mode-option is-active" aria-pressed="true"><span aria-hidden="true">◉</span> 3D DENEYİM</button>
+      <button type="button" id="modeClassic" class="mode-option" aria-pressed="false"><span aria-hidden="true">▤</span> KLASİK GALERİ</button>
+    </nav>
+
+    <section class="immersion" id="immersion" aria-label="Üç boyutlu etkileşimli dijital sanat galerisi" hidden>
+      <div class="immersion-sky" aria-hidden="true"></div>
+      <div class="immersion-grain" aria-hidden="true"></div>
+      <div class="immersion-topnote" aria-hidden="true"><span class="topnote-diamond">✧</span> BİR SERGİDEN DAHA FAZLASI <span class="topnote-rule"></span> HAYAL KARALAYAN / 2026</div>
+      <div class="orbit-caption-side" aria-hidden="true">AN INTERACTIVE ART SPACE <span></span> 001—006</div>
+      <div class="orbit-viewport" id="orbitViewport" tabindex="0" aria-label="3D galeriyi fareyle sürükleyin, kaydırın ya da ok tuşlarını kullanın">
+        <div class="orbit-backglow" aria-hidden="true"></div>
+        <div class="orbit-chamber" id="orbitChamber">
+          <div class="orbit-upper" id="orbitUpper" aria-hidden="true"></div>
+          <div class="orbit-ring" id="orbitRing"></div>
+        </div>
+        <div class="orbit-floor" aria-hidden="true"><div class="orbit-floor-inner"></div></div>
+        <div class="orbit-vignette" aria-hidden="true"></div>
+      </div>
+      <div class="orbit-caption" aria-live="polite" aria-atomic="true">
+        <span id="orbitNumber" class="orbit-number">ESER 01 / 06</span>
+        <h2 id="orbitTitle">Geceye Açılan Pencere</h2>
+        <p id="orbitYear">DEMO / 01</p>
+        <button id="orbitExamine" class="orbit-examine" type="button">ESERİ İNCELE <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="orbit-bottom-bar">
+        <div class="orbit-interaction-help"><span class="orbit-hand" aria-hidden="true">✳</span> SÜRÜKLE / KAYDIR / KEŞFET</div>
+        <div class="orbit-navigation" aria-label="3D sergi kontrolü">
+          <button class="orbit-arrow" id="orbitPrev" type="button" aria-label="Önceki eser">←</button>
+          <div class="orbit-dots" id="orbitDots" role="group" aria-label="Eser seç"></div>
+          <button class="orbit-arrow" id="orbitNext" type="button" aria-label="Sonraki eser">→</button>
+        </div>
+        <a href="https://www.instagram.com/hayalkaralayan/" target="_blank" rel="noopener noreferrer" class="orbit-instagram">@HAYALKARALAYAN <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <main id="mainContent">
+      <section class="gallery-section" aria-label="Yatay dijital sanat galerisi">
+        <div class="gallery-wall" aria-hidden="true"></div>
+        <div class="gallery-moulding" aria-hidden="true"></div>
+        <div class="gallery-floor" aria-hidden="true"></div>
+        <div class="gallery-sheen" aria-hidden="true"></div>
+
+        <div class="gallery-rail" id="galleryRail" tabindex="0" aria-label="Eserler, sağa veya sola kaydırın">
+          <div class="gallery-track" id="galleryTrack">
+            <!-- Eserler bu HTML dosyasının altındaki artworks dizisinden oluşturulur. -->
+          </div>
+        </div>
+
+        <div class="gallery-label"><span class="gallery-label-top">GALLERY NO. 01</span><span class="gallery-label-bottom">THE QUIET LIGHT COLLECTION</span></div>
+        <div class="gallery-help" id="galleryHelp"><span class="gesture-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-5 5 5 5M2 12h20m-5-5 5 5-5 5"/></svg></span><span>KAYDIRARAK KEŞFET</span></div>
+      </section>
+
+      <footer class="gallery-footer">
+        <div class="art-caption" aria-live="polite" aria-atomic="true">
+          <span class="caption-index" id="captionIndex">01 — 06</span>
+          <div><h2 id="captionTitle">Eser 01</h2><p id="captionDescription">Sergi çalışması</p></div>
+        </div>
+        <div class="gallery-controls">
+          <button class="arrow-button" type="button" id="previousButton" aria-label="Önceki eser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h14"/></svg></button>
+          <div class="progress-track" id="progressTrack" aria-label="Eser seçimi"></div>
+          <button class="arrow-button" type="button" id="nextButton" aria-label="Sonraki eser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 5 7 7-7 7M17 12H3"/></svg></button>
+        </div>
+        <div class="footer-credit"><span>AN INTERACTIVE EXHIBITION</span><a href="https://www.instagram.com/hayalkaralayan/" target="_blank" rel="noopener noreferrer">@HAYALKARALAYAN <span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div>
+      </footer>
+    </main>
+
+    <aside class="about-panel" id="aboutPanel" aria-hidden="true" aria-labelledby="aboutTitle">
+      <button id="aboutClose" class="panel-close" type="button" aria-label="Sanatçı hakkında panelini kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <span class="panel-kicker">THE ARTIST / 001</span>
+      <h2 id="aboutTitle">Hayal<br><em>Karalayan</em><span class="period">.</span></h2>
+      <div class="panel-line"></div>
+      <p>Her çizim başka bir dünyanın kapısını aralar.</p>
+      <p class="about-placeholder">Bu bölüm sanatçının paylaşacağı biyografi ve kendi sözleriyle tamamlanacak. Şu anki metinler ve galerideki görseller yalnızca şablon içindir.</p>
+      <a href="https://www.instagram.com/hayalkaralayan/" target="_blank" rel="noopener noreferrer" class="panel-social">INSTAGRAM'DA GÖR <span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <span class="panel-footnote">DİJİTAL SERGİ · KİŞİSEL PORTFÖY</span>
+    </aside>
+    <div class="panel-scrim" id="panelScrim" hidden></div>
+  </div>
+
+  <dialog class="lightbox" id="lightbox" aria-labelledby="lightboxTitle">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Büyük görüntüyü kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg> <span>KAPAT</span></button>
+    <div class="lightbox-inner"><div class="lightbox-image-wrap"><img id="lightboxImage" alt=""></div><div class="lightbox-meta"><span id="lightboxNumber" class="lightbox-num">ESER 01</span><h2 id="lightboxTitle"></h2><p id="lightboxDescription"></p></div></div>
+    <div class="lightbox-nav"><button id="lightboxPrev" type="button" aria-label="Önceki eseri görüntüle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h14"/></svg> ÖNCEKİ</button><button id="lightboxNext" type="button" aria-label="Sonraki eseri görüntüle">SONRAKİ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 5 7 7-7 7M17 12H3"/></svg></button></div>
+  </dialog>
+
+  <div class="demo-notice" id="demoNotice"><span class="demo-dot"></span> ŞABLON ÖNİZLEMESİ <span class="demo-divider">/</span> GÖRSELLER TEMSİLÎDİR <button type="button" id="demoDismiss" aria-label="Önizleme notunu kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+<script>
+'use strict';
+
+/**
+ * HAYAL KARALAYAN • Digital Gallery
+ * Eserler gelince SADECE bu dizideki başlık, açıklama ve src bilgilerini değiştir.
+ * assets/ klasöründeki SVG'ler SANATÇI ESERLERİ DEĞİLDİR, şablon için hazırlanmış temsili görsellerdir.
+ */
+const artworks = [
+  { title:'Geceye Açılan Pencere', year:'DEMO / 01', description:'Bu görsel temsili bir yer tutucudur. Gerçek eser ve açıklaması sanatçıdan gelecektir.', src:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiB2aWV3Qm94PSIwIDAgNjAwIDc1MCIgcm9sZT0iaW1nIj4KPGRlZnM+PGZpbHRlciBpZD0iZ3JhaW4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjQyIiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjxmZUNvbXBvbmVudFRyYW5zZmVyPjxmZUZ1bmNBIHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuMTAiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+CjxyYWRpYWxHcmFkaWVudCBpZD0idmlnbmV0dGUiPjxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTQwZDBiIiBzdG9wLW9wYWNpdHk9Ii4zNyIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkMGJkYTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Mzc3NjMiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSIjMjMzMDM5Ii8+Cgo8cmVjdCB4PSI4NyIgeT0iNjIiIHdpZHRoPSI0MjYiIGhlaWdodD0iNjMwIiByeD0iMjEwIiBmaWxsPSIjMTMxZTI2IiBzdHJva2U9IiNiZWE1ODEiIHN0cm9rZS13aWR0aD0iMjAiLz4KPHJlY3QgeD0iMTEzIiB5PSI4OCIgd2lkdGg9IjM3NCIgaGVpZ2h0PSI1NzgiIHJ4PSIxODgiIGZpbGw9IiMzNDQyNGEiLz4KPHBhdGggZD0iTTMwMCA4OFY2NjYgTTExNCAzNjhINDg2IiBzdHJva2U9IiNiNTlkN2MiIHN0cm9rZS13aWR0aD0iMTIiLz4KPGNpcmNsZSBjeD0iMzg3IiBjeT0iMjUzIiByPSI4MCIgZmlsbD0iI2U5ZDBhMCIvPjxjaXJjbGUgY3g9IjQxOSIgY3k9IjIzNSIgcj0iNzkiIGZpbGw9IiMzNDQyNGEiLz4KPGcgZmlsbD0iI2UwYmM4OCI+IDxjaXJjbGUgY3g9IjE3MiIgY3k9IjIyNCIgcj0iMyIvPjxjaXJjbGUgY3g9IjI2OSIgY3k9IjE3NiIgcj0iNSIvPjxjaXJjbGUgY3g9IjQxNSIgY3k9IjQzOCIgcj0iMyIvPjxjaXJjbGUgY3g9IjIwNSIgY3k9IjUwNCIgcj0iNCIvPjxjaXJjbGUgY3g9IjQ1NiIgY3k9IjMzMCIgcj0iNCIvPjwvZz4KPGcgc3Ryb2tlPSIjYzJhNDdjIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTE3NiAyMDB2MjJtLTExLTExaDIyTTIzOSAyODZ2MTdtLTgtOGgxNk00MDAgNDcwdjIwbS0xMC0xMGgyMCIvPjwvZz4KPHBhdGggZD0iTTExMyA1NzNxNzUtNTcgMTM4LTE0dDEyMy03cTUwLTMzIDExMy0xMnYxMjdIMTEzeiIgZmlsbD0iIzIyMzEyZiIvPgo8cGF0aCBkPSJNMTEzIDYxN3ExMjAtNzkgMjA0LTE3dDE3MC04djc0SDExM3oiIGZpbGw9IiMxMzFmMjAiLz4KPGcgc3Ryb2tlPSIjYzJhNDdjIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii42Ij48cGF0aCBkPSJNMTU4IDY2MnExOS00NCA0LTgxbTEgNTNxLTM2LTMwLTQwLTI5bTM3LTEzcTI3LTMxIDQyLTI1TTQ0NCA2NjBxLTE4LTQyLTctNzRtMCA0MHEyMi0yNSAzOS0yNyIvPjwvZz4KCjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSJ1cmwoI3ZpZ25ldHRlKSIvPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9Ijc1MCIgZmlsdGVyPSJ1cmwoI2dyYWluKSIgb3BhY2l0eT0iLjkiLz4KPHJlY3QgeD0iMjQiIHk9IjI0IiB3aWR0aD0iNTUyIiBoZWlnaHQ9IjcwMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTNkM2IzIiBzdHJva2Utb3BhY2l0eT0iLjI0IiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+', alt:'Temsili illüstrasyon: karanlık bir pencerede ay ve yıldızlar.' },
+  { title:'İçimde Bir Bahçe', year:'DEMO / 02', description:'Bu görsel temsili bir yer tutucudur. Gerçek eser ve açıklaması sanatçıdan gelecektir.', src:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiB2aWV3Qm94PSIwIDAgNjAwIDc1MCIgcm9sZT0iaW1nIj4KPGRlZnM+PGZpbHRlciBpZD0iZ3JhaW4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjQyIiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjxmZUNvbXBvbmVudFRyYW5zZmVyPjxmZUZ1bmNBIHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuMTAiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+CjxyYWRpYWxHcmFkaWVudCBpZD0idmlnbmV0dGUiPjxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTQwZDBiIiBzdG9wLW9wYWNpdHk9Ii4zNyIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkMGJkYTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Mzc3NjMiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSIjYmNhYTk0Ii8+Cgo8cmVjdCB4PSI0NCIgeT0iNDQiIHdpZHRoPSI1MTIiIGhlaWdodD0iNjYyIiBmaWxsPSIjYzliOGEwIiBzdHJva2U9IiM3NDUzM2MiIHN0cm9rZS13aWR0aD0iMSIvPgo8cGF0aCBkPSJNMjg0IDY5OEMyNzMgNTYzIDMwMSA0ODAgMjc5IDM4MXMtMTQtMTk5IDIyLTI5OSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzU0NDM4IiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI5MyA1MzVRMTc0IDUzOCAxMjggNDQzcTEyMi0zOCAxNzAgMjdNMjg5IDQ5MXE5Ni0xMTQgMTc3LTkzLTE5IDEwOC0xNjkgMTI3TTI4NCAzODVxLTEyNC02MS0xMzEtMTU1IDEyOSAxNSAxNDYgMTA2TTI5MSAzNDFxODktMTIwIDE3MC0xMDUtMTkgMTAxLTE2MSAxMTkiIGZpbGw9IiM1ODYyNGUiIHN0cm9rZT0iIzJmNDMzNyIgc3Ryb2tlLXdpZHRoPSI0Ii8+CjxwYXRoIGQ9Ik0yOTcgMjczYy0zNC0zOS03Ny0yNC03Ny02NCAwLTI5IDMzLTQ1IDU2LTI2IDQtNTQgNzYtNTcgODYtNSA0OS0yMiA3NiA0MyAyNiA2NyAzIDQ2LTY5IDYxLTkxIDI4eiIgZmlsbD0iI2IxNmY1OCIgc3Ryb2tlPSIjNzM0YzQxIiBzdHJva2Utd2lkdGg9IjQiLz4KPGNpcmNsZSBjeD0iMzAyIiBjeT0iMjMxIiByPSIzMSIgZmlsbD0iI2Q3YmQ4NSIvPgo8cGF0aCBkPSJNMTYyIDY2OHEtMTItNzAgMy0xMzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzNhNTc0OCIgc3Ryb2tlLXdpZHRoPSI4Ii8+CjxwYXRoIGQ9Ik0xNjggNTY0Yy05MC0xNS0xMDUtNjAtNzItMTA1IDUzIDMgNzkgMzYgNzIgMTA1ek0xNjggNTg3YzcxLTUyIDExMS0yNiAxMDQgMjItNTYgMjktOTcgMTAtMTA0LTIyeiIgZmlsbD0iIzZkNzQ1MyIgc3Ryb2tlPSIjM2I0ODNiIiBzdHJva2Utd2lkdGg9IjQiLz4KPGcgZmlsbD0iI2Q4YWQ3ZSIgc3Ryb2tlPSIjYTk3ODU4IiBzdHJva2Utd2lkdGg9IjMiPjxjaXJjbGUgY3g9IjE2NSIgY3k9IjQ4NyIgcj0iMjMiLz48Y2lyY2xlIGN4PSIxNDciIGN5PSI0NTciIHI9IjIwIi8+PGNpcmNsZSBjeD0iMTg5IiBjeT0iNDU1IiByPSIxOCIvPjwvZz4KPGNpcmNsZSBjeD0iMTY2IiBjeT0iNDcxIiByPSIxMSIgZmlsbD0iIzVkNDkzNSIvPgo8ZyBmaWxsPSIjMzg0NDNiIj48cGF0aCBkPSJNNDAwIDY3MGMtMjItNTAtMjQtMTA4LTEwLTE1OCAyNCAzNyAzNCA3NCAzMCAxMjN6Ii8+PHBhdGggZD0iTTQ0MCA2NzhjMjUtNzAgNDctMTA0IDkwLTExMi03IDc4LTQ0IDEwNC05MCAxMTJ6Ii8+PC9nPgo8ZyBmaWxsPSIjOGQ2NDRmIj48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxNjIiIHI9IjgiLz48Y2lyY2xlIGN4PSI0NzAiIGN5PSIxNzAiIHI9IjciLz48Y2lyY2xlIGN4PSI0OTUiIGN5PSI0OTUiIHI9IjYiLz48L2c+Cgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9Ijc1MCIgZmlsbD0idXJsKCN2aWduZXR0ZSkiLz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI3NTAiIGZpbHRlcj0idXJsKCNncmFpbikiIG9wYWNpdHk9Ii45Ii8+CjxyZWN0IHg9IjI0IiB5PSIyNCIgd2lkdGg9IjU1MiIgaGVpZ2h0PSI3MDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2UzZDNiMyIgc3Ryb2tlLW9wYWNpdHk9Ii4yNCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg==', alt:'Temsili illüstrasyon: soyut çiçekler ve koyu yapraklar.' },
+  { title:'Sessizliğin Yüzü', year:'DEMO / 03', description:'Bu görsel temsili bir yer tutucudur. Gerçek eser ve açıklaması sanatçıdan gelecektir.', src:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiB2aWV3Qm94PSIwIDAgNjAwIDc1MCIgcm9sZT0iaW1nIj4KPGRlZnM+PGZpbHRlciBpZD0iZ3JhaW4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjQyIiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjxmZUNvbXBvbmVudFRyYW5zZmVyPjxmZUZ1bmNBIHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuMTAiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+CjxyYWRpYWxHcmFkaWVudCBpZD0idmlnbmV0dGUiPjxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTQwZDBiIiBzdG9wLW9wYWNpdHk9Ii4zNyIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkMGJkYTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Mzc3NjMiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSIjZDdjNGE3Ii8+Cgo8Y2lyY2xlIGN4PSIzMDkiIGN5PSIzMDMiIHI9IjIyNSIgZmlsbD0iI2FkOTc4MSIgb3BhY2l0eT0iLjQiLz4KPHBhdGggZD0iTTI1MCAxMjFxMTAxLTUzIDE3NiA0MCA2NyA4NSAyMSAyMDAtMjMgNjAtNTMgNzktNiA3NiA1NiAxNDktODkgMTA3LTI3NSAyOS02Ny02Ni0yMi0xNTUgMzAtNTYgNDItMTAyLTQ0LTEzMiA1NS0yNDB6IiBmaWxsPSIjNGM1NjUzIiBzdHJva2U9IiMyNjNkM2IiIHN0cm9rZS13aWR0aD0iNSIvPgo8cGF0aCBkPSJNMjQ2IDE3NXExMTctNDQgMTU2IDM3IDI1IDUyLTIgMTA3LTMwIDY3LTQ3IDEwOC0xMCA2NSAzOCA5Ni04MyA2Mi0xNzItMiA0Mi01OSAyNi0xMTktMjgtMTAxIDEtMjI3eiIgZmlsbD0iI2M5YTU4ZSIgc3Ryb2tlPSIjNGY0YTQzIiBzdHJva2Utd2lkdGg9IjQiLz4KPHBhdGggZD0iTTE5MyAyNDVxMTAtMTA1IDkzLTEzOCA5My0yNyAxMzkgNDYtNjYgMjMtOTggNzktNzUtMTgtMTM0IDEzeiIgZmlsbD0iIzI2M2QzYiIvPgo8cGF0aCBkPSJNMjU4IDMxOXEzMi0yOSA2NCAwTTMzNyAzMjFxMjctMzAgNTAtMyIgc3Ryb2tlPSIjNDQzYTM2IiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMzMwIDMyMnEtMTIgNTctNSA3OCAxNiAxMSAyOCAwTTI4OSA0NTJxNDAgMjggODAtNSIgc3Ryb2tlPSIjNjI0YzQzIiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8Y2lyY2xlIGN4PSIyNjMiIGN5PSIzNDUiIHI9IjEwIiBmaWxsPSIjOWM3MTY5IiBvcGFjaXR5PSIuNSIvPjxjaXJjbGUgY3g9IjM4OCIgY3k9IjM0NSIgcj0iMTAiIGZpbGw9IiM5YzcxNjkiIG9wYWNpdHk9Ii41Ii8+CjxwYXRoIGQ9Ik0xNjAgNjQ3cTQ5LTkyIDEzNy05MyAxMTAtNSAxNTggOTYiIGZpbGw9IiMyODNjM2EiLz4KPGcgZmlsbD0iI2M4YTc3YSI+PGNpcmNsZSBjeD0iMTUxIiBjeT0iMjA2IiByPSI3Ii8+PGNpcmNsZSBjeD0iNDYyIiBjeT0iMjk1IiByPSI1Ii8+PGNpcmNsZSBjeD0iNDQ1IiBjeT0iNDgwIiByPSI1Ii8+PC9nPgo8cGF0aCBkPSJNMTE1IDUxNHE0Ni0zOSA1My05MW0tMjcgMzhxLTI5LTE5LTMzLTQ0IiBzdHJva2U9IiM2NTczNjUiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIvPgoKPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI3NTAiIGZpbGw9InVybCgjdmlnbmV0dGUpIi8+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWx0ZXI9InVybCgjZ3JhaW4pIiBvcGFjaXR5PSIuOSIvPgo8cmVjdCB4PSIyNCIgeT0iMjQiIHdpZHRoPSI1NTIiIGhlaWdodD0iNzAyIiBmaWxsPSJub25lIiBzdHJva2U9IiNlM2QzYjMiIHN0cm9rZS1vcGFjaXR5PSIuMjQiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=', alt:'Temsili illüstrasyon: stilize bir yüz silüeti.' },
+  { title:'İki Dünya Arasında', year:'DEMO / 04', description:'Bu görsel temsili bir yer tutucudur. Gerçek eser ve açıklaması sanatçıdan gelecektir.', src:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiB2aWV3Qm94PSIwIDAgNjAwIDc1MCIgcm9sZT0iaW1nIj4KPGRlZnM+PGZpbHRlciBpZD0iZ3JhaW4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjQyIiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjxmZUNvbXBvbmVudFRyYW5zZmVyPjxmZUZ1bmNBIHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuMTAiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+CjxyYWRpYWxHcmFkaWVudCBpZD0idmlnbmV0dGUiPjxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTQwZDBiIiBzdG9wLW9wYWNpdHk9Ii4zNyIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkMGJkYTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Mzc3NjMiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSIjMmIzMTMxIi8+Cgo8cGF0aCBkPSJNODMgNzE1VjIzMHEwLTE2OSAyMTctMTY5dDIxNyAxNjl2NDg1eiIgZmlsbD0iIzlhODI2NiIgc3Ryb2tlPSIjYzJhODg3IiBzdHJva2Utd2lkdGg9IjYiLz4KPHBhdGggZD0iTTExNSA3MTVWMjQwcTAtMTQwIDE4NS0xNDB0MTg1IDE0MHY0NzV6IiBmaWxsPSIjMzMzZTQ0Ii8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjI0NSIgcj0iNzgiIGZpbGw9IiNkOWI4ODEiLz48Y2lyY2xlIGN4PSIzMjEiIGN5PSIyMzUiIHI9Ijc1IiBmaWxsPSIjMzU0MTRhIi8+CjxnIGZpbGw9IiNlN2Q0YWIiPjxjaXJjbGUgY3g9IjE5MCIgY3k9IjIwMyIgcj0iNCIvPjxjaXJjbGUgY3g9IjM5NCIgY3k9IjMxMiIgcj0iMyIvPjxjaXJjbGUgY3g9IjI0NSIgY3k9IjE0NCIgcj0iMyIvPjxjaXJjbGUgY3g9IjQ0MCIgY3k9IjE5MCIgcj0iNCIvPjwvZz4KPHBhdGggZD0iTTExNSA3MDlMMjQ3IDUwOWgxMDZsMTMyIDIwMHoiIGZpbGw9IiM1NjRkNDQiLz4KPHBhdGggZD0iTTEzMCA3MDkgMjYxIDUyNWg4MGwxMzEgMTg0eiIgZmlsbD0iI2FhOTU3NSIvPgo8cGF0aCBkPSJNMTYzIDY2MmgyNzRNMTg1IDYyOGgyMzBNMjA2IDYwMGgxODhNMjIzIDU3NWgxNTVNMjM4IDU1MGgxMjYiIHN0cm9rZT0iIzUxNDk0MiIgc3Ryb2tlLXdpZHRoPSI5Ii8+CjxwYXRoIGQ9Ik0yNzkgNTIwVjM5MXEwLTIxIDIxLTIxdDIxIDIxdjEyOSIgZmlsbD0iI2FkOTY3NyIgc3Ryb2tlPSIjNzc2MzRlIiBzdHJva2Utd2lkdGg9IjUiLz4KPHBhdGggZD0iTTMwMCAzNjV2MTYyIiBzdHJva2U9IiM2YTVjNGEiIHN0cm9rZS13aWR0aD0iNSIvPgo8cGF0aCBkPSJNMTE1IDcxNWgzNzAiIHN0cm9rZT0iIzIyMWIxOCIgc3Ryb2tlLXdpZHRoPSIxNiIvPgo8ZyBzdHJva2U9IiNiN2EwN2QiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjciPjxwYXRoIGQ9Ik0xNDEgMzU5bDU4LTUzTTQ0OCA0MTBsLTUxLTM2Ii8+PC9nPgoKPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI3NTAiIGZpbGw9InVybCgjdmlnbmV0dGUpIi8+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWx0ZXI9InVybCgjZ3JhaW4pIiBvcGFjaXR5PSIuOSIvPgo8cmVjdCB4PSIyNCIgeT0iMjQiIHdpZHRoPSI1NTIiIGhlaWdodD0iNzAyIiBmaWxsPSJub25lIiBzdHJva2U9IiNlM2QzYjMiIHN0cm9rZS1vcGFjaXR5PSIuMjQiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=', alt:'Temsili illüstrasyon: göğe uzanan basamaklar ve kemer.' },
+  { title:'Biraz Uzakta', year:'DEMO / 05', description:'Bu görsel temsili bir yer tutucudur. Gerçek eser ve açıklaması sanatçıdan gelecektir.', src:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiB2aWV3Qm94PSIwIDAgNjAwIDc1MCIgcm9sZT0iaW1nIj4KPGRlZnM+PGZpbHRlciBpZD0iZ3JhaW4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjQyIiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjxmZUNvbXBvbmVudFRyYW5zZmVyPjxmZUZ1bmNBIHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuMTAiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+CjxyYWRpYWxHcmFkaWVudCBpZD0idmlnbmV0dGUiPjxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTQwZDBiIiBzdG9wLW9wYWNpdHk9Ii4zNyIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkMGJkYTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Mzc3NjMiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSIjZDJiZWEyIi8+Cgo8cmVjdCB4PSI0NyIgeT0iNDciIHdpZHRoPSI1MDYiIGhlaWdodD0iNjU1IiBmaWxsPSIjYjRhNjhlIi8+CjxwYXRoIGQ9Ik00NyA0N2g1MDZ2MzY2SDQ3eiIgZmlsbD0iIzRiNjY2OSIvPgo8Y2lyY2xlIGN4PSIzMTciIGN5PSIzMTIiIHI9IjEyMyIgZmlsbD0iI2Q5Yjk4MyIvPgo8cGF0aCBkPSJNNDcgNDE0aDUwNnYyODhINDd6IiBmaWxsPSIjM2Y1ODVkIi8+CjxwYXRoIGQ9Ik00NyA0MTNxMTMwLTM3IDI0NyAxdDI1OS0zIiBmaWxsPSJub25lIiBzdHJva2U9IiNlMWM1OWIiIHN0cm9rZS13aWR0aD0iOCIvPgo8cGF0aCBkPSJNNTQgNDY2cTExMi0yOCAyMzEgNXQyNTUtMk00NSA1MjhxMTI1LTM2IDIyMC01dDI4MC0zTTQ1IDU4NHExMjYtMjMgMjM0IDE1dDI3MS03TTQ3IDY1MHExMDUtMjUgMjI1IDJ0MjcwLTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlkYWVhNiIgc3Ryb2tlLXdpZHRoPSI1IiBvcGFjaXR5PSIuNTUiLz4KPHBhdGggZD0iTTMxNCA0MjJsLTUyIDI1MmgxMDB6IiBmaWxsPSIjYTBhMjlhIiBvcGFjaXR5PSIuMzYiLz4KPHBhdGggZD0iTTExNSAzNDVxMjQtMjMgNDggME00MjMgMjY4cTE4LTE0IDM2IDAiIHN0cm9rZT0iI2Q4Y2NiMSIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTQ3IDcwMnE4MC0xMTMgMTE2LTgyIDI1IDM0IDQ5IDgyIiBmaWxsPSIjMmU0ZTRkIi8+PHBhdGggZD0iTTQ0MCA3MDJxNzAtMTI1IDExMy0xMDN2MTAzIiBmaWxsPSIjMjgzZTNjIi8+Cgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9Ijc1MCIgZmlsbD0idXJsKCN2aWduZXR0ZSkiLz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI3NTAiIGZpbHRlcj0idXJsKCNncmFpbikiIG9wYWNpdHk9Ii45Ii8+CjxyZWN0IHg9IjI0IiB5PSIyNCIgd2lkdGg9IjU1MiIgaGVpZ2h0PSI3MDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2UzZDNiMyIgc3Ryb2tlLW9wYWNpdHk9Ii4yNCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg==', alt:'Temsili illüstrasyon: soyut deniz ve ufuktaki güneş.' },
+  { title:'Küçük Bir Sonsuzluk', year:'DEMO / 06', description:'Bu görsel temsili bir yer tutucudur. Gerçek eser ve açıklaması sanatçıdan gelecektir.', src:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiB2aWV3Qm94PSIwIDAgNjAwIDc1MCIgcm9sZT0iaW1nIj4KPGRlZnM+PGZpbHRlciBpZD0iZ3JhaW4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjQyIiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjxmZUNvbXBvbmVudFRyYW5zZmVyPjxmZUZ1bmNBIHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuMTAiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+CjxyYWRpYWxHcmFkaWVudCBpZD0idmlnbmV0dGUiPjxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTQwZDBiIiBzdG9wLW9wYWNpdHk9Ii4zNyIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkMGJkYTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Mzc3NjMiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNzUwIiBmaWxsPSIjNGI0YjQ5Ii8+Cgo8cmVjdCB4PSI2MiIgeT0iNDMiIHdpZHRoPSI0NzYiIGhlaWdodD0iNjY0IiBmaWxsPSIjODg4MDZlIi8+CjxwYXRoIGQ9Ik0xMzAgNzA3VjI0OXEwLTE4MiAxNzAtMTgydDE3MCAxODJ2NDU4eiIgZmlsbD0iIzIxMWYyNCIgc3Ryb2tlPSIjYzFhODgzIiBzdHJva2Utd2lkdGg9IjE4Ii8+CjxwYXRoIGQ9Ik0xNTYgNzA3VjI1MXEwLTE1NiAxNDQtMTU2dDE0NCAxNTZ2NDU2eiIgZmlsbD0iIzI1MmYzOSIvPgo8cGF0aCBkPSJNMzAzIDk2djYxMSIgc3Ryb2tlPSIjNzk2NjRmIiBzdHJva2Utd2lkdGg9IjYiLz4KPHBhdGggZD0iTTE1NiA0MDVINDQ0IiBzdHJva2U9IiM3OTY2NGYiIHN0cm9rZS13aWR0aD0iNSIvPgo8cGF0aCBkPSJNMzAzIDcwNyA0MzggNDMxdjI3NiIgZmlsbD0iIzg5NzA1NiIvPgo8cGF0aCBkPSJNMzE4IDcwNyA0NDQgNDU0djI1MyIgZmlsbD0iI2IyOTg3MyIgb3BhY2l0eT0iLjc1Ii8+CjxwYXRoIGQ9Ik0xNTAgNzA3aDMwMCIgc3Ryb2tlPSIjNGQzODI5IiBzdHJva2Utd2lkdGg9IjE4Ii8+CjxjaXJjbGUgY3g9IjM3NyIgY3k9IjI3NiIgcj0iNjgiIGZpbGw9IiNlZmQ1YTQiLz48Y2lyY2xlIGN4PSIzOTkiIGN5PSIyNjAiIHI9IjYzIiBmaWxsPSIjMjYzMzQwIi8+CjxnIGZpbGw9IiNlNGM3OTciPjxjaXJjbGUgY3g9IjIyMCIgY3k9IjIyMiIgcj0iNSIvPjxjaXJjbGUgY3g9IjI2MyIgY3k9IjMyNyIgcj0iMyIvPjxjaXJjbGUgY3g9IjM4OCIgY3k9IjM2MyIgcj0iNSIvPjxjaXJjbGUgY3g9IjE5MCIgY3k9IjUxMyIgcj0iNCIvPjwvZz4KPHBhdGggZD0iTTE2MCA2NTFxMTAwLTY1IDE0MyAwTTMwMiA2MjBxNzUtNjAgMTQzLTIxIiBzdHJva2U9IiNhMGExOGQiIHN0cm9rZS13aWR0aD0iNSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjQiLz4KPGcgc3Ryb2tlPSIjZGJjNWE1IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMzMgMTYzdjIwbS0xMC0xMGgyME0zNjYgNTEzdjE2bS04LThoMTYiLz48L2c+Cgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9Ijc1MCIgZmlsbD0idXJsKCN2aWduZXR0ZSkiLz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI3NTAiIGZpbHRlcj0idXJsKCNncmFpbikiIG9wYWNpdHk9Ii45Ii8+CjxyZWN0IHg9IjI0IiB5PSIyNCIgd2lkdGg9IjU1MiIgaGVpZ2h0PSI3MDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2UzZDNiMyIgc3Ryb2tlLW9wYWNpdHk9Ii4yNCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg==', alt:'Temsili illüstrasyon: yıldızlı göğe açılan bir kapı.' },
+];
+
+const $ = (id) => document.getElementById(id);
+const entrance = $('entrance');
+const experience = $('experience');
+const rail = $('galleryRail');
+const track = $('galleryTrack');
+const progress = $('progressTrack');
+const aboutPanel = $('aboutPanel');
+const scrim = $('panelScrim');
+const dialog = $('lightbox');
+let activeIndex = 0;
+let openedIndex = 0;
+let rafScheduled = false;
+let entered = false;
+let dismissedHint = false;
+let lastFocus = null;
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+}
+function renderGallery() {
+  track.innerHTML = artworks.map((art, index) => `
+    <article class="art-bay ${index === 0 ? 'is-active' : ''}" data-index="${index}" aria-label="${index + 1}. eser: ${escapeHtml(art.title)}">
+      <div class="wall-aura" aria-hidden="true"></div>
+      <div class="lamp" aria-hidden="true"><div class="lamp-wire"></div><div class="lamp-hood"></div><div class="lamp-bulb"></div><div class="light-halo"></div><div class="light-beam"></div></div>
+      <div class="art-display">
+        <div class="frame-shell">
+          <div class="frame-inner"><img class="art-image" src="${escapeHtml(art.src)}" alt="${escapeHtml(art.alt)}" ${index > 1 ? 'loading="lazy"' : 'fetchpriority="high"'} draggable="false"></div>
+          <div class="frame-glass" aria-hidden="true"></div>
+        </div>
+        <div class="wall-plate">${escapeHtml(art.title)}<span>${escapeHtml(art.year)}</span></div>
+      </div>
+      <button class="art-open" type="button" aria-label="${escapeHtml(art.title)} eserini büyüt" data-open="${index}"></button>
+    </article>`).join('');
+  progress.innerHTML = artworks.map((_, index) => `<button class="progress-dot ${index === 0 ? 'is-active' : ''}" type="button" aria-label="${index + 1}. esere git" ${index === 0 ? 'aria-current="true"' : ''} data-go="${index}"></button>`).join('');
+  track.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-open]');
+    if (button) openLightbox(Number(button.dataset.open));
+  });
+  progress.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-go]');
+    if (button) goTo(Number(button.dataset.go));
+  });
+  setActive(0);
+}
+function setActive(index) {
+  index = Math.max(0, Math.min(index, artworks.length - 1));
+  if (activeIndex === index && $('captionTitle').textContent === artworks[index].title) return;
+  activeIndex = index;
+  const art = artworks[index];
+  track.querySelectorAll('.art-bay').forEach((bay, i) => bay.classList.toggle('is-active', i === index));
+  progress.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === index);
+    if (i === index) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+  });
+  $('captionIndex').textContent = `${String(index + 1).padStart(2,'0')} — ${String(artworks.length).padStart(2,'0')}`;
+  $('captionTitle').textContent = art.title;
+  $('captionDescription').textContent = art.year;
+  $('previousButton').disabled = index === 0;
+  $('nextButton').disabled = index === artworks.length - 1;
+}
+function detectCenter() {
+  rafScheduled = false;
+  const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+  let closest = 0, distance = Infinity;
+  [...track.children].forEach((bay, index) => {
+    const bounds = bay.getBoundingClientRect();
+    const delta = Math.abs(bounds.left + bounds.width / 2 - center);
+    if (delta < distance) { distance = delta; closest = index; }
+  });
+  setActive(closest);
+  if (!dismissedHint && rail.scrollLeft > 75) { dismissedHint = true; $('galleryHelp').classList.add('is-hidden'); }
+}
+function goTo(index, instant = false) {
+  const bay = track.children[index];
+  if (!bay) return;
+  const left = bay.offsetLeft - (rail.clientWidth - bay.clientWidth) / 2;
+  rail.scrollTo({left, behavior:instant || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+  setActive(index);
+}
+function enterGallery() {
+  if (entered) return;
+  entered = true;
+  experience.classList.add('is-visible');
+  experience.setAttribute('aria-hidden','false');
+  entrance.classList.add('is-leaving');
+  entrance.setAttribute('aria-hidden','true');
+  $('enterButton').blur();
+  setTimeout(() => { entrance.hidden = true; goTo(0, true); }, 1000);
+}
+function setAboutOpen(open) {
+  aboutPanel.classList.toggle('is-open', open);
+  aboutPanel.setAttribute('aria-hidden', String(!open));
+  scrim.hidden = !open;
+  if (open) { lastFocus = document.activeElement; $('aboutClose').focus(); }
+  else if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+}
+function updateLightbox(index) {
+  openedIndex = Math.max(0, Math.min(index, artworks.length - 1));
+  const art = artworks[openedIndex];
+  $('lightboxImage').src = art.src;
+  $('lightboxImage').alt = art.alt;
+  $('lightboxNumber').textContent = `ESER ${String(openedIndex + 1).padStart(2,'0')} / ${String(artworks.length).padStart(2,'0')}`;
+  $('lightboxTitle').textContent = art.title;
+  $('lightboxDescription').textContent = art.description;
+  $('lightboxPrev').disabled = openedIndex === 0;
+  $('lightboxNext').disabled = openedIndex === artworks.length - 1;
+}
+function openLightbox(index) {
+  updateLightbox(index);
+  if (typeof dialog.showModal === 'function') dialog.showModal();
+  else { dialog.setAttribute('open', ''); dialog.classList.add('fallback-open'); }
+}
+function closeLightbox() {
+  if (typeof dialog.close === 'function' && dialog.open && !dialog.classList.contains('fallback-open')) dialog.close();
+  else { dialog.removeAttribute('open'); dialog.classList.remove('fallback-open'); }
+}
+
+// 3D ring scene: GPU accelerated CSS3D perspective, no WebGL dependency or external scripts.
+// The existing artworks array remains the only source for both gallery modes.
+const immersive = $('immersion');
+const orbitViewport = $('orbitViewport');
+const orbitChamber = $('orbitChamber');
+const orbitRing = $('orbitRing');
+const orbitUpper = $('orbitUpper');
+const orbitDots = $('orbitDots');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let galleryMode = 'immersive';
+let orbitFrameId = 0;
+let orbitAngle = 0;
+let orbitTarget = 0;
+let orbitActive = 0;
+let pointerHeld = false;
+let dragStarted = false;
+let dragStartX = 0;
+let dragStartAngle = 0;
+let wheelLockedUntil = 0;
+const angleStep = 360 / artworks.length;
+function wrapIndex(i) { return ((i % artworks.length) + artworks.length) % artworks.length; }
+function ringRadius() { return window.innerWidth <= 500 ? 205 : Math.max(265, Math.min(495, window.innerWidth * 0.33)); }
+function renderOrbit() {
+  const radius = ringRadius();
+  orbitRing.innerHTML = artworks.map((art, i) => `
+    <article class="orbit-art ${i===0?'is-active':''}" data-orbit-index="${i}"
+      style="transform:translate(-50%,-50%) rotateY(${i*angleStep}deg) translateZ(${radius}px)"
+      aria-label="${escapeHtml(art.title)}">
+      <div class="orbit-frame"><img src="${escapeHtml(art.src)}" alt="${escapeHtml(art.alt)}" draggable="false" loading="${i>1?'lazy':'eager'}"></div>
+      <div class="orbit-artname">${escapeHtml(art.title)}</div>
+      <div class="orbit-artno">${escapeHtml(art.year)}</div>
+      <button class="orbit-art-open" aria-label="${escapeHtml(art.title)} eserini seç" type="button" data-orbit-open="${i}"></button>
+    </article>`).join('');
+  orbitUpper.innerHTML = artworks.map((art,i) => `
+    <div class="orbit-upper-panel" style="transform:translate(-50%,-50%) rotateY(${i*angleStep+angleStep/2}deg) translateZ(${Math.round(radius*1.08)}px)">
+       <img src="${escapeHtml(art.src)}" alt="" loading="lazy" draggable="false">
+    </div>`).join('');
+  orbitDots.innerHTML = artworks.map((art,i) => `<button class="orbit-dot ${i===0?'is-active':''}" type="button" data-orbit-go="${i}" aria-label="${i+1}. eser: ${escapeHtml(art.title)}"></button>`).join('');
+  updateOrbitCaption(orbitActive);
+}
+function updateOrbitCaption(index) {
+  index=wrapIndex(index);
+  orbitActive=index;
+  const art=artworks[index];
+  $('orbitNumber').textContent=`ESER ${String(index+1).padStart(2,'0')} / ${String(artworks.length).padStart(2,'0')}`;
+  $('orbitTitle').textContent=art.title;
+  $('orbitYear').textContent=art.year;
+  orbitRing.querySelectorAll('.orbit-art').forEach((node,i)=>node.classList.toggle('is-active', i===index));
+  orbitDots.querySelectorAll('.orbit-dot').forEach((dot,i)=>{
+    dot.classList.toggle('is-active',i===index);
+    if (i===index) dot.setAttribute('aria-current','true'); else dot.removeAttribute('aria-current');
+  });
+}
+function gotoOrbit(index, instant=false) {
+  index=wrapIndex(index);
+  const base= -index*angleStep;
+  const delta=(((base-orbitTarget)+180)%360+360)%360-180;
+  orbitTarget+=delta;
+  if (instant || reducedMotion.matches) orbitAngle=orbitTarget;
+  updateOrbitCaption(index);
+  if (galleryMode==='immersive') runOrbit();
+}
+function orbitTick() {
+  if(galleryMode!=='immersive' || !entered){orbitFrameId=0;return;}
+  const diff=orbitTarget-orbitAngle;
+  orbitAngle+=reducedMotion.matches?diff:diff*.115;
+  if(Math.abs(diff)<.015) orbitAngle=orbitTarget;
+  orbitChamber.style.transform=`rotateX(-4deg) rotateY(${orbitAngle.toFixed(3)}deg)`;
+  if(Math.abs(orbitTarget-orbitAngle)>.015 || pointerHeld) orbitFrameId=requestAnimationFrame(orbitTick);
+  else orbitFrameId=0;
+}
+function runOrbit(){if(!orbitFrameId)orbitFrameId=requestAnimationFrame(orbitTick)}
+function setMode(mode) {
+  galleryMode=mode==='classic'?'classic':'immersive';
+  const in3D=galleryMode==='immersive';
+  immersive.hidden=!in3D;
+  experience.classList.toggle('mode-immersive',in3D);
+  $('mode3D').classList.toggle('is-active',in3D);
+  $('modeClassic').classList.toggle('is-active',!in3D);
+  $('mode3D').setAttribute('aria-pressed',String(in3D));
+  $('modeClassic').setAttribute('aria-pressed',String(!in3D));
+  if(in3D){renderOrbit();orbitChamber.style.transform=`rotateX(-4deg) rotateY(${orbitAngle}deg)`;runOrbit();}
+  else {cancelAnimationFrame(orbitFrameId);orbitFrameId=0;setTimeout(()=>goTo(activeIndex,true),70)}
+}
+// Keep original entrance transitions and classic scrolling intact.
+const originalEnterGallery=enterGallery;
+enterGallery = function(mode='immersive') {
+  setMode(mode);
+  originalEnterGallery();
+  if (mode==='immersive') runOrbit();
+};
+$('mode3D').addEventListener('click',()=>setMode('immersive'));
+$('modeClassic').addEventListener('click',()=>setMode('classic'));
+$('classicEntry').addEventListener('click',()=>enterGallery('classic'));
+$('orbitPrev').addEventListener('click',()=>gotoOrbit(orbitActive-1));
+$('orbitNext').addEventListener('click',()=>gotoOrbit(orbitActive+1));
+$('orbitExamine').addEventListener('click',()=>openLightbox(orbitActive));
+orbitDots.addEventListener('click',event=>{
+  const dot=event.target.closest('[data-orbit-go]');
+  if(dot)gotoOrbit(Number(dot.dataset.orbitGo));
+});
+orbitRing.addEventListener('click',event=>{
+  if(dragStarted)return;
+  const button=event.target.closest('[data-orbit-open]');
+  if(!button)return;
+  const index=Number(button.dataset.orbitOpen);
+  if(index===orbitActive)openLightbox(index); else gotoOrbit(index);
+});
+orbitViewport.addEventListener('pointerdown',event=>{
+  if(event.button!==0 || dialog.open || aboutPanel.classList.contains('is-open'))return;
+  pointerHeld=true;dragStarted=false;dragStartX=event.clientX;dragStartAngle=orbitTarget;
+  orbitViewport.setPointerCapture(event.pointerId);
+  orbitViewport.classList.add('is-dragging');
+});
+orbitViewport.addEventListener('pointermove',event=>{
+  if(!pointerHeld)return;
+  const diff=event.clientX-dragStartX;
+  if(Math.abs(diff)>8)dragStarted=true;
+  if(dragStarted){orbitTarget=dragStartAngle+diff*.28;const index=wrapIndex(Math.round(-orbitTarget/angleStep));updateOrbitCaption(index);runOrbit();}
+});
+function stopOrbitDrag(){
+  if(!pointerHeld)return;
+  pointerHeld=false;orbitViewport.classList.remove('is-dragging');
+  if(dragStarted){const index=wrapIndex(Math.round(-orbitTarget/angleStep));gotoOrbit(index);setTimeout(()=>dragStarted=false,60);}
+}
+orbitViewport.addEventListener('pointerup',stopOrbitDrag);
+orbitViewport.addEventListener('pointercancel',stopOrbitDrag);
+orbitViewport.addEventListener('lostpointercapture',stopOrbitDrag);
+orbitViewport.addEventListener('wheel',event=>{
+  if(dialog.open || aboutPanel.classList.contains('is-open'))return;
+  event.preventDefault();
+  const now=performance.now();
+  if(now<wheelLockedUntil)return;
+  wheelLockedUntil=now+330;
+  gotoOrbit(orbitActive+(event.deltaY+event.deltaX>0?1:-1));
+},{passive:false});
+orbitViewport.addEventListener('keydown',event=>{
+  if(event.key==='ArrowRight'){event.preventDefault();gotoOrbit(orbitActive+1)}
+  if(event.key==='ArrowLeft'){event.preventDefault();gotoOrbit(orbitActive-1)}
+  if(event.key==='Enter'){event.preventDefault();openLightbox(orbitActive)}
+});
+window.addEventListener('resize',()=>{if(galleryMode==='immersive')renderOrbit()},{passive:true});
+// Original brand link returns to first artwork in the current active mode.
+$('brandHome').addEventListener('click',()=>{if(galleryMode==='immersive')gotoOrbit(0)});
+renderOrbit();
+
+renderGallery();
+$('enterButton').addEventListener('click', () => enterGallery('immersive'));
+$('brandHome').addEventListener('click', (event) => { event.preventDefault(); if (entered) goTo(0); });
+$('previousButton').addEventListener('click', () => goTo(activeIndex - 1));
+$('nextButton').addEventListener('click', () => goTo(activeIndex + 1));
+rail.addEventListener('scroll', () => { if (!rafScheduled) { rafScheduled = true; requestAnimationFrame(detectCenter); } }, {passive:true});
+rail.addEventListener('wheel', (event) => {
+  if (!entered || dialog.open || aboutPanel.classList.contains('is-open')) return;
+  if (window.matchMedia('(pointer:fine)').matches && Math.abs(event.deltaY) > Math.abs(event.deltaX) * 1.15) {
+    event.preventDefault();
+    rail.scrollLeft += event.deltaY * 1.1;
+  }
+}, {passive:false});
+rail.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowRight') { event.preventDefault(); goTo(activeIndex + 1); }
+  else if (event.key === 'ArrowLeft') { event.preventDefault(); goTo(activeIndex - 1); }
+  else if (event.key === 'Enter') openLightbox(activeIndex);
+});
+$('aboutButton').addEventListener('click', () => setAboutOpen(true));
+$('aboutClose').addEventListener('click', () => setAboutOpen(false));
+scrim.addEventListener('click', () => setAboutOpen(false));
+$('lightboxClose').addEventListener('click', closeLightbox);
+$('lightboxPrev').addEventListener('click', () => updateLightbox(openedIndex - 1));
+$('lightboxNext').addEventListener('click', () => updateLightbox(openedIndex + 1));
+dialog.addEventListener('click', (event) => { if (event.target === dialog) closeLightbox(); });
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && aboutPanel.classList.contains('is-open')) setAboutOpen(false);
+  if (dialog.open && event.key === 'ArrowRight') updateLightbox(openedIndex + 1);
+  if (dialog.open && event.key === 'ArrowLeft') updateLightbox(openedIndex - 1);
+});
+$('demoDismiss').addEventListener('click', () => $('demoNotice').classList.add('is-dismissed'));
+
+</script>
+</body>
+</html>
