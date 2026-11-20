@@ -143,7 +143,7 @@
     .art-card-media { padding:16px; background:linear-gradient(180deg,rgba(255,255,255,.04), transparent); }
     .art-card-frame { position:relative; border:9px solid #7b6342; box-shadow:0 0 0 1px #c09a64, 0 0 0 4px #160f0a, 0 16px 32px rgba(0,0,0,.34); background:#d8c8b1; }
     .art-card-frame::after { content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.12), transparent 22%, transparent 76%, rgba(255,255,255,.03)); pointer-events:none; }
-    .art-card-frame img { width:100%; aspect-ratio:4/5; object-fit:contain; background:#c8b7a2; }
+    .art-card-frame img { display:block; width:100%; height:auto; aspect-ratio:auto; object-fit:contain; background:#c8b7a2; }
     .art-card-body { padding:18px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
     .art-card-kicker { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); font-weight:700; }
     .art-card h3 { margin:0; font:500 28px/1 'Cormorant Garamond',Georgia,serif; }
@@ -1176,25 +1176,36 @@
       const z = -index * 5.6;
       const group = new THREE.Group();
       group.position.set(side * 4.62, 1.84, z);
-      group.rotation.y = side === -1 ? Math.PI/2 : -Math.PI/2;
+      group.rotation.y = side === -1 ? Math.PI / 2 : -Math.PI / 2;
 
-      const woodTex = buildWoodTexture();
-      const frameMat = new THREE.MeshStandardMaterial({ map: woodTex, color:0xa98156, roughness:.56, metalness:.12 });
-      const edgeMat = new THREE.MeshStandardMaterial({ color:0x322418, roughness:.7, metalness:.08 });
-      const matteMat = new THREE.MeshStandardMaterial({ color:0xd7c8b4, roughness:.92 });
-      const glassMat = new THREE.MeshPhysicalMaterial({ color:0xffffff, roughness:.25, transparent:true, opacity:.045, metalness:0, clearcoat:.35, clearcoatRoughness:.2, depthWrite:false });
-
+      // Use the original artwork's actual width / height ratio. Landscape works
+      // get landscape frames; portrait works get portrait frames; ceramic works
+      // close to 1:1 get square frames. Never stretch or crop the artwork.
+      const artAspect = THREE.MathUtils.clamp(Number(art.aspect) || .75, .4, 2.4);
+      const imageWidth = Math.min(2.55, 2.28 * artAspect);
+      const imageHeight = imageWidth / artAspect;
+      const outerWidth = imageWidth + .44;
+      const outerHeight = imageHeight + .44;
       const heroScale = index === 0 ? 1.14 : 1;
       group.scale.setScalar(heroScale);
-      const outer = new THREE.Mesh(new THREE.BoxGeometry(2.14, 2.68, .18), frameMat);
-      outer.castShadow = true; outer.receiveShadow = true;
-      const inner = new THREE.Mesh(new THREE.BoxGeometry(1.82, 2.36, .09), matteMat);
+
+      const woodTex = buildWoodTexture();
+      const frameMat = new THREE.MeshStandardMaterial({ map: woodTex, color: 0xa98156, roughness: .56, metalness: .12 });
+      const edgeMat = new THREE.MeshStandardMaterial({ color: 0x322418, roughness: .7, metalness: .08 });
+      const matteMat = new THREE.MeshStandardMaterial({ color: 0xd7c8b4, roughness: .92 });
+      const glassMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .25, transparent: true, opacity: .045, metalness: 0, clearcoat: .35, clearcoatRoughness: .2, depthWrite: false });
+
+      const outer = new THREE.Mesh(new THREE.BoxGeometry(outerWidth, outerHeight, .18), frameMat);
+      outer.castShadow = true;
+      outer.receiveShadow = true;
+      const inner = new THREE.Mesh(new THREE.BoxGeometry(imageWidth + .30, imageHeight + .30, .09), matteMat);
       inner.position.z = .105;
-      const recess = new THREE.Mesh(new THREE.BoxGeometry(1.58, 2.12, .06), edgeMat);
+      const recess = new THREE.Mesh(new THREE.BoxGeometry(imageWidth + .075, imageHeight + .075, .06), edgeMat);
       recess.position.z = .158;
-      const glass = new THREE.Mesh(new THREE.PlaneGeometry(1.54, 2.08), glassMat);
-      glass.position.z = .207;
-      const imagePlane = new THREE.Mesh(new THREE.PlaneGeometry(1.48, 2.02), new THREE.MeshBasicMaterial({ color:0xffffff, toneMapped:false, side:THREE.DoubleSide }));
+      const imagePlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(imageWidth, imageHeight),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false, side: THREE.DoubleSide })
+      );
       imagePlane.position.z = .197;
       const texture = new THREE.TextureLoader().load(art.src, () => requestMuseumRender(), undefined, (error) => {
         console.error('Eser dokusu yüklenemedi:', art.src, error);
@@ -1202,52 +1213,27 @@
         requestMuseumRender();
       });
       texture.colorSpace = THREE.SRGBColorSpace;
-      const artAspect = art.aspect || .73;
-      const displayWidth = Math.min(1.48, 2.02 * artAspect);
-      const displayHeight = displayWidth / artAspect;
-      imagePlane.geometry.dispose();
-      imagePlane.geometry = new THREE.PlaneGeometry(displayWidth, displayHeight);
       texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
       imagePlane.material.map = texture;
       imagePlane.material.needsUpdate = true;
-
+      const glass = new THREE.Mesh(new THREE.PlaneGeometry(imageWidth, imageHeight), glassMat);
+      glass.position.z = .207;
       group.add(outer, inner, recess, imagePlane, glass);
 
-      // The title and technique appear on a physical plaque beneath every canvas.
-      const plaque = new THREE.Mesh(new THREE.BoxGeometry(1.94, .42, .065), new THREE.MeshStandardMaterial({ color:0x755b3d, roughness:.56, metalness:.18 }));
-      plaque.position.set(0, -1.68, .115);
-      plaque.castShadow = true;
-      group.add(plaque);
-      const plaqueCanvas = document.createElement('canvas');
-      plaqueCanvas.width = 1024; plaqueCanvas.height = 230;
-      const ctx = plaqueCanvas.getContext('2d');
-      ctx.fillStyle = '#e7dcc7'; ctx.fillRect(0,0,1024,230);
-      ctx.fillStyle = '#382819'; ctx.textAlign = 'center';
-      let size = 74;
-      ctx.font = `600 ${size}px Georgia`;
-      while (ctx.measureText(art.title).width > 950 && size > 32) {
-        size -= 2; ctx.font = `600 ${size}px Georgia`;
-      }
-      ctx.fillText(art.title, 512, 104);
-      ctx.fillStyle = '#6f5840'; ctx.font = '30px Arial';
-      const line = `Burcu Arısoy · ${art.year} · ${art.medium}`;
-      let detailSize = 30;
-      while (ctx.measureText(line).width > 940 && detailSize > 20) {
-        detailSize -= 1; ctx.font = `${detailSize}px Arial`;
-      }
-      ctx.fillText(line,512,177);
-      const plaqueTexture = new THREE.CanvasTexture(plaqueCanvas);
-      plaqueTexture.colorSpace = THREE.SRGBColorSpace;
-      const plaqueText = new THREE.Mesh(new THREE.PlaneGeometry(1.89, .395), new THREE.MeshBasicMaterial({map:plaqueTexture, toneMapped:false,side:THREE.DoubleSide}));
-      plaqueText.position.set(0, -1.68, .155);
-      group.add(plaqueText);
-
-      const hit = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 2.46), new THREE.MeshBasicMaterial({ transparent:true, opacity:0, depthWrite:false, side:THREE.DoubleSide }));
+      // Artwork data now lives exclusively in the existing visitor info card.
+      // There are no hanging plaques, labels or text objects below the frame.
+      const hit = new THREE.Mesh(
+        new THREE.PlaneGeometry(outerWidth, outerHeight),
+        new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide })
+      );
       hit.position.z = .231;
       hit.userData.index = index;
       group.add(hit);
 
-      const halo = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 3.4), new THREE.MeshBasicMaterial({ color:0xf2c888, transparent:true, opacity:.05 }));
+      const halo = new THREE.Mesh(
+        new THREE.PlaneGeometry(outerWidth + .66, outerHeight + .66),
+        new THREE.MeshBasicMaterial({ color: 0xf2c888, transparent: true, opacity: .05 })
+      );
       halo.position.z = -.06;
       group.add(halo);
 
@@ -1255,7 +1241,13 @@
       lightTarget.position.set(0, 0, 0);
       group.add(lightTarget);
 
-      return { group, hit, outer, plaque, imagePlane, halo, side, z, heroScale, lookAt:new THREE.Vector3(side*4.55, 1.86, z), browsePos:new THREE.Vector3(0, 1.72, z + .55), spotlightTarget:lightTarget };
+      return {
+        group, hit, outer, imagePlane, halo, side, z, heroScale,
+        frameWidth: outerWidth, frameHeight: outerHeight,
+        lookAt: new THREE.Vector3(side * 4.55, 1.84, z),
+        browsePos: new THREE.Vector3(0, 1.72, z + .55),
+        spotlightTarget: lightTarget
+      };
     }
 
     function createSpotForFrame(frame) {
@@ -1381,19 +1373,20 @@
       requestMuseumRender();
     }
 
-    // Calculate a comfortable full-frame camera position, including the
-    // artwork's frame and caption plate, for landscape and portrait screens.
+    // Frame-specific, orientation-aware camera fit. Reserve clear space around
+    // the entire frame on phones as well as desktops, without wasting space on
+    // the now-removed hanging label.
     function artworkViewPosition(frame) {
       const verticalFov = THREE.MathUtils.degToRad(camera.fov);
       const aspect = Math.max(.32, camera.aspect);
       const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * aspect);
       const scale = frame.heroScale || 1;
-      const framedWidth = 2.38 * scale;
-      const framedHeight = 3.30 * scale;
+      const framedWidth = (frame.frameWidth + .38) * scale;
+      const framedHeight = (frame.frameHeight + .42) * scale;
       const distVertical = framedHeight / (2 * Math.tan(verticalFov / 2));
       const distHorizontal = framedWidth / (2 * Math.tan(horizontalFov / 2));
-      const comfortableDistance = Math.max(distVertical, distHorizontal) * (aspect < .75 ? 1.26 : 1.17);
-      const distance = THREE.MathUtils.clamp(comfortableDistance, 3.95, 7.1);
+      const comfortableDistance = Math.max(distVertical, distHorizontal) * (aspect < .75 ? 1.15 : 1.17);
+      const distance = THREE.MathUtils.clamp(comfortableDistance, 3.9, 8.7);
       return new THREE.Vector3(frame.side * (4.62 - distance), 1.72, frame.z + .06);
     }
 
@@ -1455,8 +1448,6 @@
         const isActive = index === activeIndex;
         frame.outer.material.emissive = new THREE.Color(isActive ? 0x2c1807 : 0x000000);
         frame.outer.material.emissiveIntensity = isActive ? .22 : 0;
-        frame.plaque.material.emissive = new THREE.Color(isActive ? 0x39220b : 0x000000);
-        frame.plaque.material.emissiveIntensity = isActive ? .18 : 0;
         frame.halo.material.opacity = isActive ? (focusMode ? .13 : .08) : .02;
         const bundle = spotlights[index];
         if (bundle) {
