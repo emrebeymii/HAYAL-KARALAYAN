@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://emrebeymii.github.io/HAYAL-KARALAYAN/sitemap.xml
