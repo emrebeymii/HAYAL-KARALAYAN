@@ -113,26 +113,16 @@
     .museum-action:hover { transform:translateY(-2px); background:rgba(255,255,255,.07); border-color:rgba(236,214,175,.36); }
     .museum-action.primary { background:rgba(217,182,122,.16); color:#fff2dc; }
     .museum-action .svg-icon { width:15px; height:15px; }
-    .movement-panel { position:absolute; right:clamp(22px,4.4vw,72px); top:24px; width:min(360px,calc(100vw - 44px)); border:1px solid rgba(236,214,175,.1); background:rgba(10,9,8,.42); backdrop-filter: blur(14px); border-radius:18px; padding:16px 18px; pointer-events:auto; }
-    .movement-panel h3 { margin:0 0 10px; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); font-weight:700; }
-    .movement-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
-    .keycap { min-height:46px; border:1px solid rgba(236,214,175,.12); background:rgba(255,255,255,.03); border-radius:14px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px; padding:8px 6px; text-align:center; }
-    .keycap strong { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#efe4d4; }
-    .keycap span { font-size:9px; color:#a7957b; }
-    .keycap svg { width:16px; height:16px; color:var(--gold); }
-    .movement-copy { margin-top:10px; font-size:11px; line-height:1.65; color:#b7a58b; }
     .bottom-bar { position:absolute; left:50%; bottom:28px; transform:translateX(-50%); width:min(760px,calc(100vw - 44px)); display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 14px; border:1px solid rgba(236,214,175,.1); background:rgba(10,9,8,.44); backdrop-filter: blur(18px); border-radius:999px; pointer-events:auto; }
     .bottom-label { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#bda98a; white-space:nowrap; }
     .nav-controls { display:flex; align-items:center; gap:10px; flex:1; justify-content:flex-end; }
-    .nav-button { width:42px; height:42px; border-radius:999px; border:1px solid rgba(236,214,175,.16); background:rgba(255,255,255,.03); display:grid; place-items:center; transition:background .2s, transform .2s; }
-    .nav-button:hover { background:rgba(255,255,255,.07); transform:translateY(-1px); }
+    .nav-button { min-width:88px; height:42px; padding:0 13px; display:flex; gap:8px; align-items:center; justify-content:center; border-radius:999px; border:1px solid rgba(236,214,175,.16); background:rgba(255,255,255,.03); font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; transition:background .2s, transform .2s; }
+    .nav-button:disabled { opacity:.32; cursor:default; }
+    .nav-button:hover:not(:disabled) { background:rgba(255,255,255,.07); transform:translateY(-1px); }
     .nav-button .svg-icon { width:18px; height:18px; }
     .dot-track { display:flex; align-items:center; gap:8px; }
     .dot-track button { width:7px; height:7px; border-radius:999px; padding:0; background:#675846; border:0; transition:width .2s, background .2s; }
     .dot-track button.is-active { width:32px; background:var(--gold); }
-    .touch-controls { position:absolute; right:16px; bottom:106px; display:none; grid-template-columns:repeat(2,58px); gap:8px; pointer-events:auto; }
-    .touch-controls button { border-radius:16px; border:1px solid rgba(236,214,175,.12); background:rgba(10,9,8,.56); backdrop-filter:blur(16px); width:58px; height:58px; display:grid; place-items:center; }
-    .touch-controls .svg-icon { width:19px; height:19px; color:var(--gold); }
 
     .classic-view { overflow:auto; padding:118px clamp(22px,4.4vw,72px) 42px; background:radial-gradient(circle at 50% 0%, rgba(87,67,38,.16), transparent 26%), linear-gradient(180deg,#15120f,#0f0d0b 100%); }
     .classic-shell { max-width:1280px; margin:0 auto; }
@@ -193,7 +183,6 @@
     .demo-note.is-hidden { opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .25s, transform .25s; }
 
     @media (max-width:1024px) {
-      .movement-panel { width:min(320px,calc(100vw - 32px)); }
       .museum-meta { width:min(380px,calc(100vw - 32px)); }
       .classic-top { grid-template-columns:1fr; }
     }
@@ -202,7 +191,6 @@
       .site-header { height:66px; }
       .immersive-view,.classic-view { inset:66px 0 0; }
       .mode-switch { top:76px; left:50%; right:auto; transform:translateX(-50%); }
-      .movement-panel { display:none; }
       .museum-meta { left:16px; right:16px; width:auto; bottom:112px; }
       .bottom-bar { width:calc(100vw - 32px); }
     }
@@ -227,7 +215,6 @@
       .bottom-label { display:none; }
       .nav-controls { width:100%; justify-content:space-between; }
       .dot-track { gap:6px; }
-      .touch-controls { display:grid; }
       .demo-note { left:10px; right:10px; bottom:10px; justify-content:center; gap:6px; font-size:8px; }
       .classic-view { padding:108px 18px 36px; }
       .art-card h3 { font-size:24px; }
@@ -243,9 +230,26 @@
       .mode-option { padding:9px 11px; font-size:8px; }
       .museum-meta h2 { font-size:34px; }
       .bottom-bar { width:calc(100vw - 24px); }
-      .nav-button { width:38px; height:38px; }
-      .touch-controls { right:12px; bottom:90px; grid-template-columns:repeat(2,52px); }
-      .touch-controls button { width:52px; height:52px; border-radius:14px; }
+      .nav-button { min-width:75px; height:38px; padding:0 10px; }
+    }
+    @media (max-height:580px) {
+      .site-header {height:58px}
+      .immersive-view,.classic-view {inset:58px 0 0}
+      .mode-switch {top:64px; padding:5px}
+      .mode-option {padding:7px 10px; font-size:8px}
+      .topnote {display:none}
+      .museum-meta {bottom:74px; width:min(315px,45vw); padding:12px 14px; border-radius:14px}
+      .museum-index {margin-bottom:5px}
+      .museum-meta h2 {font-size:28px}
+      .museum-description {display:none}
+      .museum-year {font-size:9px; margin-top:4px}
+      .museum-actions {margin-top:9px}
+      .museum-action {padding:8px 10px; font-size:8px}
+      .bottom-bar {bottom:10px; padding:6px 10px; width:min(580px,calc(100vw - 24px))}
+      .nav-button {height:35px}
+    }
+    @media (max-width:700px) and (min-height:581px){
+      .museum-description {display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
     }
     @media (prefers-reduced-motion: reduce) {
       *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
@@ -362,19 +366,7 @@
       <div id="museumStage" aria-label="Üç boyutlu, gerçekçi dijital sanat müzesi"></div>
       <div class="immersive-vignette" aria-hidden="true"></div>
       <div class="immersive-ui">
-        <div class="topnote"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 10-10 10L2 12 12 2Z"/></svg></span> gerçekçi mekân · fiziksel ışık · atmosfer <span class="rule"></span></div>
-        <aside class="movement-panel" aria-label="Müze kontrol ipuçları">
-          <h3>Kontroller</h3>
-          <div class="movement-grid">
-            <div class="keycap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7-7-7" transform="rotate(-90 12 12)"/></svg><strong>W</strong><span>ileri</span></div>
-            <div class="keycap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7-7-7" transform="rotate(-90 12 12)"/></svg><strong>↑</strong><span>adım at</span></div>
-            <div class="keycap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg><strong>Tıkla</strong><span>yaklaş</span></div>
-            <div class="keycap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><strong>A</strong><span>sol</span></div>
-            <div class="keycap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg><strong>D</strong><span>sağ</span></div>
-            <div class="keycap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="m15 5 7 7-7 7" transform="translate(-5)"/></svg><strong>Sürükle</strong><span>bakın</span></div>
-          </div>
-          <div class="movement-copy">Müzede yürüyebilir, seçili esere sinematik olarak yaklaşabilir ve ardından tam ekran inceleme moduna geçebilirsin.</div>
-        </aside>
+        <div class="topnote"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 10-10 10L2 12 12 2Z"/></svg></span> koridorda ilerle · eserleri keşfet · ses yok <span class="rule"></span></div>
         <aside class="museum-meta" aria-live="polite" aria-atomic="true">
           <span class="museum-index" id="museumIndex">01 / 06</span>
           <h2 id="museumTitle"></h2>
@@ -386,18 +378,12 @@
           </div>
         </aside>
         <div class="bottom-bar">
-          <span class="bottom-label">Gerçekçi müze dolaşımı</span>
+          <span class="bottom-label">Butonlarla koridorda ilerle</span>
           <div class="nav-controls">
-            <button class="nav-button" id="prevArtwork" type="button" aria-label="Önceki esere git"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button class="nav-button" id="prevArtwork" type="button" aria-label="Geri, önceki esere doğru yürü"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>Geri</span></button>
             <div class="dot-track" id="immersiveDots"></div>
-            <button class="nav-button" id="nextArtwork" type="button" aria-label="Sonraki esere git"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button class="nav-button" id="nextArtwork" type="button" aria-label="İleri, sonraki esere doğru yürü"><span>İleri</span><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
           </div>
-        </div>
-        <div class="touch-controls" id="touchControls" aria-label="Mobil yürüme kontrolleri">
-          <button data-hold="forward" aria-label="İleri"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 5-7 7 7 7" transform="rotate(90 12 12)"/></svg></button>
-          <button data-hold="backward" aria-label="Geri"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 5-7 7 7 7" transform="rotate(-90 12 12)"/></svg></button>
-          <button data-hold="left" aria-label="Sola kay"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
-          <button data-hold="right" aria-label="Sağa kay"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
       </div>
     </section>
@@ -517,7 +503,9 @@
       museumTitle.textContent = art.title;
       museumYear.textContent = art.year;
       museumDescription.textContent = art.description;
-      focusLabel.textContent = focusMode ? 'tur alanına dön' : 'yaklaş';
+      focusLabel.textContent = focusMode ? 'koridora dön' : 'esere yaklaş';
+      $('prevArtwork').disabled = index === 0;
+      $('nextArtwork').disabled = index === artworks.length - 1;
       immersiveDots.querySelectorAll('button').forEach((button, i) => button.classList.toggle('is-active', i === index));
       updateClassicActive();
     }
@@ -596,16 +584,16 @@
     classicGrid.addEventListener('click', (event) => {
       const focusBtn = event.target.closest('[data-card-focus]');
       const openBtn = event.target.closest('[data-card-open]');
-      if (focusBtn) { activeIndex = Number(focusBtn.dataset.cardFocus); focusMode = false; updateMeta(activeIndex); enterGallery('immersive'); setArtwork(activeIndex, {focus:false}); }
+      if (focusBtn) { const index = Number(focusBtn.dataset.cardFocus); enterGallery('immersive'); walkToArtwork(index); }
       if (openBtn) openLightbox(Number(openBtn.dataset.cardOpen));
     });
 
     immersiveDots.addEventListener('click', (event) => {
       const button = event.target.closest('[data-go]');
-      if (button) setArtwork(Number(button.dataset.go), {focus:false});
+      if (button) walkToArtwork(Number(button.dataset.go));
     });
-    $('prevArtwork').addEventListener('click', () => setArtwork(activeIndex - 1, {focus:false}));
-    $('nextArtwork').addEventListener('click', () => setArtwork(activeIndex + 1, {focus:false}));
+    $('prevArtwork').addEventListener('click', () => walkToArtwork(activeIndex - 1));
+    $('nextArtwork').addEventListener('click', () => walkToArtwork(activeIndex + 1));
     focusButton.addEventListener('click', () => setArtwork(activeIndex, {focus: !focusMode}));
     $('inspectArtwork').addEventListener('click', () => openLightbox(activeIndex));
     $('lightboxClose').addEventListener('click', closeLightbox);
@@ -628,7 +616,8 @@
     let museumReady = false;
     let animationRunning = false;
     let renderQueued = false;
-    let move = {forward:false, backward:false, left:false, right:false};
+    let tourState = null;
+    let lastWheelMove = 0;
     let lookOffsetX = 0;
     let lookOffsetY = 0;
     let targetPosition;
@@ -638,7 +627,7 @@
     let activeTweenStrength = .075;
     let dragPointer = null;
     let dragStart = null;
-    let manualTarget;
+
     let introState = null;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -824,21 +813,25 @@
       const frameMat = new THREE.MeshStandardMaterial({ map: woodTex, color:0xa98156, roughness:.56, metalness:.12 });
       const edgeMat = new THREE.MeshStandardMaterial({ color:0x322418, roughness:.7, metalness:.08 });
       const matteMat = new THREE.MeshStandardMaterial({ color:0xd7c8b4, roughness:.92 });
-      const glassMat = new THREE.MeshPhysicalMaterial({ color:0xffffff, roughness:.04, transmission:.08, transparent:true, opacity:.28, metalness:0, clearcoat:1, clearcoatRoughness:.08 });
+      const glassMat = new THREE.MeshPhysicalMaterial({ color:0xffffff, roughness:.25, transparent:true, opacity:.045, metalness:0, clearcoat:.35, clearcoatRoughness:.2, depthWrite:false });
 
       const heroScale = index === 0 ? 1.14 : 1;
       group.scale.setScalar(heroScale);
       const outer = new THREE.Mesh(new THREE.BoxGeometry(2.14, 2.68, .18), frameMat);
       outer.castShadow = true; outer.receiveShadow = true;
       const inner = new THREE.Mesh(new THREE.BoxGeometry(1.82, 2.36, .09), matteMat);
-      inner.position.z = .02;
+      inner.position.z = .105;
       const recess = new THREE.Mesh(new THREE.BoxGeometry(1.58, 2.12, .06), edgeMat);
-      recess.position.z = .05;
+      recess.position.z = .158;
       const glass = new THREE.Mesh(new THREE.PlaneGeometry(1.54, 2.08), glassMat);
-      glass.position.z = .09;
-      const imagePlane = new THREE.Mesh(new THREE.PlaneGeometry(1.48, 2.02), new THREE.MeshStandardMaterial({ color:0xffffff, roughness:.95, metalness:0 }));
-      imagePlane.position.z = .075;
-      const texture = new THREE.TextureLoader().load(art.src, () => requestMuseumRender());
+      glass.position.z = .207;
+      const imagePlane = new THREE.Mesh(new THREE.PlaneGeometry(1.48, 2.02), new THREE.MeshBasicMaterial({ color:0xffffff, toneMapped:false, side:THREE.DoubleSide }));
+      imagePlane.position.z = .197;
+      const texture = new THREE.TextureLoader().load(art.src, () => requestMuseumRender(), undefined, (error) => {
+        console.error('Eser dokusu yüklenemedi:', art.src, error);
+        imagePlane.material.color.set(0xc9b79c);
+        requestMuseumRender();
+      });
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
       imagePlane.material.map = texture;
@@ -851,8 +844,8 @@
       plaque.castShadow = true;
       group.add(plaque);
 
-      const hit = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 2.46), new THREE.MeshBasicMaterial({ transparent:true, opacity:0 }));
-      hit.position.z = .14;
+      const hit = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 2.46), new THREE.MeshBasicMaterial({ transparent:true, opacity:0, depthWrite:false, side:THREE.DoubleSide }));
+      hit.position.z = .231;
       hit.userData.index = index;
       group.add(hit);
 
@@ -970,22 +963,9 @@
       renderer.domElement.addEventListener('click', onCanvasClick);
       renderer.domElement.addEventListener('wheel', onWheel, {passive:false});
       window.addEventListener('resize', onResize, {passive:true});
-      window.addEventListener('keydown', onKeyDown);
-      window.addEventListener('keyup', onKeyUp);
-      bindTouchControls();
+      // Navigation is handled by the visible Back / Forward buttons.
 
       museumReady = true;
-    }
-
-    function bindTouchControls() {
-      document.querySelectorAll('[data-hold]').forEach((button) => {
-        const key = button.dataset.hold;
-        const set = (value) => { move[key] = value; requestMuseumRender(); };
-        button.addEventListener('pointerdown', (event) => { event.preventDefault(); set(true); button.setPointerCapture(event.pointerId); });
-        button.addEventListener('pointerup', () => set(false));
-        button.addEventListener('pointercancel', () => set(false));
-        button.addEventListener('lostpointercapture', () => set(false));
-      });
     }
 
     function startCinematicEntry() {
@@ -993,12 +973,45 @@
       if (!museumReady) return;
       introState = { start: performance.now(), duration: reducedMotion ? 10 : 2200 };
       targetPosition.set(0, 1.76, 7.8);
-      manualTarget.copy(targetPosition);
+
       currentLookTarget.set(0, 2.05, 0.2);
-      desiredLookTarget.set(0, 1.8, -2.3);
+      desiredLookTarget.copy(frameGroups[0].lookAt);
       camera.position.copy(targetPosition);
       camera.lookAt(currentLookTarget);
       focusMode = false;
+      tourState = null;
+      requestMuseumRender();
+    }
+
+    // Existing Geri/İleri buttons now guide the visitor down the corridor,
+    // then move laterally toward the selected painting without teleporting.
+    function walkToArtwork(index) {
+      if (!museumReady || galleryMode !== 'immersive') return;
+      if (index < 0 || index >= artworks.length) return;
+      const destination = frameGroups[index];
+      introState = null;
+      const first = camera.position.clone();
+      const initialLook = currentLookTarget.clone();
+      const corridorStart = new THREE.Vector3(0, 1.72, first.z);
+      const corridorEnd = new THREE.Vector3(0, 1.72, destination.z + 1.05);
+      const approach = destination.focusPos.clone();
+      approach.z += .2;
+      const distance = Math.abs(first.z - corridorEnd.z);
+      const duration = reducedMotion ? 120 : Math.max(1450, Math.min(3200, 1450 + distance * 170));
+      tourState = {
+        start:performance.now(), duration, first, initialLook,
+        corridorStart, corridorEnd, approach,
+        lookTarget:destination.lookAt.clone(),
+        walkLook:new THREE.Vector3(0, 1.83, destination.z - 1.4)
+      };
+      activeIndex = index;
+      focusMode = true;
+      lookOffsetX = 0; lookOffsetY = 0;
+      guidePosition.copy(approach);
+      targetPosition.copy(approach);
+      desiredLookTarget.copy(destination.lookAt);
+      updateMeta(index);
+      updateHighlights();
       requestMuseumRender();
     }
 
@@ -1008,8 +1021,9 @@
       if (typeof options.focus === 'boolean') focusMode = options.focus;
       const frame = frameGroups[activeIndex];
       if (!frame) return;
+      tourState = null;
+      introState = null;
       guidePosition.copy(focusMode ? frame.focusPos : frame.browsePos);
-      manualTarget.copy(guidePosition);
       desiredLookTarget.copy(frame.lookAt);
       lookOffsetX = focusMode ? 0 : lookOffsetX * .45;
       lookOffsetY = focusMode ? 0 : lookOffsetY * .45;
@@ -1043,38 +1057,21 @@
       if (museumReady) return;
       if (!THREE) {
         setMode('classic');
-        alert('3D deneyim yüklenemedi. Klasik galeriye geçildi.');
+        console.warn('3D motoru yüklenemedi, klasik galeri açıldı.');
         return;
       }
       targetPosition = new THREE.Vector3(0, 1.72, 2.6);
       currentLookTarget = new THREE.Vector3(0, 1.74, -1.5);
       desiredLookTarget = currentLookTarget.clone();
       guidePosition = targetPosition.clone();
-      manualTarget = targetPosition.clone();
       try { createScene(); } catch (error) {
         console.error('3D müze başlatılamadı:', error);
         setMode('classic');
-        alert('3D deneyim bu cihazda açılamadı. Klasik galeriye geçildi.');
+        console.warn('Bu cihazda 3D başlatılamadı. Klasik galeriye geçildi.');
         return;
       }
       setArtwork(0, {focus:false, jump:true});
       requestMuseumRender();
-    }
-
-    function updateNearestArtwork() {
-      let nearest = activeIndex;
-      let nearestDistance = Infinity;
-      const z = camera.position.z;
-      frameGroups.forEach((frame, index) => {
-        const d = Math.abs(frame.browsePos.z - z);
-        if (d < nearestDistance) { nearestDistance = d; nearest = index; }
-      });
-      if (nearest !== activeIndex && !focusMode) {
-        activeIndex = nearest;
-        desiredLookTarget.copy(frameGroups[activeIndex].lookAt);
-        updateMeta(activeIndex);
-        updateHighlights();
-      }
     }
 
     function onResize() {
@@ -1111,26 +1108,11 @@
     function onWheel(event) {
       if (galleryMode !== 'immersive' || dialog.open || aboutPanel.classList.contains('is-open')) return;
       event.preventDefault();
-      if (Math.abs(event.deltaY) > 18) setArtwork(activeIndex + (event.deltaY > 0 ? 1 : -1), {focus:false});
-    }
-
-    function onKeyDown(event) {
-      if (dialog.open || aboutPanel.classList.contains('is-open') || galleryMode !== 'immersive') return;
-      const key = event.key.toLowerCase();
-      if (key === 'w' || key === 'arrowup') move.forward = true;
-      if (key === 's' || key === 'arrowdown') move.backward = true;
-      if (key === 'a' || key === 'arrowleft') move.left = true;
-      if (key === 'd' || key === 'arrowright') move.right = true;
-      if (key === 'enter') openLightbox(activeIndex);
-      if (key === ' ') { event.preventDefault(); setArtwork(activeIndex, {focus: !focusMode}); }
-      requestMuseumRender();
-    }
-    function onKeyUp(event) {
-      const key = event.key.toLowerCase();
-      if (key === 'w' || key === 'arrowup') move.forward = false;
-      if (key === 's' || key === 'arrowdown') move.backward = false;
-      if (key === 'a' || key === 'arrowleft') move.left = false;
-      if (key === 'd' || key === 'arrowright') move.right = false;
+      const now = performance.now();
+      if (Math.abs(event.deltaY) > 18 && now - lastWheelMove > 550) {
+        lastWheelMove = now;
+        walkToArtwork(activeIndex + (event.deltaY > 0 ? 1 : -1));
+      }
     }
 
     function raycastArt(clientX, clientY) {
@@ -1153,23 +1135,6 @@
       else setArtwork(index, {focus:false});
     }
 
-    function clampMuseumTarget() {
-      manualTarget.x = THREE.MathUtils.clamp(manualTarget.x, -1.1, 1.1);
-      manualTarget.z = THREE.MathUtils.clamp(manualTarget.z, -(artworks.length - 1) * 5.6 - .2, 2.7);
-      manualTarget.y = 1.72;
-    }
-
-    function updateMovement(dt) {
-      if (focusMode || galleryMode !== 'immersive') return;
-      const speed = (window.innerWidth < 700 ? 2.1 : 2.8) * dt;
-      let changed = false;
-      if (move.forward) { manualTarget.z -= speed; changed = true; }
-      if (move.backward) { manualTarget.z += speed; changed = true; }
-      if (move.left) { manualTarget.x -= speed * .65; changed = true; }
-      if (move.right) { manualTarget.x += speed * .65; changed = true; }
-      if (changed) { clampMuseumTarget(); guidePosition.copy(manualTarget); }
-    }
-
     function updateDust(time) {
       if (!dustPoints || !dustBase) return;
       const pos = dustPoints.geometry.attributes.position.array;
@@ -1184,17 +1149,40 @@
     function animate() {
       animationRunning = true;
       if (!museumReady) { animationRunning = false; return; }
-      const dt = Math.min(clock.getDelta(), .035);
+      clock.getDelta();
       const elapsed = performance.now() * 0.001;
       if (galleryMode !== 'immersive') { animationRunning = false; return; }
 
-      updateMovement(dt);
-
-      if (introState) {
+      if (tourState) {
+        const p = Math.min(1, (performance.now() - tourState.start) / tourState.duration);
+        const ease = (v) => v*v*(3-2*v);
+        const tour = tourState;
+        if (p < .20) {
+          const t = ease(p / .20);
+          camera.position.lerpVectors(tour.first, tour.corridorStart, t);
+          currentLookTarget.lerpVectors(tour.initialLook, tour.walkLook, t);
+        } else if (p < .77) {
+          const t = ease((p - .20) / .57);
+          camera.position.lerpVectors(tour.corridorStart, tour.corridorEnd, t);
+          currentLookTarget.lerpVectors(tour.walkLook, tour.lookTarget, t * .72);
+        } else {
+          const t = ease((p - .77) / .23);
+          camera.position.lerpVectors(tour.corridorEnd, tour.approach, t);
+          currentLookTarget.lerpVectors(tour.walkLook.clone().lerp(tour.lookTarget, .72), tour.lookTarget, t);
+        }
+        camera.lookAt(currentLookTarget);
+        if (p >= 1) {
+          tourState = null;
+          targetPosition.copy(tour.approach);
+          guidePosition.copy(tour.approach);
+          currentLookTarget.copy(tour.lookTarget);
+          desiredLookTarget.copy(tour.lookTarget);
+        }
+      } else if (introState) {
         const t = Math.min(1, (performance.now() - introState.start) / introState.duration);
         const ease = t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-        camera.position.lerpVectors(new THREE.Vector3(0, 1.78, 7.8), new THREE.Vector3(0, 1.72, 2.6), ease);
-        currentLookTarget.lerpVectors(new THREE.Vector3(0, 2.04, 0.2), new THREE.Vector3(0, 1.8, -2.3), ease);
+        camera.position.lerpVectors(new THREE.Vector3(0, 1.78, 7.8), new THREE.Vector3(0, 1.72, 1.5), ease);
+        currentLookTarget.lerpVectors(new THREE.Vector3(0, 2.04, 0.2), frameGroups[0].lookAt, ease);
         camera.lookAt(currentLookTarget);
         if (t >= 1) { introState = null; setArtwork(0, {focus:false}); }
       } else {
@@ -1205,12 +1193,11 @@
         camera.lookAt(currentLookTarget);
       }
 
-      updateNearestArtwork();
       updateDust(elapsed);
       renderer.render(scene, camera);
       renderQueued = false;
 
-      const shouldContinue = introState || move.forward || move.backward || move.left || move.right || dragPointer !== null || Math.abs(camera.position.distanceTo(targetPosition)) > 0.003 || Math.abs(currentLookTarget.distanceTo(desiredLookTarget.clone().add(new THREE.Vector3(lookOffsetX, lookOffsetY, 0)))) > 0.004;
+      const shouldContinue = tourState || introState || dragPointer !== null || Math.abs(camera.position.distanceTo(targetPosition)) > 0.003 || Math.abs(currentLookTarget.distanceTo(desiredLookTarget.clone().add(new THREE.Vector3(lookOffsetX, lookOffsetY, 0)))) > 0.004;
       if (shouldContinue || renderQueued) requestAnimationFrame(animate);
       else animationRunning = false;
     }
