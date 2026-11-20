@@ -712,9 +712,11 @@
             "kind": "Klasik eserden uyarlama",
             "description": "John Collier'ın 1891 tarihli eserinin yağlı boya tekniğiyle yeniden yorumlandığı bu çalışma, Delphi'nin gizemli kâhin figürünü karanlık ve dramatik bir atmosferde ele alıyor. Kırmızı kumaşın yoğunluğu, figürün duruşu ve çevresini saran duman, kompozisyonun mistik anlatımını güçlendiriyor.",
             "displayNote": "Koyu antrasit duvar, yukarıdan sıcak ve dar açılı bir spot ışığı ve çevresinde geniş boşluk. Galerinin dramatik bölümlerinden birinde konumlandırılabilir.",
+            "cropQuad": [[38,5],[913,5],[878,1688],[49,1688]],
+            "cropOutput": [866,1675],
             "src": "assets/kirmizi-ortulu-figur.jpg",
             "alt": "The Priestess of Delphi; kırmızı örtülü figürün yağlı boya uyarlaması.",
-            "aspect": 0.5629
+            "aspect": 0.51701
       },
       {
             "title": "İsimsiz (Heykel ve Bitki)",
@@ -754,9 +756,11 @@
             "theme": "Yunan mitolojisi, deniz, güzellik",
             "description": "Yunan mitolojisinin aşk ve güzellik tanrıçası Afrodit, denizin hareketiyle bütünleşen bir figür olarak resmediliyor. Turkuaz ve koyu mavi dalgalar, figürün çevresinde kıvrılarak su ile beden arasındaki sınırları belirsizleştiriyor.",
             "displayNote": "Venüs’ün Doğuşu ile görsel bir bağlantı kurulabilir. Böylece ziyaretçiler Burcu'nun aynı mitolojik figürü iki farklı teknik ve kompozisyonla nasıl ele aldığını görebilir.",
+            "cropQuad": [[19,45],[1183,48],[1161,1640],[23,1640]],
+            "cropOutput": [1172,1620],
             "src": "assets/dalgalar-ve-figur.jpg",
             "alt": "Afrodit; turkuaz deniz dalgaları arasında uzanan figür.",
-            "aspect": 0.7176
+            "aspect": 0.72346
       },
       {
             "title": "Balığın Dansı",
@@ -770,6 +774,56 @@
             "aspect": 0.7194
       }
 ];
+
+    // The supplied artwork photographs include small areas of the surrounding
+    // studio. Crop them to the canvas boundaries in memory without altering the
+    // artist's originals stored in /assets. The same clean image is used by the
+    // immersive museum, classic gallery, and full-screen inspection.
+    const preparedArtworkImages = Promise.all(artworks.filter(art => art.cropQuad).map(art => new Promise((resolve) => {
+      const original = new Image();
+      original.onload = () => {
+        try {
+          const [tl, tr, br, bl] = art.cropQuad;
+          const [width, height] = art.cropOutput;
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d', {alpha: false});
+          if (!ctx) { resolve(); return; }
+          // Small horizontal bands preserve the slightly sloping canvas edges.
+          // This removes the photographed wall without cutting into the work.
+          const step = 3;
+          for (let top = 0; top < height; top += step) {
+            const h = Math.min(step, height - top);
+            const v = (top + h / 2) / height;
+            const lerp = (a, b) => a + (b - a) * v;
+            const left = lerp(tl[0], bl[0]);
+            const right = lerp(tr[0], br[0]);
+            const originalY = lerp((tl[1] + tr[1]) / 2, (bl[1] + br[1]) / 2);
+            const originalH = ((bl[1] + br[1] - tl[1] - tr[1]) / 2) * h / height;
+            ctx.drawImage(original, left, originalY - originalH / 2, right - left, originalH, 0, top, width, h);
+          }
+          const finish = (blob) => {
+            if (blob) {
+              art.src = URL.createObjectURL(blob);
+              art.aspect = width / height;
+            }
+            resolve();
+          };
+          if (typeof canvas.toBlob === 'function') canvas.toBlob(finish, 'image/jpeg', .91);
+          else {
+            art.src = canvas.toDataURL('image/jpeg', .91);
+            art.aspect = width / height;
+            resolve();
+          }
+        } catch (error) {
+          console.warn('Fotoğraf kenarı düzeltilemedi, orijinal eser gösteriliyor.', error);
+          resolve();
+        }
+      };
+      original.onerror = () => resolve();
+      original.src = art.src;
+    })));
 
     const $ = (id) => document.getElementById(id);
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
@@ -901,7 +955,8 @@
       }
     }
 
-    function enterGallery(mode='immersive') {
+    async function enterGallery(mode='immersive') {
+      await preparedArtworkImages;
       if (!entered) {
         entered = true;
         experience.classList.add('is-visible');
@@ -917,6 +972,7 @@
 
     immersiveDots.innerHTML = artworks.map((_, index) => `<button type="button" aria-label="${index+1}. esere git" data-go="${index}" class="${index===0 ? 'is-active' : ''}"></button>`).join('');
     renderClassic();
+    preparedArtworkImages.then(() => { renderClassic(); updateClassicActive(); });
     updateMeta(0);
 
     $('enterButton').addEventListener('click', () => enterGallery('immersive'));
@@ -954,7 +1010,7 @@
     classicGrid.addEventListener('click', (event) => {
       const focusBtn = event.target.closest('[data-card-focus]');
       const openBtn = event.target.closest('[data-card-open]');
-      if (focusBtn) { const index = Number(focusBtn.dataset.cardFocus); enterGallery('immersive'); walkToArtwork(index); }
+      if (focusBtn) { const index = Number(focusBtn.dataset.cardFocus); enterGallery('immersive').then(() => walkToArtwork(index)); }
       if (openBtn) openLightbox(Number(openBtn.dataset.cardOpen));
     });
 
