@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0d0c0a">
-  <meta name="description" content="@hayalkaralayan için hazırlanmış, gerçekçi ışık ve mekân hissi veren deneyimsel dijital sanat galerisi.">
-  <meta property="og:title" content="Hayal Karalayan · Immersive Museum Edition">
+  <meta name="description" content="Hayal Karalayan. Burcu Arısoy’un 11 özgün çalışmasını üç boyutlu müze deneyimi ve klasik galeride keşfedin.">
+  <meta property="og:title" content="Hayal Karalayan | Burcu Arısoy">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://emrebeymii.github.io/HAYAL-KARALAYAN/assets/alkarasi.jpg">
   <meta property="og:description" content="Gerçek mekân hissi, sinematik giriş ve etkileşimli sanat deneyimi.">
-  <title>Hayal Karalayan | Immersive Museum Edition</title>
+  <title>Hayal Karalayan | Burcu Arısoy</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -177,11 +180,6 @@
     .lightbox-nav button { font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#d8c39f; display:inline-flex; align-items:center; gap:9px; }
     .lightbox-nav button:disabled { opacity:.28; cursor:default; }
 
-    .demo-note { position:fixed; right:14px; bottom:14px; z-index:90; display:flex; align-items:center; gap:10px; max-width:calc(100vw - 28px); border-radius:6px; background:#eee2c8; color:#30271c; padding:10px 12px; box-shadow:0 10px 34px rgba(0,0,0,.4); font-size:9px; letter-spacing:.08em; font-weight:700; }
-    .demo-note .dot { width:6px; height:6px; border-radius:999px; background:#a57430; }
-    .demo-note button { color:#6a5639; font-size:14px; padding:0 2px 0 6px; }
-    .demo-note.is-hidden { opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .25s, transform .25s; }
-
     @media (max-width:1024px) {
       .museum-meta { width:min(380px,calc(100vw - 32px)); }
       .classic-top { grid-template-columns:1fr; }
@@ -215,7 +213,6 @@
       .bottom-label { display:none; }
       .nav-controls { width:100%; justify-content:space-between; }
       .dot-track { gap:6px; }
-      .demo-note { left:10px; right:10px; bottom:10px; justify-content:center; gap:6px; font-size:8px; }
       .classic-view { padding:108px 18px 36px; }
       .art-card h3 { font-size:24px; }
       .lightbox-body { flex-direction:column; gap:18px; padding:80px 20px 18px; }
@@ -394,47 +391,168 @@
       .lightbox-copy .fact-row dt,.lightbox-copy .fact-row dd {font-size:11px;}
       .museum-details[open] .museum-detail-scroll {max-height:130px;}
     }
+
+    /* CINEMATIC FOYER - stylized architectural depth; original Alkarısı image. */
+    .entrance {
+      isolation:isolate; background:#090909;
+      padding:30px clamp(24px,5.4vw,94px) 31px;
+      transition:opacity .95s .35s cubic-bezier(.16,1,.3,1), visibility 1.45s;
+    }
+    .entrance.is-leaving {opacity:0;transform:none;visibility:hidden;}
+    .entrance::before {z-index:1;background:linear-gradient(90deg,rgba(2,3,4,.89) 0%,rgba(5,5,5,.8) 20%,rgba(6,6,6,.41) 44%,rgba(3,4,4,.0) 69%,rgba(0,0,0,.13));}
+    .cinematic-corridor {position:absolute;z-index:0;inset:-2.5%;overflow:hidden;pointer-events:none;transform-origin:68% 50%;transform:translate3d(var(--cinema-pan-x,0px),var(--cinema-pan-y,0px),0) scale(1.03);transition:transform 1.2s cubic-bezier(.16,1,.3,1), filter .7s;filter:saturate(.85);}
+    .entrance.is-entering .cinematic-corridor {transform:scale(1.66);filter:saturate(.5) brightness(.65);transition:transform 1.45s cubic-bezier(.2,.8,.2,1),filter 1.45s;}
+    .corridor-back {position:absolute;left:53%;top:15%;width:30%;height:65%;background:linear-gradient(90deg,#24201b,#554638 9%,#332c26 48%,#66533d 91%,#181713);box-shadow:inset 0 0 85px rgba(0,0,0,.8), 0 0 80px rgba(0,0,0,.85);}
+    .corridor-ceiling {position:absolute;inset:0;clip-path:polygon(29% 0,100% 0,83% 17%,53% 17%);background:repeating-linear-gradient(90deg,rgba(220,181,121,.055) 0 2px,transparent 2px 190px),linear-gradient(180deg,#191a19,#39332b 70%,#191917);}
+    .corridor-left-wall {position:absolute;inset:0;clip-path:polygon(0 0,29% 0,53% 15%,53% 80%,0 100%);background:linear-gradient(90deg,#131515,#2d2c2b 39%,#403a32 88%,#120f0b),repeating-linear-gradient(0deg,transparent 0 78px,rgba(214,182,139,.07) 79px 81px);box-shadow:inset 0 0 220px #000;}
+    .corridor-right-wall {position:absolute;inset:0;clip-path:polygon(100% 0,100% 100%,83% 80%,83% 15%);background:linear-gradient(90deg,#211c17,#534839 32%,#1a1c1d 100%);box-shadow:inset 0 0 100px rgba(0,0,0,.8);}
+    .corridor-floor {position:absolute;inset:0;clip-path:polygon(53% 80%,83% 80%,100% 100%,0 100%);background:radial-gradient(ellipse at 68% 80%,rgba(207,147,74,.22),transparent 40%),repeating-linear-gradient(100deg,transparent 0 79px,rgba(233,207,165,.055) 80px 81px),linear-gradient(180deg,#40372c,#1a1816 76%,#0b0c0d);}
+    .corridor-arch {position:absolute;pointer-events:none;box-shadow:inset 0 0 6px rgba(210,169,118,.15), 0 0 28px rgba(0,0,0,.45);border:solid #393127;border-bottom:0;opacity:.83;}
+    .corridor-arch-far {left:49%;top:11%;width:38%;height:73%;border-width:clamp(8px,1vw,16px);}
+    .corridor-arch-near {left:30%;top:-7%;width:74%;height:113%;border-width:clamp(14px,2vw,32px);border-image:linear-gradient(95deg,#251f1c,#645542,#302a22) 1;opacity:.85;}
+    .corridor-ceiling-track {position:absolute;z-index:1;left:68%;top:0;width:3px;height:22%;background:linear-gradient(#1c1611,#a88a60,transparent);box-shadow:0 0 13px rgba(208,156,93,.24);}
+    .corridor-ceiling-track::after {content:'';position:absolute;top:18%;left:50%;transform:translateX(-50%);width:34px;height:10px;border-radius:4px;background:linear-gradient(#e0bd84,#7b542a);box-shadow:0 3px 21px 9px rgba(255,196,105,.27),0 0 42px 19px rgba(227,175,93,.12);}
+    .corridor-spotlight {position:absolute;z-index:1;left:45%;top:2%;width:46%;height:73%;clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(255,219,149,.18),rgba(255,210,136,.075) 62%,transparent);filter:blur(16px);mix-blend-mode:screen;opacity:.83;animation:corridor-light-reveal 2.5s both;}
+    .corridor-lightpool {position:absolute;z-index:1;left:42%;top:79%;width:56%;height:24%;background:radial-gradient(ellipse at 50% 0%,rgba(221,162,77,.13),transparent 70%);filter:blur(18px);}
+    .corridor-film-grain {position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at 67% 40%,transparent 22%,rgba(3,3,3,.25) 70%,rgba(0,0,0,.64) 100%);}
+    @keyframes corridor-light-reveal {from{opacity:.07}to{opacity:.83}}
+    .cinematic-veil {position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(3,3,4,.79),transparent 22%,transparent 85%,rgba(5,5,5,.31));}
+    .entrance-top,.entrance-bottom {position:relative;z-index:5;font-size:10px;line-height:1.4;letter-spacing:.23em;color:#c5b69e;text-shadow:0 2px 20px #000;}
+    .entrance-brand {display:inline-flex;gap:14px;align-items:center;color:#f0dfbf;}
+    .entrance-brand-symbol {display:inline-flex;width:28px;height:28px;color:#dfbf86;}
+    .entrance-brand-symbol svg {width:100%;height:100%;}
+    .entrance .entrance-center {z-index:5;position:relative;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;align-self:stretch;width:100%;min-height:0;flex:1;text-align:left;}
+    .entrance .entrance-copy {max-width:min(730px,58vw);padding-top:2vh;text-shadow:0 9px 40px rgba(0,0,0,.5);}
+    .entrance .entrance-copy .eyebrow {justify-content:flex-start;color:#eacb92;font-size:11px;letter-spacing:.31em;gap:13px;}
+    .eyebrow-rule {display:inline-block;width:28px;height:1px;background:#e4bd83;}
+    .entrance .entrance-copy h1 {font-size:clamp(76px,8.7vw,146px);line-height:.8;letter-spacing:-.075em;margin:36px 0 34px;text-shadow:0 12px 65px #000;}
+    .entrance .entrance-copy .display-break {margin-left:clamp(0px,1vw,12px);}
+    .hero-strap {color:#dabb8a;letter-spacing:.21em;margin-bottom:19px;font-size:10px;}
+    .entrance .entrance-poem {font:400 clamp(19px,1.8vw,25px)/1.4 'Cormorant Garamond',Georgia,serif;color:#e7dbc8;letter-spacing:.012em;max-width:42ch;}
+    .entrance .entrance-actions {flex-direction:row;align-items:center;flex-wrap:wrap;gap:22px;margin-top:38px;}
+    .entrance .enter-button {display:inline-flex;gap:20px;min-height:67px;padding:12px 12px 12px 25px;background:linear-gradient(135deg,#e4c695,#b99157);border:1px solid #f2daa9;border-radius:3px;color:#1e160e;font-size:12px;letter-spacing:.16em;box-shadow:0 15px 40px rgba(0,0,0,.35),0 0 42px rgba(183,131,55,.12);transition:background .25s,transform .25s,box-shadow .25s;}
+    .entrance .enter-button:hover {color:#16100b;background:linear-gradient(135deg,#f5deb2,#c6a06c);transform:translateY(-3px);box-shadow:0 18px 56px rgba(0,0,0,.45),0 0 50px rgba(183,131,55,.18);}
+    .enter-button-text {display:flex;flex-direction:column;gap:5px;text-align:left;font-size:12px;font-weight:700;}
+    .enter-button-text small {font-size:9px;letter-spacing:.08em;font-weight:500;opacity:.77;text-transform:none;}
+    .entrance .enter-button .button-circle {width:44px;height:44px;border-color:rgba(34,26,18,.35);background:rgba(38,27,16,.08);color:#23180d;}
+    .entrance .enter-button:hover .button-circle {background:#261b12;color:#f3dcae;transform:none;}
+    .entrance .secondary-button {font-size:11px;letter-spacing:.17em;color:#ead8b8;gap:10px;}
+    .entrance .secondary-button:hover {color:#fff;}
+    .entry-bottom-divider {display:inline-block;width:18px;height:1px;vertical-align:middle;margin:0 8px;background:#a48456;}
+    .cinematic-corridor .hero-art {position:absolute;left:68%;top:45%;width:clamp(142px,17vw,248px);transform:translate(-50%,-50%);margin:0;z-index:3;display:block;filter:drop-shadow(0 18px 26px rgba(0,0,0,.72));}
+    .cinematic-corridor .hero-art-frame {position:relative;width:100%;height:auto;max-height:none;aspect-ratio:960/1347;padding:8px;background:linear-gradient(135deg,#b28c56 0%,#47321d 14%,#aa854e 40%,#4c331b 70%,#c99b5f);border:1px solid #a88250;box-shadow:0 0 0 3px #24190f,0 0 0 5px rgba(198,155,91,.3),0 14px 45px #000;}
+    .cinematic-corridor .hero-art-frame img {display:block;width:100%;height:auto;aspect-ratio:960/1347;object-fit:contain;background:#201712;filter:none;}
+    .cinematic-corridor .hero-art-frame::after {inset:8px;background:linear-gradient(115deg,rgba(255,241,218,.09),transparent 24%,transparent 82%,rgba(255,255,255,.025));}
+    .cinematic-corridor .hero-art-light {position:absolute;left:50%;top:-19%;width:145%;height:80%;opacity:.9;background:radial-gradient(ellipse at 50% 5%,rgba(253,201,132,.31),transparent 62%);filter:blur(16px);}
+    .cinematic-corridor .hero-art figcaption {display:grid;justify-content:center;justify-items:center;align-items:center;gap:4px;margin-top:16px;text-align:center;text-shadow:0 3px 10px #000;}
+    .cinematic-corridor .hero-art figcaption span {font-size:9px;letter-spacing:.24em;color:#d4b583;}
+    .cinematic-corridor .hero-art figcaption strong {font:500 30px/1 'Cormorant Garamond',Georgia,serif;color:#f0e5d3;}
+    .cinematic-corridor .hero-art figcaption small {display:block;color:#baaa8e;font-size:9px;letter-spacing:.09em;}
+    .entrance-bottom {color:#a9967b;font-size:9px;}
+    @media(max-width:1120px) and (min-width:701px) {
+      .entrance .entrance-copy h1 {font-size:clamp(66px,8vw,110px);}
+      .entrance .entrance-copy {max-width:61vw;}
+      .cinematic-corridor .hero-art {left:73%;width:clamp(128px,15vw,190px);}
+      .corridor-back {left:58%;}
+      .cinematic-corridor {transform-origin:73% 50%;}
+    }
+    @media(max-width:700px) {
+      .entrance {overflow:auto;padding:21px 18px 25px;}
+      .entrance::before {background:linear-gradient(0deg,rgba(5,5,5,.96) 0%,rgba(5,5,5,.88) 26%,rgba(5,5,5,.15) 56%,rgba(0,0,0,.19) 100%);}
+      .cinematic-corridor {inset:0;transform-origin:50% 32%;}
+      .entrance.is-entering .cinematic-corridor {transform:scale(1.63);}
+      .corridor-back {left:25%;top:5%;width:50%;height:54%;}
+      .corridor-ceiling {clip-path:polygon(0 0,100% 0,75% 6%,25% 6%);}
+      .corridor-left-wall {clip-path:polygon(0 0,25% 6%,25% 58%,0 100%);}
+      .corridor-right-wall {clip-path:polygon(100% 0,100% 100%,75% 58%,75% 6%);}
+      .corridor-floor {clip-path:polygon(25% 58%,75% 58%,100% 100%,0 100%);}
+      .corridor-arch-far {left:20%;top:3%;width:60%;height:59%;border-width:9px;}
+      .corridor-arch-near {left:-10%;top:-10%;width:120%;height:90%;border-width:17px;}
+      .corridor-ceiling-track {left:50%;height:13%;}
+      .corridor-spotlight {left:18%;top:0;width:64%;height:56%;}
+      .corridor-lightpool {left:18%;top:55%;width:64%;}
+      .corridor-film-grain {background:radial-gradient(ellipse at 50% 32%,transparent 9%,rgba(5,5,5,.16) 65%,rgba(0,0,0,.57) 100%);}
+      .cinematic-corridor .hero-art {left:50%;top:28%;width:clamp(116px,36vw,171px);}
+      .cinematic-corridor .hero-art-frame {padding:5px;}
+      .cinematic-corridor .hero-art-frame::after {inset:5px;}
+      .cinematic-corridor .hero-art figcaption {margin-top:9px;gap:1px;}
+      .cinematic-corridor .hero-art figcaption span {font-size:8px;}
+      .cinematic-corridor .hero-art figcaption strong {font-size:24px;}
+      .cinematic-corridor .hero-art figcaption small {font-size:8px;}
+      .entrance-top,.entrance-bottom {font-size:8px;letter-spacing:.11em;gap:13px;}
+      .entrance-top span:last-child {text-align:right;max-width:170px;}
+      .entrance-brand-symbol {width:22px;height:22px;}
+      .entrance .entrance-center {display:flex;flex-direction:column;justify-content:flex-end;min-height:600px;padding:0 0 clamp(48px,7vh,78px);}
+      .entrance .entrance-copy {max-width:100%;width:100%;padding-top:min(30vh,282px);text-align:center;}
+      .entrance .entrance-copy .eyebrow {justify-content:center;letter-spacing:.2em;font-size:9px;}
+      .entrance .entrance-copy h1 {font-size:clamp(61px,16.5vw,100px);line-height:.8;margin:20px 0 21px;}
+      .entrance .entrance-copy .display-break {margin-left:0;}
+      .entrance .hero-strap {justify-content:center;margin-bottom:11px;font-size:8px;letter-spacing:.13em;gap:8px;}
+      .entrance .hero-strap-line {width:24px;}
+      .entrance .entrance-poem {font-size:18px;line-height:1.28;margin:8px 0;max-width:none;}
+      .entrance .entrance-actions {justify-content:center;gap:14px;flex-wrap:wrap;margin-top:18px;}
+      .entrance .enter-button {min-height:59px;padding:8px 9px 8px 18px;gap:14px;}
+      .entrance .enter-button .button-circle {width:40px;height:40px;}
+      .entrance .secondary-button {font-size:10px;}
+      .entrance-bottom span:last-child {display:none;}
+      .entrance .entrance-copy {z-index:3;}
+    }
+    @media(max-width:390px) and (max-height:750px) {
+      .entrance .entrance-center {min-height:595px;}
+      .cinematic-corridor .hero-art {top:23%;width:115px;}
+      .cinematic-corridor .hero-art figcaption span,.cinematic-corridor .hero-art figcaption small {display:none;}
+      .entrance .entrance-copy h1 {font-size:clamp(57px,15.5vw,66px);margin:12px 0 15px;}
+      .entrance .entrance-poem {font-size:16px;}
+      .entrance .entrance-actions {margin-top:14px;}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .corridor-spotlight {animation:none;opacity:.75;}
+      .cinematic-corridor {transition:none;transform:none!important;}
+      .entrance.is-leaving {transition:none;}
+    }
+
 </style>
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
 
   <section class="entrance" id="entrance" aria-labelledby="entranceTitle">
-    <div class="entrance-ambient" aria-hidden="true">
-      <div class="ambient-arch"></div>
-      <div class="ambient-portal"></div>
-      <div class="ambient-glow"></div>
+    <div class="cinematic-corridor" id="cinematicCorridor" aria-hidden="true">
+      <div class="corridor-back"></div>
+      <div class="corridor-ceiling"></div>
+      <div class="corridor-left-wall"></div>
+      <div class="corridor-right-wall"></div>
+      <div class="corridor-floor"></div>
+      <div class="corridor-arch corridor-arch-far"></div>
+      <div class="corridor-arch corridor-arch-near"></div>
+      <div class="corridor-ceiling-track"></div>
+      <div class="corridor-spotlight"></div>
+      <div class="corridor-lightpool"></div>
+      <figure class="hero-art" aria-label="Açılış eseri: Alkarısı">
+        <div class="hero-art-light"></div>
+        <div class="hero-art-frame"><img src="assets/alkarasi.jpg" alt="Alkarısı: loş bir odada beşiğin yanında duran tekinsiz figür" fetchpriority="high" decoding="async"></div>
+        <figcaption><span>AÇILIŞ ESERİ</span><strong>Alkarısı</strong><small>Burcu Arısoy, 2026</small></figcaption>
+      </figure>
+      <div class="corridor-film-grain"></div>
     </div>
-    <div class="entrance-top"><span>Bağımsız Dijital Sergi</span><span>Immersive Museum Edition</span></div>
+    <div class="cinematic-veil" aria-hidden="true"></div>
+    <div class="entrance-top"><span class="entrance-brand"><span class="entrance-brand-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"><path d="m12 2 9 10-9 10-9-10z"/><path d="M12 7v10M7 12h10"/></svg></span> HAYAL KARALAYAN</span><span>BURCU ARISOY / DİJİTAL SANAT SERGİSİ</span></div>
     <div class="entrance-center">
       <div class="entrance-copy">
-        <div class="eyebrow reveal-item">
-          <span class="small-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 7 10-7 10L5 12Z"/></svg></span>
-          Bağımsız Dijital Sergi
-          <span class="small-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 7 10-7 10L5 12Z"/></svg></span>
-        </div>
+        <div class="eyebrow reveal-item"><span class="eyebrow-rule" aria-hidden="true"></span> 11 ESER · 1 DİJİTAL SERGİ</div>
         <h1 id="entranceTitle" class="reveal-item">hayal<span class="display-break">karalayan<span class="period">.</span></span></h1>
-        <div class="hero-strap reveal-item"><span class="hero-strap-line"></span> ANA ESER / ALKARASI</div>
-        <p class="entrance-poem reveal-item">Bir eserin sessizliği, bütün odayı doldurabilir.<br>Alkarısı ile başlayan bir sergi.</p>
+        <div class="hero-strap reveal-item"><span class="hero-strap-line" aria-hidden="true"></span> ALKARISI İLE BAŞLAYAN BİR YOLCULUK</div>
+        <p class="entrance-poem reveal-item">Karanlığın içinden bir ışık süzülür.<br>Her eser, başka bir dünyanın kapısını aralar.</p>
         <div class="entrance-actions reveal-item">
           <button id="enterButton" class="enter-button" type="button">
-            <span class="button-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-            <span>Alkarısı’na yaklaş</span>
-            <span class="enter-rule" aria-hidden="true"></span>
+            <span class="enter-button-text">Sergiye gir <small>Üç boyutlu müze deneyimi</small></span>
+            <span class="button-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></span>
           </button>
-          <button id="classicEntry" class="secondary-button" type="button">
-            <span class="button-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m21 15-5-5L5 21"/></svg></span>
-            <span>Klasik galeriyi gez</span>
-          </button>
+          <button id="classicEntry" class="secondary-button" type="button"><span>Klasik galeriyi gez</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4zM4 15l5-5 4 4 3-3 4 4"/></svg></button>
         </div>
       </div>
-      <figure class="hero-art reveal-item" aria-label="Öne çıkan eser: Alkarısı">
-        <div class="hero-art-light" aria-hidden="true"></div>
-        <div class="hero-art-frame"><img src="assets/alkarasi.jpg" alt="Alkarısı: karanlık bir odada bir beşiğin yanında duran figür" fetchpriority="high"></div>
-        <figcaption><span>BAŞROLDE</span><strong>Alkarısı</strong><small>Burcu Arısoy · Dijital Sergi</small></figcaption>
-      </figure>
     </div>
-    <div class="entrance-bottom"><span>01 / Deneyimsel Müze</span><span>Ses katmanı kullanılmadı; görsel atmosfer güçlendirildi.</span></div>
+    <div class="entrance-bottom"><span>HAYAL KARALAYAN <span class="entry-bottom-divider" aria-hidden="true"></span> SANAL SERGİ</span><span>11 ESER · BURCU ARISOY</span></div>
   </section>
 
   <div class="experience" id="experience" aria-hidden="true">
@@ -491,7 +609,7 @@
           <aside class="classic-side">
             <span>Alternatif deneyim</span>
             <strong>Aynı eserler, daha sakin gezinme</strong>
-            <p>Sergideki eserler Burcu Arısoy'a aittir. Eser isimleri belirtilmeyen çalışmalar geçici tanımlayıcı başlıklarla listelenmiştir.</p>
+            <p>Çizimden yağlı boyaya, baskıdan çiniye uzanan farklı teknikleri ve anlatıları tek bir seçkide keşfedin.</p>
           </aside>
         </div>
         <section class="classic-grid" id="classicGrid"></section>
@@ -504,7 +622,7 @@
       <h2>hayal <em>karalayan</em></h2>
       <div class="about-line"></div>
       <p>Her çizim başka bir dünyanın kapısını aralar.</p>
-      <p class="small">Bu bölüm sanatçının paylaşacağı biyografi ve kendi sözleriyle tamamlanacaktır. Sergilenen resimler ve eser açıklamaları gerçek çalışmalara dayanmaktadır.</p>
+      <p class="small">Burcu Arısoy'un çizim, yağlı boya, baskı ve dekoratif sanat çalışmalarından oluşan bu seçki, mitolojik anlatımlarla düşsel imgeleri aynı sergi mekânında buluşturur.</p>
       <a class="about-social" href="https://www.instagram.com/hayalkaralayan/" target="_blank" rel="noopener noreferrer">instagram'da gör <span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
       <span class="about-footnote">Dijital sergi · kişisel portföy</span>
     </aside>
@@ -519,11 +637,11 @@
       <div class="lightbox-nav"><button id="lightboxPrev" type="button"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> önceki</button><button id="lightboxNext" type="button">sonraki <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div>
     </dialog>
 
-    <div class="demo-note" id="demoNote"><span class="dot"></span> 11 eser · Burcu Arısoy · Dijital sergi <button type="button" id="dismissDemo" aria-label="Önizleme notunu kapat"><svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   </div>
 
   <script type="module">
     let THREE;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     try {
       THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');
     } catch (error) {
@@ -570,7 +688,6 @@
             "year": "2026",
             "medium": "Çini",
             "form": "Dairesel, bitkisel bezemeli",
-            "nameStatus": "Geçici sergi adı",
             "description": "Geleneksel çini sanatının çiçek motiflerinden beslenen bu çalışma, mavi ve kırmızı tonlarını dengeli bir kompozisyonda buluşturuyor. Merkezde yükselen çiçek dalları, çevresindeki geometrik düzenli bordürle bütünleşiyor.",
             "displayNote": "Dairesel formunu koruyarak koyu lacivert bir duvar üzerinde, sıcak ve yumuşak bir spot ışığıyla sergilenebilir.",
             "src": "assets/cini-tabak.jpg",
@@ -581,7 +698,6 @@
             "title": "İsimsiz (Lale ve Çiçek Motifleri)",
             "year": "Henüz belirtilmedi",
             "medium": "Çini (teyit bekliyor)",
-            "nameStatus": "Geçici sergi adı",
             "description": "Geleneksel çini bezemelerinden izler taşıyan bu çalışma, lale ve çiçek motiflerini kıvrımlı dallarla bir araya getiriyor. Turkuaz, lacivert ve bordo tonları, beyaz zemin üzerinde canlı bir ritim oluşturuyor.",
             "displayNote": "Üçüncü eserle aynı bölümde, yan yana sergilenebilir. Böylece iki farklı çini kompozisyonu arasında görsel bir bütünlük kurulur.",
             "src": "assets/cini-detay.jpg",
@@ -604,7 +720,6 @@
             "title": "İsimsiz (Heykel ve Bitki)",
             "year": "2024",
             "medium": "Tuval üzerine akrilik boya",
-            "nameStatus": "Geçici sergi adı",
             "description": "Yeşilin dingin tonlarıyla şekillenen bu kompozisyon, klasik heykel formunu gündelik bir iç mekân bitkisiyle buluşturuyor. Serbest fırça darbeleri, ışık ve renk geçişleriyle iki farklı form arasında görsel bir denge kuruyor.",
             "displayNote": "The Priestess of Delphi eserinin ardından konumlandırılarak karanlık ve yoğun bir atmosferden daha aydınlık, sakin bir sergi alanına geçiş sağlanabilir.",
             "src": "assets/yesil-naturmort.jpg",
@@ -615,7 +730,6 @@
             "title": "İsimsiz (Bitki ve Drapeli Kumaş)",
             "year": "2024",
             "medium": "Toz pastel",
-            "nameStatus": "Geçici sergi adı",
             "description": "Yumuşak pastel geçişleriyle oluşturulan bu natürmort, saksı bitkisini kıvrımlı kumaş yüzeyleriyle bir araya getiriyor. Turkuaz arka plan ve toprak tonları arasındaki karşıtlık, kompozisyona sakin ve düşsel bir atmosfer kazandırıyor.",
             "displayNote": "Altıncı eserle aynı bölümde sergilenebilir. Her iki çalışma da bitki ve kumaş dokularına odaklansa da kullanılan teknikler birbirinden farklıdır.",
             "src": "assets/bitki-ve-kumas.jpg",
@@ -692,7 +806,6 @@
         ...(art.edition ? [['Baskı numarası', art.edition]] : []),
         ...(art.form ? [['Biçim', art.form]] : []),
         ...(art.theme ? [['Tema', art.theme]] : []),
-        ...(art.nameStatus ? [['Eser adı', art.nameStatus]] : [])
       ];
       return fields.map(([key, value]) =>
         `<div class="fact-row"><dt>${escapeHtml(key)}</dt><dd>${escapeHtml(value)}</dd></div>`
@@ -793,9 +906,10 @@
         entered = true;
         experience.classList.add('is-visible');
         experience.setAttribute('aria-hidden','false');
+        entrance.classList.toggle('is-entering', mode === 'immersive' && !reducedMotion);
         entrance.classList.add('is-leaving');
         entrance.setAttribute('aria-hidden','true');
-        setTimeout(() => { entrance.hidden = true; }, 900);
+        setTimeout(() => { entrance.hidden = true; }, reducedMotion ? 80 : 1550);
       }
       setMode(mode);
       if (mode === 'immersive' && museumReady) startCinematicEntry();
@@ -807,14 +921,35 @@
 
     $('enterButton').addEventListener('click', () => enterGallery('immersive'));
     $('classicEntry').addEventListener('click', () => enterGallery('classic'));
+    if (!reducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const corridor = $('cinematicCorridor');
+      entrance.addEventListener('pointermove', (event) => {
+        if (entered) return;
+        const dx = (event.clientX / window.innerWidth - .5) * 2;
+        const dy = (event.clientY / window.innerHeight - .5) * 2;
+        corridor.style.setProperty('--cinema-pan-x', `${-dx * 11}px`);
+        corridor.style.setProperty('--cinema-pan-y', `${-dy * 7}px`);
+      }, {passive:true});
+      entrance.addEventListener('pointerleave', () => {
+        corridor.style.setProperty('--cinema-pan-x','0px');
+        corridor.style.setProperty('--cinema-pan-y','0px');
+      });
+    }
+
     $('modeImmersive').addEventListener('click', () => setMode('immersive'));
     $('modeClassic').addEventListener('click', () => setMode('classic'));
     $('aboutButton').addEventListener('click', () => setAboutOpen(true));
     $('aboutClose').addEventListener('click', () => setAboutOpen(false));
     panelScrim.addEventListener('click', () => setAboutOpen(false));
-    $('restartExperience').addEventListener('click', () => { entrance.hidden = false; requestAnimationFrame(() => entrance.classList.remove('is-leaving')); experience.classList.remove('is-visible'); experience.setAttribute('aria-hidden','true'); entered = false; });
+    $('restartExperience').addEventListener('click', () => {
+      entrance.hidden = false;
+      entrance.classList.remove('is-entering');
+      requestAnimationFrame(() => entrance.classList.remove('is-leaving'));
+      experience.classList.remove('is-visible');
+      experience.setAttribute('aria-hidden','true');
+      entered = false;
+    });
     $('brandHome').addEventListener('click', () => { if (!entered) return; if (galleryMode === 'immersive') setArtwork(0, {focus:false}); else activeIndex = 0, updateMeta(0); });
-    $('dismissDemo').addEventListener('click', () => $('demoNote').classList.add('is-hidden'));
 
     classicGrid.addEventListener('click', (event) => {
       const focusBtn = event.target.closest('[data-card-focus]');
@@ -864,7 +999,6 @@
     let dragStart = null;
 
     let introState = null;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function requestMuseumRender() {
       renderQueued = true;
@@ -1121,7 +1255,7 @@
       lightTarget.position.set(0, 0, 0);
       group.add(lightTarget);
 
-      return { group, hit, outer, plaque, imagePlane, halo, side, z, lookAt:new THREE.Vector3(side*4.55, 1.9, z), browsePos:new THREE.Vector3(0, 1.72, z + .55), focusPos:new THREE.Vector3(side*2.25, 1.68, z + .02), spotlightTarget:lightTarget };
+      return { group, hit, outer, plaque, imagePlane, halo, side, z, heroScale, lookAt:new THREE.Vector3(side*4.55, 1.86, z), browsePos:new THREE.Vector3(0, 1.72, z + .55), spotlightTarget:lightTarget };
     }
 
     function createSpotForFrame(frame) {
@@ -1247,8 +1381,24 @@
       requestMuseumRender();
     }
 
-    // Existing Geri/İleri buttons now guide the visitor down the corridor,
-    // then move laterally toward the selected painting without teleporting.
+    // Calculate a comfortable full-frame camera position, including the
+    // artwork's frame and caption plate, for landscape and portrait screens.
+    function artworkViewPosition(frame) {
+      const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+      const aspect = Math.max(.32, camera.aspect);
+      const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * aspect);
+      const scale = frame.heroScale || 1;
+      const framedWidth = 2.38 * scale;
+      const framedHeight = 3.30 * scale;
+      const distVertical = framedHeight / (2 * Math.tan(verticalFov / 2));
+      const distHorizontal = framedWidth / (2 * Math.tan(horizontalFov / 2));
+      const comfortableDistance = Math.max(distVertical, distHorizontal) * (aspect < .75 ? 1.26 : 1.17);
+      const distance = THREE.MathUtils.clamp(comfortableDistance, 3.95, 7.1);
+      return new THREE.Vector3(frame.side * (4.62 - distance), 1.72, frame.z + .06);
+    }
+
+    // Back and Forward guide the visitor through the corridor, then settle
+    // at a lens distance where the complete framed painting stays in view.
     function walkToArtwork(index) {
       if (!museumReady || galleryMode !== 'immersive') return;
       if (index < 0 || index >= artworks.length) return;
@@ -1258,8 +1408,7 @@
       const initialLook = currentLookTarget.clone();
       const corridorStart = new THREE.Vector3(0, 1.72, first.z);
       const corridorEnd = new THREE.Vector3(0, 1.72, destination.z + 1.05);
-      const approach = destination.focusPos.clone();
-      approach.z += .2;
+      const approach = artworkViewPosition(destination);
       const distance = Math.abs(first.z - corridorEnd.z);
       const duration = reducedMotion ? 120 : Math.max(1450, Math.min(3200, 1450 + distance * 170));
       tourState = {
@@ -1287,7 +1436,7 @@
       if (!frame) return;
       tourState = null;
       introState = null;
-      guidePosition.copy(focusMode ? frame.focusPos : frame.browsePos);
+      guidePosition.copy(focusMode ? artworkViewPosition(frame) : frame.browsePos);
       desiredLookTarget.copy(frame.lookAt);
       lookOffsetX = focusMode ? 0 : lookOffsetX * .45;
       lookOffsetY = focusMode ? 0 : lookOffsetY * .45;
@@ -1343,6 +1492,10 @@
       camera.aspect = stage.clientWidth / stage.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(stage.clientWidth, stage.clientHeight);
+      if (focusMode && !tourState && !introState && frameGroups[activeIndex]) {
+        guidePosition.copy(artworkViewPosition(frameGroups[activeIndex]));
+        targetPosition.copy(guidePosition);
+      }
       requestMuseumRender();
     }
 
