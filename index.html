@@ -304,7 +304,65 @@
       .entrance .entrance-copy h1{margin:15px 0 11px;font-size:clamp(58px,15.5vw,88px);}
       .entrance .entrance-actions{margin-top:17px;}
     }
-  </style>
+  
+    /* Compact, visitor-controlled artwork info: keep the canvas and artwork visible. */
+    .museum-meta {
+      left:clamp(14px,3vw,42px);
+      right:auto;
+      bottom:96px;
+      width:min(292px,calc(100vw - 34px));
+      padding:12px 14px;
+      border-radius:15px;
+      background:rgba(12,10,8,.68);
+      box-shadow:0 12px 34px rgba(0,0,0,.28);
+    }
+    .museum-index {font-size:9px; margin-bottom:5px; letter-spacing:.18em;}
+    .museum-meta h2 {font-size:clamp(26px,2.7vw,35px); line-height:1;}
+    .museum-year {font-size:9px; margin-top:5px; letter-spacing:.12em;}
+    .museum-actions {margin-top:9px; gap:7px; flex-wrap:wrap;}
+    .museum-action {width:auto; padding:8px 10px; font-size:9px; letter-spacing:.08em; gap:5px;}
+    .museum-action .svg-icon {width:13px; height:13px;}
+    .museum-details {margin-top:8px;}
+    .museum-details summary {
+      display:inline-flex; align-items:center; gap:5px; list-style:none;
+      color:var(--gold); font-size:9px; font-weight:700; letter-spacing:.13em;
+      cursor:pointer; user-select:none;
+    }
+    .museum-details summary::-webkit-details-marker {display:none;}
+    .museum-details summary .svg-icon {width:13px; height:13px; transition:transform .2s ease;}
+    .museum-details[open] summary .svg-icon {transform:rotate(180deg);}
+    .museum-description {display:none !important;}
+    .museum-details[open] .museum-description {
+      display:block !important;
+      margin:8px 0 0;
+      max-width:100%; max-height:100px;
+      overflow-y:auto; font-size:11px; line-height:1.6;
+    }
+    @media (max-width:840px) {
+      .museum-meta {left:12px;right:auto;width:min(242px,62vw);bottom:83px;padding:10px 11px;border-radius:13px;}
+      .museum-meta h2 {font-size:26px;}
+      .museum-index {font-size:8px;margin-bottom:4px;}
+      .museum-year {font-size:8px;margin-top:4px;}
+      .museum-details {margin-top:6px;}
+      .museum-details summary {font-size:8px;}
+      .museum-actions {margin-top:7px;}
+      .museum-action {width:auto;padding:7px 9px;font-size:8px;}
+      /* Previous/next already walks the corridor toward the artwork. */
+      #focusArtwork {display:none;}
+    }
+    @media (max-height:580px) {
+      .museum-meta {bottom:68px;width:min(215px,43vw);padding:8px 10px;}
+      .museum-meta h2 {font-size:24px;}
+      .museum-actions {margin-top:5px;}
+      .museum-action {padding:6px 8px;}
+      .museum-details[open] .museum-description {max-height:65px;}
+    }
+    @media (max-width:380px) {
+      .museum-meta {width:min(216px,60vw);left:9px;}
+      .museum-meta h2 {font-size:24px;}
+      .museum-action .svg-icon {width:12px;height:12px;}
+    }
+</style>
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -371,7 +429,10 @@
           <span class="museum-index" id="museumIndex">01 / 06</span>
           <h2 id="museumTitle"></h2>
           <p class="museum-year" id="museumYear"></p>
-          <p class="museum-description" id="museumDescription"></p>
+          <details class="museum-details" id="museumDetails">
+            <summary>ESER HAKKINDA <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p class="museum-description" id="museumDescription"></p>
+          </details>
           <div class="museum-actions">
             <button class="museum-action primary" id="focusArtwork" type="button"><span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 3 6 6"/><path d="M10 14 21 3"/><path d="m18 8 3-5-5 3"/><path d="M3 21l6-2 10-10-4-4L5 15l-2 6Z"/></svg></span><span id="focusLabel">yaklaş</span></button>
             <button class="museum-action" id="inspectArtwork" type="button"><span class="svg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span> tam ekranda incele</button>
