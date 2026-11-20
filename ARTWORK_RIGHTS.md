@@ -1,5 +1,7 @@
-# Eser görseli hakları
+# Sanat Eserlerinin Hakları
 
-`assets/alkarasi.jpg` kullanıcı tarafından dijital sergi amacıyla sağlanan, Burcu Arısoy'a ait Alkarası sanat eserinin görselidir. Bu görselin herkese açık depoda bulunması, yeniden kullanım, çoğaltma, değiştirme veya ticari kullanım izni vermez. Sanat eserine ilişkin tüm haklar ilgili hak sahiplerine aittir.
+Bu depodaki `assets/` klasöründe yer alan 10 görsel Burcu Arısoy'un sanatsal çalışmalarını gösterir. Görsellerin kamuya açık depoda bulunması, eserleri kopyalama, yeniden yayımlama, değiştirme veya ticari amaçla kullanma izni vermez. Sanat eserlerinin hakları ilgili hak sahiplerine aittir.
 
-Bu bilgi notu bir kod lisansı değildir. Kod için ayrı bir lisans seçilebilir.
+**Alkarası** adı eser için doğrulanmıştır. Diğer eserlerin başlıkları, sanatçı tarafından kesinleştirilene kadar sergi için geçici tanımlardır. Yıl, teknik ve ölçüler sanatçıdan öğrenildiğinde tamamlanmalıdır.
+
+Bu açıklama kaynak kod için açık kaynak lisansı değildir. Kod lisansı ayrıca seçilebilir.
